@@ -27,11 +27,11 @@ class ImplementationClass : ISampleInterface
 
     static void Main()
    {
-      // Создание объекта интерфейса ISampleInterface
+// Создание объекта интерфейса ISampleInterface
 
         ISampleInterface obj = new ImplementationClass();
 
-        // Пример вызова функции
+// Пример вызова функции
 
         var str=obj.SampleMethod(1,2);
     }
