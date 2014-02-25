@@ -1,6 +1,6 @@
-#summary One-sentence summary of this page.
+#summary Интерфейс(ы)Графического интерфейса пользователя
 
-= Introduction =
+= Интерфейс(ы) =
 
 Add your content here.
 
