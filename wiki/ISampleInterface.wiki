@@ -15,6 +15,10 @@ interface ISampleInterface
 
 = Классы их описание и назначение =
 {{{
+    /// <summary>
+    ///  Класс ImplementationClass
+    ///  нужен для...
+    /// </summary>
 class ImplementationClass : ISampleInterface
 {
     // Явная реализация члена интерфейса
