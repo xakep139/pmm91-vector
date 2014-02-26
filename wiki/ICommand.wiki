@@ -2,8 +2,10 @@
 
 = Introduction =
 
-Add your content here.
-
+Требования от GUI:
+ * do(class command);
+ * undo();
+ * redo().
 
 = Details =
 
