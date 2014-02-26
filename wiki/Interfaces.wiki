@@ -2,12 +2,12 @@
 
 = Интерфейсы =
 
-* IGeometryObject
-* IGraphicObject
+ * IGeometryObject
+ * IGraphicObject
 из этих двух IFigure
 
-* ICommand
-* IFileManager
-* IFigureMover
-* IFigureCollection
-* IGraphicInterface
+ * ICommand
+ * IFileManager
+ * IFigureMover
+ * IFigureCollection
+ * IGraphicInterface
