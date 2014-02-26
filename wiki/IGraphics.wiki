@@ -2,7 +2,10 @@
 
 = Интерфейс(ы) =
 
-Add your content here.
+Требования от GUI:
+ * init(hdc);
+ * paint(class geometry);
+ * free_mem(hdc).
 
 
 = Details =
