@@ -1,0 +1,13 @@
+#summary Список интерфейсов
+
+= Интерфейсы =
+
+* IGeometryObject
+* IGraphicObject
+из этих двух IFigure
+
+* ICommand
+* IFileManager
+* IFigureMover
+* IFigureCollection
+* IGraphicInterface
