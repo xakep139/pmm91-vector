@@ -1,8 +1,17 @@
-﻿<Window x:Class="pmm91_vector.MainWindow"
+﻿<Window x:Name="MainWindow1" x:Class="pmm91_vector.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Векторный графический редактор" Height="350" Width="525">
+        Title="Векторный графический редактор" Height="480" Width="640" MinWidth="640" MinHeight="480">
     <Grid>
-        <Label Content="Hello World!!!" FontSize="20"/>
+        <Menu x:Name="MainMenu" VerticalAlignment="Top">
+            <MenuItem x:Name="miFile" Header="Файл">
+                <MenuItem x:Name="miExit" Header="Выход" Click="miExit_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="miEdit" Header="Правка">
+                <MenuItem x:Name="miUndo" Header="Отменить" />
+                <MenuItem x:Name="miRedo" Header="Вернуть" />
+            </MenuItem>
+        </Menu>
+        <Canvas x:Name="MainCanvas"></Canvas>
     </Grid>
 </Window>
