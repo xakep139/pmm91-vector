@@ -1,8 +1,10 @@
 #summary Коллекция фигур.
 
-= Introduction =
+= Интерфейс(ы) =
 
-Add your content here.
+Требования от GUI:
+ * static load(string fileName);
+ * save(string fileName).
 
 
 = Details =
