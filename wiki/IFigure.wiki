@@ -2,7 +2,9 @@
 
 = Introduction =
 
-Add your content here.
+Данный интерфейс наследует два интерфейса:
+ * IGraphicObject;
+ * IGeometryObject.
 
 
 = Details =
