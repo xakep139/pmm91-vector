@@ -1,14 +1,13 @@
 #summary Список всех интерфейсов
 
 = Интерфейсы =
-
- * IGeometryObject
- * IGraphicObject
-^^^^^^^^^^^^^^^^  из этих двух IFigure
-
- * ICommand
- * ICommandStack
- * IFileManager
- * IFigureMover
- * IFigureCollection
- * IGraphicInterface
+`IFigure` наследуется от:
+ * `IGeometryObject`
+ * `IGraphicObject`
+Остальные:
+ * `ICommand`
+ * `ICommandStack`
+ * `IFileManager`
+ * `IFigureMover`
+ * `IFigureCollection`
+ * `IGraphics`
