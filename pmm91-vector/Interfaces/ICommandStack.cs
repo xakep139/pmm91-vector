@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace pmm91_vector.Interfaces
 {
-    interface IComandStack : ICollection<ICommand>
+    interface ICommandStack : ICollection<ICommand>
     {
         /// <summary>
         /// Выполнение заданной команды
