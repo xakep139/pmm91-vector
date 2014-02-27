@@ -1,12 +1,8 @@
 #summary Интерфейс команды.
-#labels Балабаев
 
 = Introduction =
 
-Требования от GUI:
- * do(class command);
- * undo();
- * redo().
+
 
 = Details =
 
