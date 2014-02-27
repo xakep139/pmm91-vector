@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace pmm91_vector.Interfaces
 {
-    interface ICommandStack : ICollection<ICommand>
+    interface ICommandStack<ICommand> : ICollection<ICommand>
     {
         /// <summary>
         /// Выполнение заданной команды
