@@ -8,8 +8,8 @@ namespace pmm91_vector.Interfaces
         /// <summary>
         /// Выполнение заданной команды
         /// </summary>
-        /// <param name="comand">Команда для выполнения</param>
-        void doComand(ICommand comand);
+        /// <param name="command">Команда для выполнения</param>
+        void doComand(ICommand command);
 
         /// <summary>
         /// Отмена последней выполненной команды
