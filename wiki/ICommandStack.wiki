@@ -1,4 +1,5 @@
 #summary Интерфейс стека команд.
+#labels Балабаев
 
 = Introduction =
 
