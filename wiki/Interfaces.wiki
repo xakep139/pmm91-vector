@@ -1,12 +1,13 @@
-#summary Список интерфейсов
+#summary Список всех интерфейсов
 
 = Интерфейсы =
 
  * IGeometryObject
  * IGraphicObject
-из этих двух IFigure
+^^^^^^^^^^^^^^^^  из этих двух IFigure
 
  * ICommand
+ * ICommandStack
  * IFileManager
  * IFigureMover
  * IFigureCollection
