@@ -3,6 +3,15 @@
 
 = Интерфейс(ы) =
 
+{{{
+interface IFigureCollection:ICollection
+{
+   bool AddFigure(Figure elem);
+   bool DeleteFigure(Figure elem);
+   int SearchFigure(Figure elem);
+}
+}}}
+
 _Требования от GUI:_
  * _static load(string fileName);_
  * _save(string fileName)._
