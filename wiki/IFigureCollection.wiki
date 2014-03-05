@@ -15,14 +15,6 @@ public interface IFigureCollection:ICollection
 }
 }}}
 
-_Требования от GUI:_
- * _static load(string fileName);_
- * _save(string fileName)._
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Требования от GUI:
+ * _static load(string fileName)_;
+ * _save(string fileName)_.
