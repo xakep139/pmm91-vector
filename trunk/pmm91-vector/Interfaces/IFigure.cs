@@ -2,7 +2,10 @@
 
 namespace pmm91_vector.Interfaces
 {
-    interface IFigure
+    /// <summary>
+    /// Интерфейс объекта "фигура"
+    /// </summary>
+    public interface IFigure
     {
     }
 }

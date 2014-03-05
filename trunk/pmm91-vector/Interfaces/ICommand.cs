@@ -2,7 +2,10 @@
 
 namespace pmm91_vector.Interfaces
 {
-    interface ICommand
+    /// <summary>
+    /// Интерфейс команды
+    /// </summary>
+    public interface ICommand
     {
     }
 }

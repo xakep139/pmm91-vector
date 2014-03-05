@@ -2,24 +2,27 @@
 
 namespace pmm91_vector.Interfaces
 {
-    interface IGraphics
+    /// <summary>
+    /// Интерфейс графической части
+    /// </summary>
+    public interface IGraphics
     {
         /// <summary>
         /// Инициализация графики в заданном контексте отображения
         /// </summary>
         /// <param name="displayContext">Контекст отображения</param>
-        void init(Visual displayContext);
+        void Init(Visual displayContext);
 
         /// <summary>
         /// Отрисовка заданного набора фигур в контексте отображения
         /// </summary>
         /// <param name="displayScene">Набор фигур для отрисовки</param>
-        void paint(IFigureCollection<IFigure> displayScene);
+        void Paint(IFigureCollection<IFigure> displayScene);
 
         /// <summary>
         /// Освобождение памяти под заданный контекст отображения
         /// </summary>
         /// <param name="displayContext">Контекст отображения</param>
-        void free_mem(Visual displayContext);
+        void Free_mem(Visual displayContext);
     }
 }
