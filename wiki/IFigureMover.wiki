@@ -1,14 +1,13 @@
 #summary Класс матричного преобразования фигуры.
 #labels Тесёлкин
 
-= Introduction =
 
-Add your content here.
+= Интерфейс =
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+{{{
+interface IFigureMover
+{
+    //MoveType - перечислимый тип: перемещение/вращение/масштаб
+    string Move(enum MoveType, Arraylist params);
+}
+}}}
