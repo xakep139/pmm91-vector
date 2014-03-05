@@ -5,7 +5,7 @@
 = Интерфейс =
 
 {{{
-interface IFigureMover
+public interface IFigureMover
 {
     // MoveType - перечислимый тип: перемещение/вращение/масштаб
     string Move(enum MoveType, Arraylist params);
