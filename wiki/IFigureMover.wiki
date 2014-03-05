@@ -7,7 +7,7 @@
 {{{
 interface IFigureMover
 {
-    //MoveType - перечислимый тип: перемещение/вращение/масштаб
+    // MoveType - перечислимый тип: перемещение/вращение/масштаб
     string Move(enum MoveType, Arraylist params);
 }
 }}}
