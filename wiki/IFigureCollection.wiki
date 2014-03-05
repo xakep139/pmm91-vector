@@ -11,6 +11,7 @@ public interface IFigureCollection:ICollection
    bool DeleteFigure(Figure elem);
    int SearchFigure(Figure elem);
    List<Figure> Selection(Point a, Point b);
+   // Объединение - ?
 }
 }}}
 
