@@ -3,22 +3,26 @@ using System.Collections.Generic;
 
 namespace pmm91_vector.Interfaces
 {
-    interface ICommandStack<ICommand> : ICollection<ICommand>
+    /// <summary>
+    /// Интерфейс стека команд
+    /// </summary>
+    /// <typeparam name="ICommand">Класс, реализующий итерфейс команды</typeparam>
+    public interface ICommandStack<ICommand> : ICollection<ICommand>
     {
         /// <summary>
         /// Выполнение заданной команды
         /// </summary>
         /// <param name="command">Команда для выполнения</param>
-        void doComand(ICommand command);
+        void DoComand(ICommand command);
 
         /// <summary>
         /// Отмена последней выполненной команды
         /// </summary>
-        void undoComand();
+        void UndoComand();
 
         /// <summary>
         /// Повтор последней отменённой команды
         /// </summary>
-        void redoComand();
+        void RedoComand();
     }
 }
