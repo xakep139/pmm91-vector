@@ -3,9 +3,9 @@
 
 = Интерфейс(ы) =
 
-Требования от GUI:
- * static load(string fileName);
- * save(string fileName).
+_Требования от GUI:_
+ * _static load(string fileName);_
+ * _save(string fileName)._
 
 
 = Details =
