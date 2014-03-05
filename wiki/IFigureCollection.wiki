@@ -4,7 +4,7 @@
 = Интерфейс(ы) =
 
 {{{
-interface IFigureCollection:ICollection
+public interface IFigureCollection:ICollection
 {
    bool AddFigure(Figure elem);
    bool DeleteFigure(Figure elem);
