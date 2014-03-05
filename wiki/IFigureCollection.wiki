@@ -9,7 +9,7 @@ interface IFigureCollection:ICollection
    bool AddFigure(Figure elem);
    bool DeleteFigure(Figure elem);
    int SearchFigure(Figure elem);
-// Объединение/перемещение
+   List<Figure> Selection(Point a, Point b);
 }
 }}}
 
