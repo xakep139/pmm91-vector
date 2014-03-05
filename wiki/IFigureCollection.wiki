@@ -6,6 +6,7 @@
 {{{
 public interface IFigureCollection:ICollection
 {
+   // Figure - класс, реализующий интерфейс IFigure
    bool AddFigure(Figure elem);
    bool DeleteFigure(Figure elem);
    int SearchFigure(Figure elem);
