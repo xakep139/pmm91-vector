@@ -65,7 +65,7 @@
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IFigure.cs" />
     <Compile Include="Interfaces\IFigureCollection.cs" />
-    <Compile Include="Interfaces\IFigureMover.cs" />
+    <Compile Include="Interfaces\IFigureTransform.cs" />
     <Compile Include="Interfaces\IGraphics.cs" />
     <Compile Include="Misc\Marker.cs" />
     <Compile Include="MainWindow.xaml.cs">
