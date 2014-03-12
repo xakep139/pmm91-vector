@@ -9,8 +9,7 @@ namespace pmm91_vector.Interfaces
     /// Интерфейс коллекции фигур
     /// </summary>
     /// <typeparam name="IFigure">Класс, реализующий интерфейс объекта "фигура"</typeparam>
-    public interface IFigureCollection<IFigure> : ICollection, ICollection<IFigure>
-    {
+    public interface IFigureCollection : ICollection
         /// <summary>
         /// Добавление фигуры
         /// </summary>
