@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 
 namespace pmm91_vector.Interfaces
@@ -7,7 +7,7 @@ namespace pmm91_vector.Interfaces
     /// Интерфейс стека команд
     /// </summary>
     /// <typeparam name="ICommand">Класс, реализующий итерфейс команды</typeparam>
-    public interface ICommandStack<ICommand> : ICollection<ICommand>
+    public interface ICommandStack : ICollection
     {
         /// <summary>
         /// Выполнение заданной команды
