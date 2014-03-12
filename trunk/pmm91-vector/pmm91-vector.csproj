@@ -61,11 +61,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Implementation\Command.cs" />
     <Compile Include="Interfaces\ICommandStack.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IFigure.cs" />
     <Compile Include="Interfaces\IFigureCollection.cs" />
     <Compile Include="Interfaces\IFigureTransform.cs" />
+    <Compile Include="Interfaces\IGeometryFigure.cs" />
+    <Compile Include="Interfaces\IGraphicFigure.cs" />
     <Compile Include="Interfaces\IGraphics.cs" />
     <Compile Include="Misc\Marker.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -100,9 +103,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implementation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

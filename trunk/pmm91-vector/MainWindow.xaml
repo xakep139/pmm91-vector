@@ -1,14 +1,18 @@
 ﻿<Window x:Name="ProgramWindow" x:Class="pmm91_vector.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:pmm91_vector"
         Title="Векторный графический редактор" Height="480" Width="640" MinWidth="640" MinHeight="480">
+    <Window.Resources>
+        <my:Command x:Key="MyCommand"/>
+    </Window.Resources>
     <Grid>
         <Menu x:Name="MainMenu" VerticalAlignment="Top">
             <MenuItem x:Name="miFile" Header="Файл">
                 <MenuItem x:Name="miExit" Header="Выход" Click="miExit_Click"/>
             </MenuItem>
             <MenuItem x:Name="miEdit" Header="Правка">
-                <MenuItem x:Name="miUndo" Header="Отменить" />
+                <MenuItem x:Name="miUndo" Header="Отменить" Command="{StaticResource MyCommand}"/>
                 <MenuItem x:Name="miRedo" Header="Вернуть" />
             </MenuItem>
         </Menu>
