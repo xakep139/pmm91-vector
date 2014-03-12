@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
@@ -47,7 +47,7 @@ namespace pmm91_vector.Interfaces
         /// </summary>
         /// <param name="fileName">Имя файла</param>
         /// <returns>Возвращает коллекцию фигур</returns>
-        IFigureCollection<IFigure> Load(string fileName);
+        void Load(string fileName);
 
         /// <summary>
         /// Сохранение коллекции фигур
