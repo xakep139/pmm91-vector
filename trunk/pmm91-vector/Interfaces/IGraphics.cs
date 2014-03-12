@@ -1,4 +1,4 @@
-﻿using System.Windows.Media;
+ using System.Windows.Media;
 
 namespace pmm91_vector.Interfaces
 {
@@ -17,7 +17,7 @@ namespace pmm91_vector.Interfaces
         /// Отрисовка заданного набора фигур в контексте отображения
         /// </summary>
         /// <param name="displayScene">Набор фигур для отрисовки</param>
-        void Paint(IFigureCollection<IFigure> displayScene);
+        void Paint(IFigureCollection displayScene);
 
         /// <summary>
         /// Освобождение памяти под заданный контекст отображения
