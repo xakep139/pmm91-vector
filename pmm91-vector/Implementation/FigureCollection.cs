@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using pmm91_vector.Interfaces;
 
 namespace pmm91_vector.Implementation
 {
@@ -11,9 +13,11 @@ namespace pmm91_vector.Implementation
     /// </summary>
     class FigureCollection : Interfaces.IFigureCollection
     {
-        public IList<Interfaces.IFigure> Selection(System.Windows.Point a, System.Windows.Point b)
+        private IList<IFigure> _figures = new List<IFigure>();
+
+        public IList<Interfaces.IFigure> Selection(Point a, Point b)
         {
-            throw new NotImplementedException();
+            return _figures.Where(x => x.Selection(a,b)).ToList();
         }
 
         public bool Load(System.IO.Stream fileStream)
