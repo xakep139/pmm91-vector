@@ -26,7 +26,7 @@ namespace pmm91_vector.Implementation.Figures
             throw new NotImplementedException();
         }
 
-        public bool IsContained(Point p)
+        public bool Selection(Point a, Point b)
         {
             throw new NotImplementedException();
         }

@@ -20,11 +20,12 @@ namespace pmm91_vector.Interfaces
         void Transform(IFigureTransform transformer);
 
         /// <summary>
-        /// Проверка принадлежности заданной точки фигуре
+        /// Проверка пересечения заданной области выделения и фигуры
         /// </summary>
-        /// <param name="p">Точка</param>
+        /// <param name="a">Левая верхняя точка выделения</param>
+        /// <param name="b">Превая нижняя точка выделения</param>
         /// <returns>Возвращает принадлежность точки</returns>
-        bool IsContained(Point p);
+        bool Selection(Point a, Point b);
 
         /// <summary>
         /// Задание новых координат некоторой точке фигуры
