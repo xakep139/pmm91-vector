@@ -62,6 +62,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Implementation\Command.cs" />
+    <Compile Include="Implementation\FigureCollection.cs" />
+    <Compile Include="Implementation\Figures\Ellipse.cs" />
+    <Compile Include="Implementation\Figures\Polygon.cs" />
+    <Compile Include="Implementation\Figures\Polyline.cs" />
     <Compile Include="Interfaces\ICommandStack.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IFigure.cs" />
