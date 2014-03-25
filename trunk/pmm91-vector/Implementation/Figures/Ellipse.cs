@@ -12,6 +12,12 @@ namespace pmm91_vector.Implementation.Figures
     /// </summary>
     class Ellipse : Interfaces.IFigure
     {
+        public Ellipse(Point p1, Point p2)
+        {
+            _points.Add(p1);
+            _points.Add(p2);
+        }
+
         #region IGeometryFigure
 
         private List<Point> _points = new List<Point>();

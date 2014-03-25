@@ -12,6 +12,45 @@ namespace pmm91_vector.Implementation.Figures
     /// </summary>
     class Polygon : Interfaces.IFigure
     {
+        #region Constructors
+
+        /// <summary>
+        /// Конструктор произвольного многоугольника
+        /// </summary>
+        public Polygon(List<Point> points)
+        {
+            _points = points;
+        }
+
+        /// <summary>
+        /// Конструктор треугольника
+        /// </summary>
+        public Polygon(Point p1, Point p2, Point p3)
+        {
+            _points.Add(p1);
+            _points.Add(p2);
+            _points.Add(p3);
+        }
+
+        /// <summary>
+        /// Конструктор прямоугольника
+        /// </summary>
+        public Polygon(Point p1, Point p2)
+        {
+            _points.Add(p1);
+            _points.Add(p2);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Добавление точки
+        /// </summary>
+        public void AddPoint(Point point)
+        {
+            _points.Add(point);
+        }
+
         #region IGeometryFigure
 
         private List<Point> _points = new List<Point>();
@@ -33,7 +72,7 @@ namespace pmm91_vector.Implementation.Figures
 
         public void SetPoint(int index, Point p)
         {
-            throw new NotImplementedException();
+            _points[index] = p;
         }
 
         public Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
