@@ -12,6 +12,19 @@ namespace pmm91_vector.Implementation.Figures
     /// </summary>
     class Polyline : Interfaces.IFigure
     {
+        public Polyline(List<Point> points)
+        {
+            _points = points;
+        }
+
+        /// <summary>
+        /// Добавление точки
+        /// </summary>
+        public void AddPoint(Point point)
+        {
+            _points.Add(point);
+        }
+
         #region IGeometryFigure
 
         private List<Point> _points = new List<Point>();
@@ -33,7 +46,7 @@ namespace pmm91_vector.Implementation.Figures
 
         public void SetPoint(int index, Point p)
         {
-            throw new NotImplementedException();
+            _points[index] = p;
         }
 
         public Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
