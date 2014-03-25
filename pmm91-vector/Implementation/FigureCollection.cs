@@ -32,69 +32,69 @@ namespace pmm91_vector.Implementation
 
         public int IndexOf(Interfaces.IFigure item)
         {
-            throw new NotImplementedException();
+            return _figures.IndexOf(item);
         }
 
         public void Insert(int index, Interfaces.IFigure item)
         {
-            throw new NotImplementedException();
+            _figures.Insert(index, item);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            _figures.RemoveAt(index);
         }
 
         public Interfaces.IFigure this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                return _figures[index];
             }
             set
             {
-                throw new NotImplementedException();
+                _figures[index] = value;
             }
         }
 
         public void Add(Interfaces.IFigure item)
         {
-            throw new NotImplementedException();
+            _figures.Add(item);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _figures.Clear();
         }
 
         public bool Contains(Interfaces.IFigure item)
         {
-            throw new NotImplementedException();
+            return _figures.Contains(item);
         }
 
         public void CopyTo(Interfaces.IFigure[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            _figures.CopyTo(array, arrayIndex);
         }
 
         public int Count
         {
-            get { throw new NotImplementedException(); }
+            get { return _figures.Count; }
         }
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return _figures.IsReadOnly; }
         }
 
         public bool Remove(Interfaces.IFigure item)
         {
-            throw new NotImplementedException();
+            return _figures.Remove(item);
         }
 
         public IEnumerator<Interfaces.IFigure> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _figures.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
