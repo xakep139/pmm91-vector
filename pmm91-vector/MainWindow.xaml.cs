@@ -25,7 +25,7 @@ namespace pmm91_vector
             InitializeComponent();
         }
 
-        private void miExit_Click(object sender, RoutedEventArgs e)
+        public void CloseWindow()
         {
             this.Close();
         }
