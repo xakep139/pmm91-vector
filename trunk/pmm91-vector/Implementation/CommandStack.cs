@@ -11,6 +11,24 @@ namespace pmm91_vector.Implementation
     {
         private int _curCommand = -1;
         private List<Interfaces.ICommand> _stack = new List<Interfaces.ICommand>();
+        private static CommandStack instance = null;
+
+        /// <summary>
+        /// Конструктор закрыт, т.к. используется шаблон "Одиночка"
+        /// </summary>
+        private CommandStack() { }
+
+        public static CommandStack Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new CommandStack();
+                }
+                return instance;
+            }
+        }
 
         void Interfaces.ICommandStack.DoComand(Interfaces.ICommand command)
         {
