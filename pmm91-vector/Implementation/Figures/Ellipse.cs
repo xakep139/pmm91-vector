@@ -98,5 +98,18 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         #endregion
+
+
+        public Point Center
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

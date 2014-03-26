@@ -47,5 +47,10 @@ namespace pmm91_vector.Interfaces
         /// <param name="figure">Фигура для объединения</param>
         /// <returns>Возвращает новую фигуру</returns>
         IGeometryFigure Union(IGeometryFigure figure);
+
+        /// <summary>
+        /// Получение и установка центра фигуры 
+        /// </summary>
+        Point Center { get; set; }
     }
 }
