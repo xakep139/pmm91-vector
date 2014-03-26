@@ -18,6 +18,9 @@ namespace pmm91_vector.Implementation
         /// </summary>
         private CommandStack() { }
 
+        /// <summary>
+        /// Сущность объекта-одиночки "стек команд"
+        /// </summary>
         public static CommandStack Instance
         {
             get
