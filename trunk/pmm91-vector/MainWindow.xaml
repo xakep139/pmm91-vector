@@ -4,16 +4,16 @@
         xmlns:my="clr-namespace:pmm91_vector"
         Title="Векторный графический редактор" Height="480" Width="640" MinWidth="640" MinHeight="480">
     <Window.Resources>
-        <my:Command x:Key="MyCommand"/>
+        <my:Command x:Key="CommandKey"/>
     </Window.Resources>
     <Grid>
         <Menu x:Name="MainMenu" VerticalAlignment="Top">
             <MenuItem x:Name="miFile" Header="Файл">
-                <MenuItem x:Name="miExit" Header="Выход" Click="miExit_Click"/>
+                <MenuItem x:Name="miExit" Header="Выход" Command="{StaticResource CommandKey}" CommandParameter="Exit"/>
             </MenuItem>
             <MenuItem x:Name="miEdit" Header="Правка">
-                <MenuItem x:Name="miUndo" Header="Отменить" Command="{StaticResource MyCommand}"/>
-                <MenuItem x:Name="miRedo" Header="Вернуть" />
+                <MenuItem x:Name="miUndo" Header="Отменить" Command="{StaticResource CommandKey}" CommandParameter="Undo"/>
+                <MenuItem x:Name="miRedo" Header="Вернуть" Command="{StaticResource CommandKey}" CommandParameter="Redo"/>
             </MenuItem>
         </Menu>
         <Canvas x:Name="MainCanvas"></Canvas>

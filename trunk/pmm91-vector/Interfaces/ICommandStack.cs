@@ -6,16 +6,16 @@ namespace pmm91_vector.Interfaces
     /// Интерфейс стека команд
     /// </summary>
     /// <typeparam name="ICommand">Класс, реализующий итерфейс команды</typeparam>
-    public interface ICommandStack
+    public interface ICommandStack : ICollection<ICommand>
     {
         /// <summary>
-        /// Помещение заданной команды в стек
+        /// Выполнение заданной команды
         /// </summary>
         /// <param name="command">Команда для выполнения</param>
-        void DoComand(object command);
+        void DoComand(ICommand command);
 
         /// <summary>
-        /// Отмена последней выполненной команды с извлечением из стека
+        /// Отмена последней выполненной команды
         /// </summary>
         void UndoComand();
 
@@ -24,5 +24,16 @@ namespace pmm91_vector.Interfaces
         /// </summary>
         void RedoComand();
 
+        /// <summary>
+        /// Проверка возможности отмены последней выполненной команды
+        /// </summary>
+        /// <returns>Возвращает true, если команду можно отменить</returns>
+        bool CanUndo();
+
+        /// <summary>
+        /// Проверка возможности повтора последней отменённой команды
+        /// </summary>
+        /// <returns>Возвращает true, если команду можно повторить</returns>
+        bool CanRedo();
     }
 }
