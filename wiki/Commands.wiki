@@ -1,0 +1,6 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Наследуем команды от нашей ICommand, нашу наследуем от Input.ICommand;
+Пишем реализации нашей ICommand.
