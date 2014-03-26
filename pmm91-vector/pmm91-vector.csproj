@@ -61,8 +61,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Implementation\Command.cs" />
+    <Compile Include="Implementation\Commands\ExitCmd.cs" />
     <Compile Include="Implementation\CommandStack.cs" />
+    <Compile Include="Implementation\Commands\UndoCmd.cs" />
+    <Compile Include="Implementation\Commands\RedoCmd.cs" />
     <Compile Include="Implementation\FigureCollection.cs" />
     <Compile Include="Implementation\Figures\Ellipse.cs" />
     <Compile Include="Implementation\Figures\Polygon.cs" />

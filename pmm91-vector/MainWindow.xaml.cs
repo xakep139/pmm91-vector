@@ -24,10 +24,5 @@ namespace pmm91_vector
         {
             InitializeComponent();
         }
-
-        public void CloseWindow()
-        {
-            this.Close();
-        }
     }
 }
