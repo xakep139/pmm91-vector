@@ -1,6 +1,6 @@
-#summary One-sentence summary of this page.
+#summary Описание структуры команд.
 
-= Introduction =
+= Введение =
 
 Наследуем команды от нашей ICommand, нашу наследуем от Input.ICommand;
 Пишем реализации нашей ICommand.
