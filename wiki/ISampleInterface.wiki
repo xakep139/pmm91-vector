@@ -1,4 +1,5 @@
 #summary Пример интерфейса, который реализует класс ImplementationClass
+#labels Example
 
 = Интерфейс =
 
@@ -13,7 +14,7 @@ interface ISampleInterface
 }
 }}}
 
-= Классы их описание и назначение =
+= Классы, их описание и назначение =
 {{{
     /// <summary>
     ///  Класс ImplementationClass
