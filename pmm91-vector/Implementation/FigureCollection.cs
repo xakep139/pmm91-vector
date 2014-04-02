@@ -13,9 +13,9 @@ namespace pmm91_vector.Implementation
     /// </summary>
     class FigureCollection : Interfaces.IFigureCollection
     {
-        private IList<IFigure> _figures = new List<IFigure>();
+        private IList<Figure> _figures = new List<Figure>();
 
-        public IList<Interfaces.IFigure> Selection(Point a, Point b)
+        public IList<Interfaces.Figure> Selection(Point a, Point b)
         {
             return _figures.Where(x => x.Selection(a,b)).ToList();
         }
@@ -30,12 +30,12 @@ namespace pmm91_vector.Implementation
             throw new NotImplementedException();
         }
 
-        public int IndexOf(Interfaces.IFigure item)
+        public int IndexOf(Interfaces.Figure item)
         {
             return _figures.IndexOf(item);
         }
 
-        public void Insert(int index, Interfaces.IFigure item)
+        public void Insert(int index, Interfaces.Figure item)
         {
             _figures.Insert(index, item);
         }
@@ -45,7 +45,7 @@ namespace pmm91_vector.Implementation
             _figures.RemoveAt(index);
         }
 
-        public Interfaces.IFigure this[int index]
+        public Interfaces.Figure this[int index]
         {
             get
             {
@@ -57,7 +57,7 @@ namespace pmm91_vector.Implementation
             }
         }
 
-        public void Add(Interfaces.IFigure item)
+        public void Add(Interfaces.Figure item)
         {
             _figures.Add(item);
         }
@@ -67,12 +67,12 @@ namespace pmm91_vector.Implementation
             _figures.Clear();
         }
 
-        public bool Contains(Interfaces.IFigure item)
+        public bool Contains(Interfaces.Figure item)
         {
             return _figures.Contains(item);
         }
 
-        public void CopyTo(Interfaces.IFigure[] array, int arrayIndex)
+        public void CopyTo(Interfaces.Figure[] array, int arrayIndex)
         {
             _figures.CopyTo(array, arrayIndex);
         }
@@ -87,12 +87,12 @@ namespace pmm91_vector.Implementation
             get { return _figures.IsReadOnly; }
         }
 
-        public bool Remove(Interfaces.IFigure item)
+        public bool Remove(Interfaces.Figure item)
         {
             return _figures.Remove(item);
         }
 
-        public IEnumerator<Interfaces.IFigure> GetEnumerator()
+        public IEnumerator<Interfaces.Figure> GetEnumerator()
         {
             return _figures.GetEnumerator();
         }

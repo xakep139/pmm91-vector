@@ -15,5 +15,6 @@ namespace pmm91_vector.Implementation.Commands
         {
             App.Current.Shutdown(0);
         }
+
     }
 }
