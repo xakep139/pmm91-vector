@@ -6,13 +6,13 @@ namespace pmm91_vector.Interfaces
     /// Интерфейс стека команд
     /// </summary>
     /// <typeparam name="ICommand">Класс, реализующий итерфейс команды</typeparam>
-    public interface ICommandStack : ICollection<ICommand>
+    public interface ICommandStack : ICollection<pmm91_vector.Interfaces.ICommand>
     {
         /// <summary>
         /// Выполнение заданной команды
         /// </summary>
         /// <param name="command">Команда для выполнения</param>
-        void DoComand(ICommand command);
+        void DoComand(pmm91_vector.Interfaces.ICommand command);
 
         /// <summary>
         /// Отмена последней выполненной команды

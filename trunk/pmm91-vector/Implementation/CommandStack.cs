@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using pmm91_vector.Interfaces;
 namespace pmm91_vector.Implementation
 {
     /// <summary>
     /// Класс реализующий интерфейс стека команд
     /// </summary>
-    public class CommandStack : Interfaces.ICommandStack
+    public class CommandStack : ICommandStack
     {
         /// <summary>
         /// Стек выполненных команд
@@ -40,7 +40,7 @@ namespace pmm91_vector.Implementation
             }
         }
 
-        void Interfaces.ICommandStack.DoComand(Interfaces.ICommand command)
+        public void DoComand(pmm91_vector.Interfaces.ICommand command)
         {
             ////
             ////    Подумать насчёт того, следует ли выполнять команду здесь
@@ -50,7 +50,7 @@ namespace pmm91_vector.Implementation
             this._stackUndo.Push(command);  //Добавляем выполняемую команду в основной стек
         }
 
-        void Interfaces.ICommandStack.UndoComand()
+        public void UndoComand()
         {
             ////
             ////    Подумать насчёт того, как сделать так, чтобы отменить изменения, сделанные командой
@@ -59,7 +59,7 @@ namespace pmm91_vector.Implementation
             this._stackRedo.Push(this._stackUndo.Pop());
         }
 
-        void Interfaces.ICommandStack.RedoComand()
+        public void RedoComand()
         {
             ////
             ////    Подумать насчёт того, где хранить параметры команды (сейчас задал как null)
@@ -68,12 +68,12 @@ namespace pmm91_vector.Implementation
             this._stackUndo.Peek().Execute(null);
         }
 
-        bool Interfaces.ICommandStack.CanUndo()
+        public bool CanUndo()
         {
             return (this._stackUndo.Count > 0);
         }
 
-        bool Interfaces.ICommandStack.CanRedo()
+        public bool CanRedo()
         {
             return (this._stackRedo.Count > 0);
         }
@@ -126,5 +126,6 @@ namespace pmm91_vector.Implementation
         {
             return this._stackUndo.GetEnumerator();
         }
+
     }
 }

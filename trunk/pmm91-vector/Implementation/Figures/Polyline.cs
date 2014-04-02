@@ -10,11 +10,11 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Ломаная линия
     /// </summary>
-    class Polyline : Interfaces.IFigure
+    class Polyline : Interfaces.Figure
     {
         public Polyline(List<Point> points)
         {
-            _points = points;
+            Points = points;
         }
 
         /// <summary>
@@ -22,39 +22,33 @@ namespace pmm91_vector.Implementation.Figures
         /// </summary>
         public void AddPoint(Point point)
         {
-            _points.Add(point);
+            Points.Add(point);
         }
 
         #region IGeometryFigure
 
-        private List<Point> _points = new List<Point>();
 
-        public IList<Point> Points
-        {
-            get { return _points; }
-        }
-
-        public void Transform(Interfaces.IFigureTransform transformer)
+        public override void Transform(Interfaces.IFigureTransform transformer)
         {
             throw new NotImplementedException();
         }
 
-        public bool Selection(Point a, Point b)
+        public override bool Selection(Point a, Point b)
         {
             throw new NotImplementedException();
         }
 
-        public void SetPoint(int index, Point p)
+        public override void SetPoint(int index, Point p)
         {
-            _points[index] = p;
+            Points[index] = p;
         }
 
-        public Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
+        public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
         {
             throw new NotImplementedException();
         }
 
-        public Interfaces.IGeometryFigure Union(Interfaces.IGeometryFigure figure)
+        public override Interfaces.IGeometryFigure Union(Interfaces.IGeometryFigure figure)
         {
             throw new NotImplementedException();
         }
@@ -63,43 +57,7 @@ namespace pmm91_vector.Implementation.Figures
 
         #region IGraphicFigure
 
-        public int Z
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public System.Windows.Media.Color BoundaryColor
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public System.Windows.Media.Brush FillColor
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void Draw(Interfaces.IGraphics where)
+        public override void Draw(Interfaces.IGraphics where)
         {
             throw new NotImplementedException();
         }
@@ -107,7 +65,7 @@ namespace pmm91_vector.Implementation.Figures
         #endregion
 
 
-        public Point Center
+        public override Point Center
         {
             get
             {
