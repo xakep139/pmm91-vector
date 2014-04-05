@@ -64,6 +64,8 @@
     <Compile Include="Implementation\Commands\AddFigureCmd.cs" />
     <Compile Include="Implementation\Commands\ExitCmd.cs" />
     <Compile Include="Implementation\CommandStack.cs" />
+    <Compile Include="Implementation\Commands\InputCmd.cs" />
+    <Compile Include="Implementation\Commands\OutputCmd.cs" />
     <Compile Include="Implementation\Commands\UndoCmd.cs" />
     <Compile Include="Implementation\Commands\RedoCmd.cs" />
     <Compile Include="Implementation\FigureCollection.cs" />
