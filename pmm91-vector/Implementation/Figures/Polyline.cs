@@ -10,7 +10,7 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Ломаная линия
     /// </summary>
-    class Polyline : Interfaces.Figure
+    class Polyline : Interfaces.IFigure
     {
         public Polyline(List<Point> points)
         {

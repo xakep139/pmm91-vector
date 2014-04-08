@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using pmm91_vector.Interfaces;
 
@@ -11,31 +10,31 @@ namespace pmm91_vector.Implementation
     /// <summary>
     /// Коллекция фигур
     /// </summary>
-    class FigureCollection : Interfaces.IFigureCollection
+    class FigureCollection : IFigureCollection
     {
-        private IList<Figure> _figures = new List<Figure>();
+        private IList<IFigure> _figures = new List<IFigure>();
 
-        public IList<Interfaces.Figure> Selection(Point a, Point b)
+        public IList<IFigure> Selection(Point a, Point b)
         {
-            return _figures.Where(x => x.Selection(a,b)).ToList();
+            return _figures.Where(x => x.Selection(a, b)).ToList();
         }
 
-        public bool Load(System.IO.Stream fileStream)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Save(System.IO.Stream fileName)
+        public bool Load(Stream fileStream)
         {
             throw new NotImplementedException();
         }
 
-        public int IndexOf(Interfaces.Figure item)
+        public bool Save(Stream fileName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int IndexOf(IFigure item)
         {
             return _figures.IndexOf(item);
         }
 
-        public void Insert(int index, Interfaces.Figure item)
+        public void Insert(int index, IFigure item)
         {
             _figures.Insert(index, item);
         }
@@ -45,7 +44,7 @@ namespace pmm91_vector.Implementation
             _figures.RemoveAt(index);
         }
 
-        public Interfaces.Figure this[int index]
+        public IFigure this[int index]
         {
             get
             {
@@ -57,7 +56,7 @@ namespace pmm91_vector.Implementation
             }
         }
 
-        public void Add(Interfaces.Figure item)
+        public void Add(IFigure item)
         {
             _figures.Add(item);
         }
@@ -67,12 +66,12 @@ namespace pmm91_vector.Implementation
             _figures.Clear();
         }
 
-        public bool Contains(Interfaces.Figure item)
+        public bool Contains(IFigure item)
         {
             return _figures.Contains(item);
         }
 
-        public void CopyTo(Interfaces.Figure[] array, int arrayIndex)
+        public void CopyTo(IFigure[] array, int arrayIndex)
         {
             _figures.CopyTo(array, arrayIndex);
         }
@@ -87,12 +86,12 @@ namespace pmm91_vector.Implementation
             get { return _figures.IsReadOnly; }
         }
 
-        public bool Remove(Interfaces.Figure item)
+        public bool Remove(IFigure item)
         {
             return _figures.Remove(item);
         }
 
-        public IEnumerator<Interfaces.Figure> GetEnumerator()
+        public IEnumerator<IFigure> GetEnumerator()
         {
             return _figures.GetEnumerator();
         }

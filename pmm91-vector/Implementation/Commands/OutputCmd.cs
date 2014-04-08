@@ -4,7 +4,7 @@ using Microsoft.Win32;
 
 namespace pmm91_vector.Implementation.Commands
 {
-    class OutputCmd : Interfaces.ICommand
+    public class OutputCmd : Interfaces.ICommand
     {
         public bool CanExecute(object parameter)
         {
@@ -27,6 +27,7 @@ namespace pmm91_vector.Implementation.Commands
                 string path = saveFileDialog.FileName;
                 StreamReader sw = new StreamReader(path);
                 //тут вызываем метод bool Save(Stream fileStream)
+                throw new NotImplementedException();
             }
         }
     }

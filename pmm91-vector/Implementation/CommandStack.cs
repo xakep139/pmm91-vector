@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using pmm91_vector.Interfaces;
+
 namespace pmm91_vector.Implementation
 {
     /// <summary>
@@ -12,12 +13,12 @@ namespace pmm91_vector.Implementation
         /// <summary>
         /// Стек выполненных команд
         /// </summary>
-        private Stack<Interfaces.ICommand> _stackUndo = new Stack<Interfaces.ICommand>();
+        private Stack<ICommand> _stackUndo = new Stack<ICommand>();
         
         /// <summary>
         /// Стек отменённых команд
         /// </summary>
-        private Stack<Interfaces.ICommand> _stackRedo = new Stack<Interfaces.ICommand>();
+        private Stack<ICommand> _stackRedo = new Stack<ICommand>();
         private static CommandStack instance = null;
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace pmm91_vector.Implementation
             }
         }
 
-        public void DoComand(pmm91_vector.Interfaces.ICommand command)
+        public void DoCommand(ICommand command)
         {
             ////
             ////    Подумать насчёт того, следует ли выполнять команду здесь
@@ -50,7 +51,7 @@ namespace pmm91_vector.Implementation
             this._stackUndo.Push(command);  //Добавляем выполняемую команду в основной стек
         }
 
-        public void UndoComand()
+        public void UndoCommand()
         {
             ////
             ////    Подумать насчёт того, как сделать так, чтобы отменить изменения, сделанные командой
@@ -59,7 +60,7 @@ namespace pmm91_vector.Implementation
             this._stackRedo.Push(this._stackUndo.Pop());
         }
 
-        public void RedoComand()
+        public void RedoCommand()
         {
             ////
             ////    Подумать насчёт того, где хранить параметры команды (сейчас задал как null)
@@ -78,46 +79,46 @@ namespace pmm91_vector.Implementation
             return (this._stackRedo.Count > 0);
         }
 
-        void ICollection<Interfaces.ICommand>.Add(Interfaces.ICommand item)
+        void ICollection<ICommand>.Add(ICommand item)
         {
             this._stackUndo.Push(item);
         }
 
-        void ICollection<Interfaces.ICommand>.Clear()
+        void ICollection<ICommand>.Clear()
         {
             this._stackRedo.Clear();
             this._stackUndo.Clear();
         }
 
-        bool ICollection<Interfaces.ICommand>.Contains(Interfaces.ICommand item)
+        bool ICollection<ICommand>.Contains(ICommand item)
         {
             return this._stackUndo.Contains(item);
         }
 
-        void ICollection<Interfaces.ICommand>.CopyTo(Interfaces.ICommand[] array, int arrayIndex)
+        void ICollection<ICommand>.CopyTo(ICommand[] array, int arrayIndex)
         {
             this._stackUndo.CopyTo(array, arrayIndex);
         }
 
-        int ICollection<Interfaces.ICommand>.Count
+        int ICollection<ICommand>.Count
         {
             get { return this._stackUndo.Count; }
         }
 
-        bool ICollection<Interfaces.ICommand>.IsReadOnly
+        bool ICollection<ICommand>.IsReadOnly
         {
             get { return false; }
         }
 
-        bool ICollection<Interfaces.ICommand>.Remove(Interfaces.ICommand item)
+        bool ICollection<ICommand>.Remove(ICommand item)
         {
             var tmp = this._stackUndo.ToList();
             bool isRemoved = tmp.Remove(item);
-            this._stackUndo = new Stack<Interfaces.ICommand>(tmp);
+            this._stackUndo = new Stack<ICommand>(tmp);
             return isRemoved;
         }
 
-        IEnumerator<Interfaces.ICommand> IEnumerable<Interfaces.ICommand>.GetEnumerator()
+        IEnumerator<ICommand> IEnumerable<ICommand>.GetEnumerator()
         {
             return this._stackUndo.GetEnumerator();
         }

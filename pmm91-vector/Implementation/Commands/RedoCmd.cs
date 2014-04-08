@@ -6,14 +6,14 @@ namespace pmm91_vector.Implementation.Commands
     {
         public bool CanExecute(object parameter)
         {
-            return (CommandStack.Instance as Interfaces.ICommandStack).CanRedo();
+            return CommandStack.Instance.CanRedo();
         }
 
         public event EventHandler CanExecuteChanged;
 
         public void Execute(object parameter)
         {
-            (CommandStack.Instance as Interfaces.ICommandStack).RedoComand();
+            CommandStack.Instance.RedoCommand();
         }
     }
 }

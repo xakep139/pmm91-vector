@@ -10,7 +10,7 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Эллипс
     /// </summary>
-    class Ellipse : Interfaces.Figure
+    class Ellipse : Interfaces.IFigure
     {
         public Ellipse(Point p1, Point p2)
         {

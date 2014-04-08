@@ -5,24 +5,24 @@ namespace pmm91_vector.Interfaces
     /// <summary>
     /// Интерфейс стека команд
     /// </summary>
-    /// <typeparam name="ICommand">Класс, реализующий итерфейс команды</typeparam>
-    public interface ICommandStack : ICollection<pmm91_vector.Interfaces.ICommand>
+    /// <typeparam name="ICommand">Класс, реализующий интерфейс команды</typeparam>
+    public interface ICommandStack : ICollection<ICommand>
     {
         /// <summary>
         /// Выполнение заданной команды
         /// </summary>
         /// <param name="command">Команда для выполнения</param>
-        void DoComand(pmm91_vector.Interfaces.ICommand command);
+        void DoCommand(ICommand command);
 
         /// <summary>
         /// Отмена последней выполненной команды
         /// </summary>
-        void UndoComand();
+        void UndoCommand();
 
         /// <summary>
         /// Повтор последней отменённой команды
         /// </summary>
-        void RedoComand();
+        void RedoCommand();
 
         /// <summary>
         /// Проверка возможности отмены последней выполненной команды
