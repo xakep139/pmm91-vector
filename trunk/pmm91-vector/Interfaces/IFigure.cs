@@ -1,40 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
 
 namespace pmm91_vector.Interfaces
 {
     /// <summary>
     /// Интерфейс объекта "фигура"
     /// </summary>
-    public abstract class Figure : IGeometryFigure, IGraphicFigure
+    public abstract class IFigure : IGeometryFigure, IGraphicFigure
     {
-        System.Windows.Media.Color boundaryColor;
-        public System.Windows.Media.Color BoundaryColor
+        private int z;
+        private Brush fillColor;
+        private Color boundaryColor;
+        private IList<Point> points = new List<Point>();
+
+        public Color BoundaryColor
         {
             get { return boundaryColor; }
             set { boundaryColor = value; }
         }
-        System.Windows.Media.Brush fillColor;
-        public System.Windows.Media.Brush FillColor
+
+        public Brush FillColor
         {
             get { return fillColor; }
             set { fillColor = value; }
         }
-        int z;
+
         public int Z
         {
             get { return z; }
             set { z = value;  }
         }
-        private IList<Point> _points = new List<Point>();
 
         public IList<Point> Points
         {
-            get { return _points; }
-            protected set { _points = value; }
+            get { return points; }
+            protected set { points = value; }
         }
 
+        abstract public Point Center { get; set; }
 
         abstract public void Transform(IFigureTransform transformer);
 
@@ -45,8 +49,6 @@ namespace pmm91_vector.Interfaces
         abstract public IGeometryFigure Intersection(IGeometryFigure figure);
 
         abstract public IGeometryFigure Union(IGeometryFigure figure);
-
-        abstract public Point Center     {get;set;}
 
         abstract public void Draw(IGraphics where);
     }

@@ -10,7 +10,7 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Многоугольник
     /// </summary>
-    class Polygon : Interfaces.Figure
+    class Polygon : Interfaces.IFigure
     {
         #region Constructors
 

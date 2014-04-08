@@ -8,7 +8,7 @@ namespace pmm91_vector.Interfaces
     /// Интерфейс коллекции фигур
     /// </summary>
     /// <typeparam name="IFigure">Класс, реализующий интерфейс объекта "фигура"</typeparam>
-    public interface IFigureCollection : IList<Figure>
+    public interface IFigureCollection : IList<IFigure>
     {
         /// <summary>
         /// Получение списка фигур в выделении
@@ -16,7 +16,7 @@ namespace pmm91_vector.Interfaces
         /// <param name="a">Левая верхняя точка выделения</param>
         /// <param name="b">Превая нижняя точка выделения</param>
         /// <returns>Возвращает коллекцию фигур</returns>
-        IList<Figure> Selection(Point a, Point b);
+        IList<IFigure> Selection(Point a, Point b);
         
         // Объединение - ?
         
