@@ -16,10 +16,8 @@ namespace pmm91_vector.Implementation.Commands
         public void Execute(object parameter)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "txt files (*.txt)|*.txt"; //например, txt
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
+            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*"; //например, txt
+            openFileDialog.FilterIndex = 1;
 
             var result = openFileDialog.ShowDialog();
             if (result.HasValue && result.Value == true)

@@ -33,5 +33,6 @@ namespace pmm91_vector.Interfaces
         /// <param name="fileStream">Поток для сохранения</param>
         /// <returns>Возвращает успешность сохранения</returns>
         bool Save(Stream fileName);
+        string FileName { get; set; }
     }
 }
