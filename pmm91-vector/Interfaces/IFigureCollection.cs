@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -32,7 +33,11 @@ namespace pmm91_vector.Interfaces
         /// </summary>
         /// <param name="fileStream">Поток для сохранения</param>
         /// <returns>Возвращает успешность сохранения</returns>
-        bool Save(Stream fileName);
+        bool Save(Stream fileStream);
+
+        /// <summary>
+        /// Имя файла, который соответствует теущей коллекции фигур
+        /// </summary>
         string FileName { get; set; }
     }
 }

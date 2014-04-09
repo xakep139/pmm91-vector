@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Path x:Key="PolygonIcon" x:Shared="False"
+          Data="F1M1703.66,-21.7902L1687.66,-49.7902 1703.66,-77.7902 1735.66,-77.7902 1751.66,-49.7902 1735.66,-21.7902 1703.66,-21.7902z"
+          Stretch="Uniform" Fill="#FF0CDFEF" Width="24" Height="24" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+        <Path.RenderTransform>
+            <TransformGroup>
+                <TransformGroup.Children>
+                    <RotateTransform Angle="0" />
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                </TransformGroup.Children>
+            </TransformGroup>
+        </Path.RenderTransform>
+    </Path>
+    <Path x:Key="PolylineIcon" x:Shared="False"
+          Data="F1M737.734,1800.89L678.309,1766.58 737.734,1732.27 737.734,1800.89z M683.642,1766.58L735.068,1796.27 735.068,1736.89 683.642,1766.58z"
+          Stretch="Uniform" Fill="#FF01FF40" Width="24" Height="24" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+        <Path.RenderTransform>
+            <TransformGroup>
+                <TransformGroup.Children>
+                    <RotateTransform Angle="0" />
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                </TransformGroup.Children>
+            </TransformGroup>
+        </Path.RenderTransform>
+    </Path>
+    <Path x:Key="EllipseIcon" x:Shared="False"
+        Data="M37.12669,47.713001L37.377998,49.608006C35.609142,49.842468 33.795189,49.961002 31.985933,49.961002 30.526888,49.961002 29.057444,49.884182 27.617998,49.731838L27.820406,47.830231C30.8927,48.155918,34.081596,48.116806,37.12669,47.713001z M10.68367,41.250999C13.054049,43.076717,15.778026,44.575512,18.778,45.705784L18.104105,47.494999C14.927133,46.296925,12.037758,44.705719,9.5170002,42.765495z M54.048126,40.644001L55.267002,42.115368C52.819153,44.142864,49.980015,45.825241,46.829681,47.117001L46.105,45.348618C49.076935,44.129761,51.748775,42.549088,54.048126,40.644001z M1.908246,25.865999C2.0663735,28.8582,2.9608878,31.7514,4.5669994,34.4664L2.9211683,35.438999C1.1575894,32.4571,0.17454171,29.269699,0,25.9664z M63.888702,22.807001C63.962894,23.503742 64.00069,24.213386 63.999992,24.913927 63.999992,28.242327 63.180473,31.47682 61.564133,34.524002L59.875999,33.628048C61.343956,30.859583 62.08868,27.927208 62.08868,24.913927 62.089382,24.279789 62.055485,23.639151 61.988491,23.008913z M7.9158602,8.388001L9.1880016,9.8150277C6.7746696,11.966118,4.9171796,14.402162,3.6678505,17.057001L1.9379997,16.243321C3.2986498,13.353987,5.3097196,10.710848,7.9158602,8.388001z M53.620914,6.4410005C56.44315,8.465823,58.756378,10.839478,60.495998,13.496994L58.896378,14.544001C57.286961,12.084185,55.137135,9.8798016,52.507,7.9944711z M25.57461,0.36600113L25.874001,2.2539716C22.741796,2.7512631,19.745289,3.6276631,16.967376,4.8620019L16.191999,3.1146226C19.12151,1.8138256,22.278412,0.88948059,25.57461,0.36600113z M35.328899,0C38.640099,0.26815414,41.858898,0.93479967,44.896,1.9817185L44.2729,3.789C41.387398,2.7942362,38.326199,2.1600962,35.174,1.9036002z"
+          Stretch="Uniform" Fill="#FF321DFF" Width="24" Height="24" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+        <Path.RenderTransform>
+            <TransformGroup>
+                <TransformGroup.Children>
+                    <RotateTransform Angle="0" />
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                </TransformGroup.Children>
+            </TransformGroup>
+        </Path.RenderTransform>
+    </Path>
+</ResourceDictionary>

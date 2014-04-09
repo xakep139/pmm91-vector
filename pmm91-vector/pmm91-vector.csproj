@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -61,10 +65,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Implementation\Commands\AddFigureCmd.cs" />
     <Compile Include="Implementation\Commands\ExitCmd.cs" />
     <Compile Include="Implementation\CommandStack.cs" />
-    <Compile Include="Implementation\Commands\InputCmd.cs" />
-    <Compile Include="Implementation\Commands\OutputCmd.cs" />
+    <Compile Include="Implementation\Commands\OpenCmd.cs" />
+    <Compile Include="Implementation\Commands\SaveAsCmd.cs" />
     <Compile Include="Implementation\Commands\UndoCmd.cs" />
     <Compile Include="Implementation\Commands\RedoCmd.cs" />
     <Compile Include="Implementation\FigureCollection.cs" />
@@ -111,12 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Misc\Icons\Ellipse.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Misc\Icons\Ellipse.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

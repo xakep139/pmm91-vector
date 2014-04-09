@@ -1,37 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace pmm91_vector.Implementation.Commands
 {
-    public class AddFigure : Interfaces.ICommand
+    public class AddFigureCmd : Interfaces.ICommand
     {
         public bool CanExecute(object parameter)
         {
             return true;
         }
 
+#pragma warning disable 67
         public event EventHandler CanExecuteChanged;
+#pragma warning restore 67
 
         public void Execute(object parameter)
         {
-            CommandStack.Instance.DoComand(this);
-            string figure = parameter as string;
+            CommandStack.Instance.DoCommand(this);
+            string figure = (parameter as string).ToLower();
             switch(figure)
             {
-                case "Ellipse":
+                //TODO: написать реальное добавление
                 case "ellipse":
-
-                    //Написать реальную добавку
-
+                    break;
+                case "polygon":
+                    break;
+                case "polyline":
                     break;
                 default:
-                    break;
+                    throw new NotImplementedException();
             }
-            App.Current.Shutdown(0);
         }
-
     }
 }
