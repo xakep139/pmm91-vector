@@ -11,10 +11,16 @@
         <my:InputCmd x:Key="LoadCommand"/>
     </Window.Resources>
     <Grid>
-        <Menu x:Name="MainMenu" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu x:Name="MainMenu" Grid.Row="0" VerticalAlignment="Top">
             <MenuItem x:Name="miFile" Header="Файл">
                 <MenuItem x:Name="miLoad" Header="Открыть" Command="{StaticResource LoadCommand}"/>
                 <MenuItem x:Name="miSave" Header="Сохранить" Command="{StaticResource SaveCommand}"/>
+                <Separator />
                 <MenuItem x:Name="miExit" Header="Выход" Command="{StaticResource ExitCommand}"/>
             </MenuItem>
             <MenuItem x:Name="miEdit" Header="Правка">
@@ -22,6 +28,11 @@
                 <MenuItem x:Name="miRedo" Header="Вернуть" Command="{StaticResource RedoCommand}"/>
             </MenuItem>
         </Menu>
-        <Canvas x:Name="MainCanvas"></Canvas>
+        <Menu x:Name="ButtonMenu" Grid.Row="1" VerticalAlignment="Top">
+            <Button x:Name="btnAddEllipse" ToolTip="Добавить эллипс">
+                <Image Source="Misc/Icons/Ellipse.gif" MaxHeight="20" />
+            </Button>
+        </Menu>
+        <Canvas x:Name="MainCanvas" Grid.Row="2" Background="#FFE2E2E2" />
     </Grid>
 </Window>
