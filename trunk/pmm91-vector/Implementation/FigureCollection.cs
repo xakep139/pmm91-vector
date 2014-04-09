@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using pmm91_vector.Interfaces;
 
@@ -10,9 +11,16 @@ namespace pmm91_vector.Implementation
     /// <summary>
     /// Коллекция фигур
     /// </summary>
+    [Serializable()]
     class FigureCollection : IFigureCollection
     {
         private IList<IFigure> _figures = new List<IFigure>();
+
+        public string FileName
+        {
+            get;
+            set;
+        }
 
         public IList<IFigure> Selection(Point a, Point b)
         {
@@ -21,12 +29,28 @@ namespace pmm91_vector.Implementation
 
         public bool Load(Stream fileStream)
         {
-            throw new NotImplementedException();
+            if (fileStream.CanRead)
+            {
+                BinaryFormatter deserializer = new BinaryFormatter();
+                var newFigureCollection = (FigureCollection)deserializer.Deserialize(fileStream);
+                this.FileName = newFigureCollection.FileName;
+                this._figures = new List<IFigure>(newFigureCollection._figures);
+                return true;
+            }
+            else
+                return false;
         }
 
-        public bool Save(Stream fileName)
+        public bool Save(Stream fileStream)
         {
-            throw new NotImplementedException();
+            if (fileStream.CanWrite)
+            {
+                BinaryFormatter serializer = new BinaryFormatter();
+                serializer.Serialize(fileStream, this);
+                return true;
+            }
+            else
+                return false;
         }
 
         public int IndexOf(IFigure item)
@@ -99,8 +123,6 @@ namespace pmm91_vector.Implementation
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
-        }
-
-        public string FileName{get;set;}        
+        }    
     }
 }

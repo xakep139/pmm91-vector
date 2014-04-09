@@ -43,10 +43,6 @@ namespace pmm91_vector.Implementation
 
         public void DoCommand(ICommand command)
         {
-            ////
-            ////    Подумать насчёт того, следует ли выполнять команду здесь
-            ////
-            throw new NotImplementedException();
             this._stackRedo.Clear();        //Стек отменённых команд очищаем
             this._stackUndo.Push(command);  //Добавляем выполняемую команду в основной стек
         }
