@@ -100,5 +100,7 @@ namespace pmm91_vector.Implementation
         {
             throw new NotImplementedException();
         }
+
+        public string FileName{get;set;}        
     }
 }
