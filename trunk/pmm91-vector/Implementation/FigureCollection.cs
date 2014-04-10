@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using pmm91_vector.Interfaces;
 
@@ -27,12 +26,11 @@ namespace pmm91_vector.Implementation
             return _figures.Where(x => x.Selection(a, b)).ToList();
         }
 
-        public bool Load(Stream fileStream)
+        public bool Load(Streamers.BaseStream stream)
         {
-            if (fileStream.CanRead)
+            if (stream.CanRead)
             {
-                BinaryFormatter deserializer = new BinaryFormatter();
-                var newFigureCollection = (FigureCollection)deserializer.Deserialize(fileStream);
+                var newFigureCollection = (FigureCollection)stream.ReadColection();
                 this.FileName = newFigureCollection.FileName;
                 this._figures = new List<IFigure>(newFigureCollection._figures);
                 return true;
@@ -41,12 +39,11 @@ namespace pmm91_vector.Implementation
                 return false;
         }
 
-        public bool Save(Stream fileStream)
+        public bool Save(Streamers.BaseStream stream)
         {
-            if (fileStream.CanWrite)
+            if (stream.CanWrite)
             {
-                BinaryFormatter serializer = new BinaryFormatter();
-                serializer.Serialize(fileStream, this);
+                stream.WriteColection(this);
                 return true;
             }
             else

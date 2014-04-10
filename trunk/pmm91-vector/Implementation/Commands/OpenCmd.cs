@@ -26,7 +26,8 @@ namespace pmm91_vector.Implementation.Commands
             {
                 string path = openFileDialog.FileName;
                 StreamReader sr = new StreamReader(path);
-                //тут вызываем метод FigureCollection.Load(Stream fileStream)
+                //В зависимости от типа файла создаём Streamer'а (наследника BaseStream)
+                //и вызываем метод FigureCollection.Load(BaseStream stream)
                 //и записываем path в свойство FigureCollection.FileName
                 throw new NotImplementedException();
             }

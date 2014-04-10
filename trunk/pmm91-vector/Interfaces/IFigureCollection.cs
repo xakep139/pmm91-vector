@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows;
 
 namespace pmm91_vector.Interfaces
@@ -24,16 +22,16 @@ namespace pmm91_vector.Interfaces
         /// <summary>
         /// Загрузка коллекции фигур из заданного потока
         /// </summary>
-        /// <param name="fileStream">Поток для загрузки</param>
+        /// <param name="Stream">Поток для загрузки</param>
         /// <returns>Возвращает успешность сохранения</returns>
-        bool Load(Stream fileStream);
+        bool Load(Streamers.BaseStream stream);
 
         /// <summary>
         /// Сохранение коллекции фигур в заданный поток
         /// </summary>
-        /// <param name="fileStream">Поток для сохранения</param>
+        /// <param name="Stream">Поток для сохранения</param>
         /// <returns>Возвращает успешность сохранения</returns>
-        bool Save(Stream fileStream);
+        bool Save(Streamers.BaseStream stream);
 
         /// <summary>
         /// Имя файла, который соответствует теущей коллекции фигур

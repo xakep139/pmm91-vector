@@ -53,6 +53,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Streamers\BinaryFileStream.cs" />
+    <Compile Include="Streamers\XmlFileStream.cs" />
     <Page Include="Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -73,9 +75,11 @@
     <Compile Include="Implementation\Commands\UndoCmd.cs" />
     <Compile Include="Implementation\Commands\RedoCmd.cs" />
     <Compile Include="Implementation\FigureCollection.cs" />
+    <Compile Include="Implementation\Figures\BaseFigure.cs" />
     <Compile Include="Implementation\Figures\Ellipse.cs" />
     <Compile Include="Implementation\Figures\Polygon.cs" />
     <Compile Include="Implementation\Figures\Polyline.cs" />
+    <Compile Include="Streamers\BaseStream.cs" />
     <Compile Include="Interfaces\ICommandStack.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IFigure.cs" />
