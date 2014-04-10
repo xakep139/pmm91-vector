@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace pmm91_vector.Implementation.Figures
@@ -10,7 +7,7 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Многоугольник
     /// </summary>
-    class Polygon : Interfaces.IFigure
+    class Polygon : BaseFigure
     {
         #region Constructors
 

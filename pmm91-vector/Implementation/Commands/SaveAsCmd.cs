@@ -26,7 +26,8 @@ namespace pmm91_vector.Implementation.Commands
             {
                 string path = saveFileDialog.FileName;
                 StreamReader sw = new StreamReader(path);
-                //тут вызываем метод FigureCollection.Save(Stream fileStream)
+                //В зависимости от типа файла создаём Streamer'а (наследника BaseStream)
+                //и тут вызываем метод FigureCollection.Save(BaseStream stream)
                 //и записываем path в свойство FigureCollection.FileName
                 throw new NotImplementedException();
             }
