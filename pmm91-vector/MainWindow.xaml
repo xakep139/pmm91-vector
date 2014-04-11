@@ -11,6 +11,20 @@
         <com:SaveAsCmd x:Key="SaveAsCommand"/>
         <com:OpenCmd x:Key="OpenCommand"/>
         <com:AddFigureCmd x:Key="AddFigure"/>
+        <com:DeleteFigureCmd x:Key="DeleteFigure"/>
+        <com:ChangeOutColorCmd x:Key="ChangeOutColor"/>
+        <com:ChangeInColorCmd x:Key="ChangeInColor"/>
+        <com:ChangeCoordZCmd x:Key="ChangeCoordZ"/>
+        <Style x:Key="VerticalSeparatorStyle" 
+                TargetType="{x:Type Separator}"
+                BasedOn="{StaticResource {x:Type Separator}}">
+            <Setter Property="Margin" Value="0,0,0,2"/>
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="90"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -20,27 +34,72 @@
         </Grid.RowDefinitions>
         <Menu x:Name="MainMenu" Grid.Row="0" VerticalAlignment="Top">
             <MenuItem x:Name="miFile" Header="Файл">
-                <MenuItem x:Name="miOpen" Header="Открыть" Command="{StaticResource OpenCommand}"/>
-                <MenuItem x:Name="miSaveAs" Header="Сохранить как" Command="{StaticResource SaveAsCommand}"/>
+                <MenuItem x:Name="miOpen" Header="Открыть" Command="{StaticResource OpenCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Open.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="miSaveAs" Header="Сохранить как" Command="{StaticResource SaveAsCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Save_As.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem x:Name="miExit" Header="Выход" Command="{StaticResource ExitCommand}"/>
+                <MenuItem x:Name="miExit" Header="Выход" Command="{StaticResource ExitCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Close.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem x:Name="miEdit" Header="Правка">
-                <MenuItem x:Name="miUndo" Header="Отменить" Command="{StaticResource UndoCommand}"/>
-                <MenuItem x:Name="miRedo" Header="Вернуть" Command="{StaticResource RedoCommand}"/>
+                <MenuItem x:Name="miUndo" Header="Отменить" Command="{StaticResource UndoCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Undo.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="miRedo" Header="Вернуть" Command="{StaticResource RedoCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Redo.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <Menu x:Name="ButtonMenu" Grid.Row="1" VerticalAlignment="Top">
-            <Button x:Name="btnAddPolyline" ToolTip="Добавить ломаную" Command="{StaticResource AddFigure}" CommandParameter="Polyline">
+            <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
+            <Button x:Name="btnAddPolyline" ToolTip="Добавить ломаную"
+                    Command="{StaticResource AddFigure}" CommandParameter="Polyline">
                 <ContentControl Content="{StaticResource PolylineIcon}"/>
             </Button>
             <Button x:Name="btnAddPolygon" ToolTip="Добавить многоугольник"
                     Command="{StaticResource AddFigure}" CommandParameter="Polygon">
                 <ContentControl Content="{StaticResource PolygonIcon}"/>
             </Button>
-            <Button x:Name="btnAddEllipse" ToolTip="Добавить эллипс" Command="{StaticResource AddFigure}" CommandParameter="Ellipse">
+            <Button x:Name="btnAddEllipse" ToolTip="Добавить эллипс"
+                    Command="{StaticResource AddFigure}" CommandParameter="Ellipse">
                 <ContentControl Content="{StaticResource EllipseIcon}"/>
             </Button>
+            <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
+            <Button x:Name="btnOutColor" ToolTip="Цвет границы фигуры"
+                    Command="{StaticResource ChangeOutColor}">
+                <ContentControl Content="{StaticResource PenIcon}"/>
+            </Button>
+            <Button x:Name="btnInColor" ToolTip="Цвет заливки фигуры"
+                    Command="{StaticResource ChangeInColor}">
+                <ContentControl Content="{StaticResource FillingIcon}"/>
+            </Button>
+            <Button x:Name="btnIncreaseZ" ToolTip="Переместить вперёд"
+                    Command="{StaticResource ChangeCoordZ}" CommandParameter="Up">
+                <ContentControl Content="{StaticResource ArrowUpIcon}"/>
+            </Button>
+            <Button x:Name="btnDecreaseZ" ToolTip="Переместить назад"
+                    Command="{StaticResource ChangeCoordZ}" CommandParameter="Down">
+                <ContentControl Content="{StaticResource ArrowDownIcon}"/>
+            </Button>
+            <Button x:Name="btnDeleteFigure" ToolTip="Удалить фигуру"
+                    Command="{StaticResource DeleteFigure}">
+                <ContentControl Content="{StaticResource GarbageIcon}"/>
+            </Button>
+            <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
         </Menu>
         <Canvas x:Name="MainCanvas" Grid.Row="2" Background="#FFE2E2E2" />
     </Grid>

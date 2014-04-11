@@ -53,6 +53,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Implementation\Commands\ChangeCoordZCmd.cs" />
+    <Compile Include="Implementation\Commands\ChangeInColorCmd.cs" />
+    <Compile Include="Implementation\Commands\ChangeOutColorCmd.cs" />
+    <Compile Include="Implementation\Commands\DeleteFigureCmd.cs" />
     <Compile Include="Streamers\BinaryFileStream.cs" />
     <Compile Include="Streamers\XmlFileStream.cs" />
     <Page Include="Icons.xaml">
@@ -120,6 +124,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Close.png" />
+    <Resource Include="Icons\Redo.png" />
+    <Resource Include="Icons\Undo.png" />
+    <Resource Include="Icons\Open.png" />
+    <Resource Include="Icons\Save_As.png" />
+    <Resource Include="Icons\Save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
