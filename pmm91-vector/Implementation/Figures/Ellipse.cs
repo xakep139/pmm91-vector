@@ -10,9 +10,8 @@ namespace pmm91_vector.Implementation.Figures
     class Ellipse : BaseFigure
     {
         public Ellipse(Point p1, Point p2)
+            : base(new List<Point> { p1, p2})
         {
-            Points.Add(p1);
-            Points.Add(p2);
         }
 
         #region IGeometryFigure
@@ -23,11 +22,6 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         public override bool Selection(Point a, Point b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SetPoint(int index, Point p)
         {
             throw new NotImplementedException();
         }
@@ -54,18 +48,5 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         #endregion
-
-
-        public override Point Center
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }
