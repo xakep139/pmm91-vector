@@ -10,16 +10,19 @@ namespace pmm91_vector.Implementation.Figures
     class Polyline : BaseFigure
     {
         public Polyline(List<Point> points)
+            : base(points)
         {
-            Points = points;
         }
 
         /// <summary>
         /// Добавление точки
         /// </summary>
+        /// <param name="point">Координаты точки в глобальной системе координат</param>
         public void AddPoint(Point point)
         {
-            Points.Add(point);
+            var globalPoints = Local2Global();
+            globalPoints.Add(point);
+            SetPoints(globalPoints);
         }
 
         #region IGeometryFigure
@@ -33,11 +36,6 @@ namespace pmm91_vector.Implementation.Figures
         public override bool Selection(Point a, Point b)
         {
             throw new NotImplementedException();
-        }
-
-        public override void SetPoint(int index, Point p)
-        {
-            Points[index] = p;
         }
 
         public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
@@ -60,18 +58,5 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         #endregion
-
-
-        public override Point Center
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }

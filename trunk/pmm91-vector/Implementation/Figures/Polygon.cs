@@ -15,37 +15,37 @@ namespace pmm91_vector.Implementation.Figures
         /// Конструктор произвольного многоугольника
         /// </summary>
         public Polygon(List<Point> points)
-        {
-            Points = points;
+            : base(points)
+        {           
         }
 
         /// <summary>
         /// Конструктор треугольника
         /// </summary>
         public Polygon(Point p1, Point p2, Point p3)
+            : base(new List<Point> { p1, p2, p3})
         {
-            Points.Add(p1);
-            Points.Add(p2);
-            Points.Add(p3);
         }
 
         /// <summary>
         /// Конструктор прямоугольника
         /// </summary>
         public Polygon(Point p1, Point p2)
+            : base(new List<Point> { p1, p2 })
         {
-            Points.Add(p1);
-            Points.Add(p2);
         }
 
         #endregion
 
-        /// <summary>
-        /// Добавление точки
-        /// </summary>
+       /// <summary>
+       /// Добавление точки
+       /// </summary>
+       /// <param name="point">Координаты точки в глобальной системе координат</param>
         public void AddPoint(Point point)
         {
-            Points.Add(point);
+            var globalPoints = Local2Global();
+            globalPoints.Add(point);
+            SetPoints(globalPoints);
         }
 
         #region IGeometryFigure
@@ -59,11 +59,6 @@ namespace pmm91_vector.Implementation.Figures
         public override  bool Selection(Point a, Point b)
         {
             throw new NotImplementedException();
-        }
-
-        public override void SetPoint(int index, Point p)
-        {
-            Points[index] = p;
         }
 
         public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
@@ -87,18 +82,5 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         #endregion
-
-
-        public override Point Center
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }

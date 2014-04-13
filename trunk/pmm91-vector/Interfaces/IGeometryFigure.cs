@@ -31,7 +31,7 @@ namespace pmm91_vector.Interfaces
         /// Задание новых координат некоторой точке фигуры
         /// </summary>
         /// <param name="index">Индекс изменяемой точки</param>
-        /// <param name="p">Новые координаты</param>
+        /// <param name="p">Новые координаты(в глобальной системе координат)</param>
         void SetPoint(int index, Point p);
 
         /// <summary>
