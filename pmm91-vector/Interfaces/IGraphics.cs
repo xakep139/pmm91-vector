@@ -1,4 +1,5 @@
-﻿﻿using System.Windows.Media;
+﻿using System.Windows.Controls;
+﻿using System.Windows.Media;
 
 namespace pmm91_vector.Interfaces
 {
@@ -12,6 +13,12 @@ namespace pmm91_vector.Interfaces
         /// </summary>
         /// <param name="displayContext">Контекст отображения</param>
         void Init(Visual displayContext);
+
+        /// <summary>
+        /// Инициализация графики в заданном контексте отображения
+        /// </summary>
+        /// <param name="displayCanvas">Контекст отображения</param>
+        void Init(Canvas displayCanvas);
 
         /// <summary>
         /// Отрисовка заданного набора фигур в контексте отображения

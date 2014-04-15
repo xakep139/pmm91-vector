@@ -11,7 +11,7 @@ namespace pmm91_vector.Implementation
     /// Коллекция фигур
     /// </summary>
     [Serializable()]
-    class FigureCollection : IFigureCollection
+    public class FigureCollection : IFigureCollection
     {
         private IList<IFigure> _figures = new List<IFigure>();
 
