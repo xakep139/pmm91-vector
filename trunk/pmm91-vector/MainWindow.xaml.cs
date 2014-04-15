@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using pmm91_vector.Implementation;
+
 namespace pmm91_vector
 {
     /// <summary>
@@ -20,9 +22,17 @@ namespace pmm91_vector
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Graphics graphics;
+        public FigureCollection figures;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            graphics = new Graphics();
+            graphics.Init(this.MainCanvas);
+
+            figures = new FigureCollection();
         }
     }
 }
