@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace pmm91_vector.Implementation.Figures
@@ -63,7 +64,7 @@ namespace pmm91_vector.Implementation.Figures
 
         abstract public Interfaces.IGeometryFigure Union(Interfaces.IGeometryFigure figure);
 
-        abstract public void Draw(Interfaces.IGraphics where);
+        abstract public void Draw(Panel where);
 
          /// <summary>
         /// Пересчитывет центр фигуры, состоящей из указанных точек

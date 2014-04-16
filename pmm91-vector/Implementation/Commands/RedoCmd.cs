@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 
 namespace pmm91_vector.Implementation.Commands
 {
@@ -9,9 +10,17 @@ namespace pmm91_vector.Implementation.Commands
             return CommandStack.Instance.CanRedo();
         }
 
-#pragma warning disable 67
-        public event EventHandler CanExecuteChanged;
-#pragma warning restore 67
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
 
         public void Execute(object parameter)
         {

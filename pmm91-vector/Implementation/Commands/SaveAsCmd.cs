@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Win32;
+using System.Windows.Input;
 
 namespace pmm91_vector.Implementation.Commands
 {
@@ -11,9 +12,17 @@ namespace pmm91_vector.Implementation.Commands
             return true;
         }
 
-#pragma warning disable 67
-        public event EventHandler CanExecuteChanged;
-#pragma warning restore 67
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
 
         public void Execute(object parameter)
         {
