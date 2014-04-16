@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace pmm91_vector.Implementation.Figures
 {
@@ -40,9 +41,7 @@ namespace pmm91_vector.Implementation.Figures
 
         #region IGraphicFigure
 
-
-
-        public override void Draw(Interfaces.IGraphics where)
+        public override void Draw(Panel where)
         {
             throw new NotImplementedException();
         }

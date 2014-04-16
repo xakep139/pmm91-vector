@@ -29,6 +29,7 @@ namespace pmm91_vector
         {
             InitializeComponent();
 
+            //Определённо, так делать не следует:
             graphics = new Graphics();
             graphics.Init(this.MainCanvas);
 

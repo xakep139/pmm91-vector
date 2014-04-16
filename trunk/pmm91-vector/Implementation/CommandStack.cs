@@ -34,9 +34,7 @@ namespace pmm91_vector.Implementation
             get
             {
                 if (instance == null)
-                {
                     instance = new CommandStack();
-                }
                 return instance;
             }
         }

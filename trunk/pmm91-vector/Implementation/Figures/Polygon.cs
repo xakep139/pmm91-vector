@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace pmm91_vector.Implementation.Figures
 {
     /// <summary>
     /// Многоугольник
     /// </summary>
-    class Polygon : BaseFigure
+    public class Polygon : BaseFigure
     {
         #region Constructors
 
@@ -49,7 +50,6 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         #region IGeometryFigure
-
      
         public override void Transform(Interfaces.IFigureTransform transformer)
         {
@@ -75,10 +75,15 @@ namespace pmm91_vector.Implementation.Figures
 
         #region IGraphicFigure
 
-
-        public override void Draw(Interfaces.IGraphics where)
+        public override void Draw(Panel where)
         {
-            throw new NotImplementedException();
+            var polygon = new System.Windows.Shapes.Polygon();
+            foreach (Point pt in this.Points)
+                //TODO: учесть локальную ось X
+                polygon.Points.Add(new Point(pt.X + this.Center.X, pt.Y + this.Center.Y));
+            //TODO: цвет линии
+            polygon.Stroke = SystemColors.WindowFrameBrush;
+            where.Children.Add(polygon);
         }
 
         #endregion
