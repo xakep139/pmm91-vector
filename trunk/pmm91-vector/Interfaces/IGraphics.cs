@@ -9,6 +9,11 @@ namespace pmm91_vector.Interfaces
     public interface IGraphics
     {
         /// <summary>
+        /// Поверхность отрисовки
+        /// </summary>
+        Panel DrawingSurface { get; }
+
+        /// <summary>
         /// Инициализация графики в заданном контексте отображения
         /// </summary>
         /// <param name="displayContext">Контекст отображения</param>

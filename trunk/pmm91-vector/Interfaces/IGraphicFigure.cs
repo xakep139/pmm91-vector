@@ -21,12 +21,12 @@ namespace pmm91_vector.Interfaces
         /// <summary>
         /// Кисть закраски фигуры
         /// </summary>
-        Brush FillColor { get; set; }
+        Brush FillBrush { get; set; }
 
         /// <summary>
         /// Отрисовка фигуры на заданном контексте
         /// </summary>
         /// <param name="where">Контекст для отрисовки</param>
-        void Draw(Panel where);
+        void Draw(IGraphics where);
     }
 }

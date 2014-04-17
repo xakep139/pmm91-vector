@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace pmm91_vector.Implementation.Commands
 {
@@ -26,24 +28,28 @@ namespace pmm91_vector.Implementation.Commands
         public void Execute(object parameter)
         {
             CommandStack.Instance.DoCommand(this);
-            string figure = (parameter as string).ToLower();
-            switch(figure)
+            Figures.BaseFigure newFigure = null;
+            //TODO: выставить необходимые координаты
+            Point[] figCoords = new Point[] { new Point(110, 150), new Point(180, 240), new Point(210, 170) };
+            string figureType = (parameter as string).ToLower();
+            switch(figureType)
             {
-                //TODO: написать реальное добавление
                 case "ellipse":
+                    newFigure = new Figures.Ellipse(figCoords);
                     break;
                 case "polygon":
-                    //Как можно добавить прямоугольник:
-                    //TODO: выставить необходимые координаты
-                    ((MainWindow)App.Current.MainWindow).figures.Add(new Figures.Polygon(new Point(150.0, 150.0), new Point(220.0, 220.0)));
-                    //И так тоже делать не следует:
-                    ((MainWindow)App.Current.MainWindow).graphics.Paint(((MainWindow)App.Current.MainWindow).figures);
+                    newFigure = new Figures.Polygon(figCoords[0], figCoords[1]);
                     break;
                 case "polyline":
+                    newFigure = new Figures.Polyline(figCoords);
                     break;
                 default:
                     throw new NotImplementedException();
             }
+            newFigure.BoundaryColor = Colors.Black;
+            //TODO: поправить
+            ((MainWindow)App.Current.MainWindow).figures.Add(newFigure);
+            newFigure.Draw(((MainWindow)App.Current.MainWindow).graphics);
         }
     }
 }
