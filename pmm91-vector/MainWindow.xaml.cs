@@ -29,7 +29,7 @@ namespace pmm91_vector
         {
             InitializeComponent();
 
-            //Определённо, так делать не следует:
+            //TODO: исправить с целью поддержки многооконности
             graphics = new Graphics();
             graphics.Init(this.MainCanvas);
 

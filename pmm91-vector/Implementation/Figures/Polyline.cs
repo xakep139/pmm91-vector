@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace pmm91_vector.Implementation.Figures
 {
@@ -10,7 +11,11 @@ namespace pmm91_vector.Implementation.Figures
     /// </summary>
     class Polyline : BaseFigure
     {
-        public Polyline(List<Point> points)
+        /// <summary>
+        /// Конструктор ломаной
+        /// </summary>
+        /// <param name="points">Коллекция точек ломаной</param>
+        public Polyline(IEnumerable<Point> points)
             : base(points)
         {
         }
@@ -53,9 +58,15 @@ namespace pmm91_vector.Implementation.Figures
 
         #region IGraphicFigure
 
-        public override void Draw(Panel where)
+        public override void Draw(Interfaces.IGraphics where)
         {
-            throw new NotImplementedException();
+            var polyline = new System.Windows.Shapes.Polyline();
+            foreach (Point pt in this.Points)
+                //TODO: учесть локальную ось X
+                polyline.Points.Add(new Point(pt.X + this.Center.X, pt.Y + this.Center.Y));
+            polyline.Fill = this.FillBrush;
+            polyline.Stroke = new SolidColorBrush(this.BoundaryColor);
+            where.DrawingSurface.Children.Add(polyline);
         }
 
         #endregion

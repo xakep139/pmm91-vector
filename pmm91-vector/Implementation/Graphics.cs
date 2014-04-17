@@ -16,24 +16,21 @@ namespace pmm91_vector.Implementation
     {
         private Panel drawingPanel;
 
-        public void Init(Panel displayContext)
+        public Panel DrawingSurface
         {
-            //DrawingContext drawingContext = ((DrawingVisual)displayContext).RenderOpen();
-            //Rect rect = new Rect(new System.Windows.Point(160, 100), new System.Windows.Size(320, 80));
-            //drawingContext.DrawRectangle(System.Windows.Media.Brushes.LightBlue, (System.Windows.Media.Pen)null, rect);
-            //drawingContext.Close();
+            get { return this.drawingPanel; }
         }
 
-        public void Init(Canvas displayCanvas)
+        public void Init(Panel displayContext)
         {
-            drawingPanel = displayCanvas;
+            drawingPanel = displayContext;
         }
 
         public void Paint(IFigureCollection displayScene)
         {
             drawingPanel.Children.Clear();
             foreach (BaseFigure figure in displayScene)
-                figure.Draw(this.drawingPanel);
+                figure.Draw(this);
         }
 
         public void Free_mem(System.Windows.Media.Visual displayContext)
