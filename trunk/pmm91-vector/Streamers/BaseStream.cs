@@ -12,8 +12,9 @@ namespace pmm91_vector.Streamers
         /// <summary>
         /// Чтение коллекции фигур из потока
         /// </summary>
+        /// <param name="collectionType">Тип коллекции фигур</param>
         /// <returns>Возвращает коллекцию фигур</returns>
-        abstract public Interfaces.IFigureCollection ReadColection();
+        abstract public Interfaces.IFigureCollection ReadColection(System.Type collectionType);
 
         /// <summary>
         /// Запись коллекции фигур в поток
@@ -22,6 +23,12 @@ namespace pmm91_vector.Streamers
         abstract public void WriteColection(Interfaces.IFigureCollection Collection);
 
         #region Реализация абстрактных методов класса Stream
+
+        ~BaseStream()
+        {
+            if (this._stream != null)
+                this._stream.Close();
+        }
 
         public override bool CanRead
         {

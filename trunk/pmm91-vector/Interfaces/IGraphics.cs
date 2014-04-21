@@ -11,13 +11,13 @@ namespace pmm91_vector.Interfaces
         /// <summary>
         /// Поверхность отрисовки
         /// </summary>
-        Panel DrawingSurface { get; }
+        Misc.GraphicWindow DrawingSurface { get; }
 
         /// <summary>
-        /// Инициализация графики в заданном контексте отображения
+        /// Инициализация графики в заданном окне
         /// </summary>
-        /// <param name="displayContext">Контекст отображения</param>
-        void Init(Panel displayContext);
+        /// <param name="displayWindow">Окно для отображения</param>
+        void Init(Misc.GraphicWindow displayWindow);
 
         /// <summary>
         /// Отрисовка заданного набора фигур в контексте отображения
@@ -26,9 +26,8 @@ namespace pmm91_vector.Interfaces
         void Paint(IFigureCollection displayScene);
 
         /// <summary>
-        /// Освобождение памяти под заданный контекст отображения
+        /// Освобождение памяти
         /// </summary>
-        /// <param name="displayContext">Контекст отображения</param>
-        void Free_mem(Visual displayContext);
+        void Free_mem();
     }
 }

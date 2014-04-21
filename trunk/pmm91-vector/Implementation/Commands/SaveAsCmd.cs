@@ -1,7 +1,9 @@
 ﻿using System;
-using System.IO;
 using Microsoft.Win32;
 using System.Windows.Input;
+
+using pmm91_vector.Misc;
+using pmm91_vector.Streamers;
 
 namespace pmm91_vector.Implementation.Commands
 {
@@ -9,7 +11,7 @@ namespace pmm91_vector.Implementation.Commands
     {
         public bool CanExecute(object parameter)
         {
-            return true;
+            return (WindowManager.Instance.ActiveWindow != null);
         }
 
         public event EventHandler CanExecuteChanged
@@ -27,18 +29,23 @@ namespace pmm91_vector.Implementation.Commands
         public void Execute(object parameter)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
+            saveFileDialog.Filter = "Бинарный файл (*.bin)|*.bin|XML-файл (*.xml)|*.xml";
             saveFileDialog.FilterIndex = 1;
 
             var result = saveFileDialog.ShowDialog();
             if (result.HasValue && result.Value == true)
             {
                 string path = saveFileDialog.FileName;
-                StreamReader sw = new StreamReader(path);
                 //В зависимости от типа файла создаём Streamer'а (наследника BaseStream)
-                //и тут вызываем метод FigureCollection.Save(BaseStream stream)
+                //и вызываем метод FigureCollection.Save(BaseStream stream)
                 //и записываем path в свойство FigureCollection.FileName
-                throw new NotImplementedException();
+                BaseStream stream = null;
+                if (saveFileDialog.FilterIndex == 1)
+                    stream = new BinaryFileStream(path);
+                else
+                    stream = new XmlFileStream(path);
+                WindowManager.Instance.ActiveWindow.Figures.FileName = path;
+                WindowManager.Instance.ActiveWindow.Figures.Save(stream);
             }
         }
     }

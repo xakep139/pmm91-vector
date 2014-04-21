@@ -19,25 +19,6 @@ namespace pmm91_vector.Implementation
         /// Стек отменённых команд
         /// </summary>
         private Stack<ICommand> _stackRedo = new Stack<ICommand>();
-        private static CommandStack instance = null;
-
-        /// <summary>
-        /// Конструктор закрыт, т.к. используется шаблон "Одиночка"
-        /// </summary>
-        private CommandStack() { }
-
-        /// <summary>
-        /// Сущность объекта-одиночки "стек команд"
-        /// </summary>
-        public static CommandStack Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new CommandStack();
-                return instance;
-            }
-        }
 
         public void DoCommand(ICommand command)
         {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
 
+using pmm91_vector.Misc;
+
 namespace pmm91_vector.Implementation.Commands
 {
     class ChangeCoordZCmd : Interfaces.ICommand
@@ -25,7 +27,7 @@ namespace pmm91_vector.Implementation.Commands
 
         public void Execute(object parameter)
         {
-            CommandStack.Instance.DoCommand(this);
+            WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
             string direction = (parameter as string).ToLower();
             switch (direction)
             {

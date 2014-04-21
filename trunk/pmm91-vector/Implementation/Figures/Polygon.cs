@@ -9,6 +9,7 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Многоугольник
     /// </summary>
+    [Serializable()]
     public class Polygon : BaseFigure
     {
         #region Конструкторы

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+
 using pmm91_vector.Interfaces;
 
 namespace pmm91_vector.Implementation
@@ -30,7 +31,7 @@ namespace pmm91_vector.Implementation
         {
             if (stream.CanRead)
             {
-                var newFigureCollection = (FigureCollection)stream.ReadColection();
+                var newFigureCollection = (FigureCollection)stream.ReadColection(this.GetType());
                 this.FileName = newFigureCollection.FileName;
                 this._figures = new List<IFigure>(newFigureCollection._figures);
                 return true;

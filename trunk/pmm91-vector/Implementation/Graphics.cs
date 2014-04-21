@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Controls;
 
+using pmm91_vector.Misc;
 using pmm91_vector.Interfaces;
 using pmm91_vector.Implementation.Figures;
 
@@ -14,28 +15,28 @@ namespace pmm91_vector.Implementation
     /// </summary>
     public class Graphics : IGraphics
     {
-        private Panel drawingPanel;
+        private GraphicWindow drawingWindow;
 
-        public Panel DrawingSurface
+        public GraphicWindow DrawingSurface
         {
-            get { return this.drawingPanel; }
+            get { return this.drawingWindow; }
         }
 
-        public void Init(Panel displayContext)
+        public void Init(GraphicWindow displayContext)
         {
-            drawingPanel = displayContext;
+            drawingWindow = displayContext;
         }
 
         public void Paint(IFigureCollection displayScene)
         {
-            drawingPanel.Children.Clear();
+            drawingWindow.Children.Clear();
             foreach (BaseFigure figure in displayScene)
                 figure.Draw(this);
         }
 
-        public void Free_mem(System.Windows.Media.Visual displayContext)
+        public void Free_mem()
         {
-            throw new NotImplementedException();
+            this.drawingWindow = null;
         }
     }
 }

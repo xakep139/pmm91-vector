@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
 
+using pmm91_vector.Misc;
+
 namespace pmm91_vector.Implementation.Commands
 {
     public class DeleteFigureCmd : Interfaces.ICommand

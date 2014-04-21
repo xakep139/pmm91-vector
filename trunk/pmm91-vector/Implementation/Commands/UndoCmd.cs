@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Windows.Input;
 
+using pmm91_vector.Misc;
+
 namespace pmm91_vector.Implementation.Commands
 {
     public class UndoCmd : Interfaces.ICommand
     {
         public bool CanExecute(object parameter)
         {
-            return CommandStack.Instance.CanUndo();
+            if (WindowManager.Instance.ActiveWindow != null)
+                return WindowManager.Instance.ActiveWindow.Stack.CanUndo();
+            else
+                return false;
         }
 
         public event EventHandler CanExecuteChanged
@@ -24,7 +29,7 @@ namespace pmm91_vector.Implementation.Commands
 
         public void Execute(object parameter)
         {
-            CommandStack.Instance.UndoCommand();
+            WindowManager.Instance.ActiveWindow.Stack.UndoCommand();
         }
     }
 }

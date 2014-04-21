@@ -16,7 +16,7 @@ namespace pmm91_vector.Streamers
             this._stream = new FileStream(fileHandle, FileAccess.ReadWrite);
         }
 
-        public override Interfaces.IFigureCollection ReadColection()
+        public override Interfaces.IFigureCollection ReadColection(System.Type collectionType)
         {
             BinaryFormatter deserializer = new BinaryFormatter();
             return (Interfaces.IFigureCollection)deserializer.Deserialize(this);
