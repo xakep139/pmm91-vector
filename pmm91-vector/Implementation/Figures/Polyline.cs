@@ -9,6 +9,7 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Ломаная линия
     /// </summary>
+    [Serializable()]
     class Polyline : BaseFigure
     {
         /// <summary>

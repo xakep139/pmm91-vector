@@ -10,6 +10,7 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Базовый класс для всех фигур
     /// </summary>
+    [Serializable()]
     public abstract class BaseFigure : Interfaces.IFigure
     {
         private int z;

@@ -57,7 +57,10 @@
     <Compile Include="Implementation\Commands\ChangeInColorCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeOutColorCmd.cs" />
     <Compile Include="Implementation\Commands\DeleteFigureCmd.cs" />
+    <Compile Include="Implementation\Commands\SaveCmd.cs" />
     <Compile Include="Implementation\Graphics.cs" />
+    <Compile Include="Misc\GraphicWindow.cs" />
+    <Compile Include="Misc\WindowManager.cs" />
     <Compile Include="Streamers\BinaryFileStream.cs" />
     <Compile Include="Streamers\XmlFileStream.cs" />
     <Page Include="Icons.xaml">
