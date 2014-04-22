@@ -20,7 +20,7 @@ namespace pmm91_vector.Implementation.Figures
 
         public BaseFigure(IEnumerable<Point> points)
         {
-            AxisX = new Point(0, 1);    //Инициализируем ось Х
+            AxisX = new Point(1, 0);    //Инициализируем ось Х
             SetPoints(points);
         }
 
@@ -93,9 +93,8 @@ namespace pmm91_vector.Implementation.Figures
         protected List<Point> Local2Global()
         {
             List<Point> globalPoints = new List<Point>();
-
-            double cosPhi = AxisX.X / Math.Sqrt(AxisX.X * AxisX.X + AxisX.Y * AxisX.Y); //Косинус угла поворота (угол между локальной осью Х и глобальной)
-            double sinPhi = Math.Sqrt(1 - cosPhi * cosPhi); //Синус ула поворота
+            double cosPhi = AxisX.X; //Косинус угла поворота (угол между локальной осью Х и глобальной)
+            double sinPhi = -AxisX.Y; //Синус ула поворота
             Matrix transformMatrix = new Matrix(cosPhi, sinPhi, -sinPhi, cosPhi, Center.X, Center.Y);   //Матрицы трансформации
 
             foreach (var p in Points)
@@ -116,9 +115,9 @@ namespace pmm91_vector.Implementation.Figures
 
             Points = new List<Point>();
 
-            double cosPhi = AxisX.X / Math.Sqrt(AxisX.X * AxisX.X + AxisX.Y * AxisX.Y); //Косинус угла поворота (угол между локальной осью Х и глобальной)
-            double sinPhi = Math.Sqrt(1 - cosPhi * cosPhi); //Синус ула поворота
-            Matrix transformMatrix = new Matrix(cosPhi, sinPhi, -sinPhi, cosPhi, Center.Y, Center.X);   //Матрицы трансформации
+            double cosPhi = AxisX.X; //Косинус угла поворота (угол между локальной осью Х и глобальной)
+            double sinPhi = -AxisX.Y; //Синус ула поворота
+            Matrix transformMatrix = new Matrix(cosPhi, sinPhi, -sinPhi, cosPhi, Center.X, Center.Y);   //Матрицы трансформации
             transformMatrix.Invert();
 
             foreach (var p in points)
