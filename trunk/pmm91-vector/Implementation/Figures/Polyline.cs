@@ -12,6 +12,10 @@ namespace pmm91_vector.Implementation.Figures
     [Serializable()]
     class Polyline : BaseFigure
     {
+        public Polyline()
+        {
+        }
+
         /// <summary>
         /// Конструктор ломаной
         /// </summary>
