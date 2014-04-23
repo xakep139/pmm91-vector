@@ -50,7 +50,16 @@ namespace pmm91_vector.Implementation.Figures
 
         public Point Center { get; set; }
 
-        public Point AxisX { get; set; }
+        private Point _axisX = new Point(1,0);
+        public Point AxisX 
+        {
+            get { return _axisX; }
+            set
+            {
+                var norma = Math.Sqrt(value.X * value.X + value.Y * value.Y);
+                _axisX = new Point(value.X / norma, value.Y / norma);
+            }
+        }
 
         abstract public void Transform(Interfaces.IFigureTransform transformer);
 
