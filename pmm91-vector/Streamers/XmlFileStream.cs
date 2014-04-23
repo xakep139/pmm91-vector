@@ -5,11 +5,19 @@ namespace pmm91_vector.Streamers
 {
     public class XmlFileStream : BaseStream
     {
+        string fname;
         public XmlFileStream(string fileName)
         {
-            this._stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            fname = fileName;
+//            this._stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
         }
-
+        public override bool CanWrite
+        {
+            get
+            {
+                return true;
+            }
+        }
         public override Interfaces.IFigureCollection ReadColection(System.Type collectionType)
         {
             XmlSerializer x = new XmlSerializer(collectionType);
@@ -18,8 +26,11 @@ namespace pmm91_vector.Streamers
 
         public override void WriteColection(Interfaces.IFigureCollection Collection)
         {
-            XmlSerializer x = new XmlSerializer(Collection.GetType());
-            x.Serialize(this._stream, Collection);
+            using (var writer = System.Xml.XmlWriter.Create(fname, new System.Xml.XmlWriterSettings { Indent = true, NewLineOnAttributes = true }))
+            {
+                XmlSerializer x = new XmlSerializer(typeof(pmm91_vector.Implementation.FigureCollection));
+                x.Serialize(writer, Collection as pmm91_vector.Implementation.FigureCollection);
+            }
         }
     }
 }

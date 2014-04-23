@@ -11,9 +11,10 @@ namespace pmm91_vector.Implementation
     /// <summary>
     /// Коллекция фигур
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class FigureCollection : IFigureCollection
     {
+        [NonSerialized]
         private IList<IFigure> _figures = new List<IFigure>();
 
         public string FileName

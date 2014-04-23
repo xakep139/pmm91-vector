@@ -7,16 +7,35 @@ using System.Windows.Media;
 
 namespace pmm91_vector.Implementation.Figures
 {
+    [Serializable]
+    public class BrushSerializator
+    {
+        public bool IsSolidBrush { get; set; }
+        byte r, g, b, a;
+
+        public BrushSerializator(Brush brush)
+        {
+
+        }
+        public Brush CreateBrush()
+        {
+            return new SolidColorBrush(Colors.Aqua);
+        }
+    }
     /// <summary>
     /// Базовый класс для всех фигур
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public abstract class BaseFigure : Interfaces.IFigure
     {
         private int z;
+        [NonSerialized]
         private Brush fillBrush;
+        [NonSerialized]
         private Color boundaryColor;
         private IList<Point> points = new List<Point>();
+
+        public BaseFigure()        {  }
 
         public BaseFigure(IEnumerable<Point> points)
         {
@@ -28,6 +47,11 @@ namespace pmm91_vector.Implementation.Figures
         {
             get { return this.boundaryColor; }
             set { this.boundaryColor = value; }
+        }
+        BrushSerializator FillBrushSerializer
+        {
+        get{return new BrushSerializator(FillBrush);}
+        set{FillBrush=value.CreateBrush();}
         }
 
         public Brush FillBrush
@@ -133,6 +157,21 @@ namespace pmm91_vector.Implementation.Figures
                 Points.Add(transformMatrix.Transform(p));
 
             #endregion
+        }
+
+        public System.Xml.Schema.XmlSchema GetSchema()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(System.Xml.XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteXml(System.Xml.XmlWriter writer)
+        {
+            throw new NotImplementedException();
         }
     }
 }
