@@ -15,12 +15,29 @@ namespace pmm91_vector.Implementation
     public class FigureCollection : IFigureCollection
     {
         [NonSerialized]
+        private IList<IFigure> _activeFigures = new List<IFigure>();
+
         private IList<IFigure> _figures = new List<IFigure>();
 
         public string FileName
         {
             get;
             set;
+        }
+
+        public IList<IFigure> ActiveFigures
+        {
+            get
+            {
+                return new List<IFigure>(this._activeFigures);
+            }
+            set
+            {
+                foreach (var fig in value)
+                    if (!this._figures.Contains(fig))
+                        throw new Exception("Заданная фигура не содержится в коллекции");
+                this.ActiveFigures = new List<IFigure>(value);
+            }
         }
 
         public IList<IFigure> Selection(Point a, Point b)
@@ -122,6 +139,6 @@ namespace pmm91_vector.Implementation
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
-        }    
+        }
     }
 }

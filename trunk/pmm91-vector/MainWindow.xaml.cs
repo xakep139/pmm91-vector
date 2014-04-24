@@ -11,7 +11,8 @@ namespace pmm91_vector
         public MainWindow()
         {
             InitializeComponent();
-          AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
+            Misc.WindowManager.Instance.Parent = this.MainCanvas;
+            AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
         }
 
         static void ExceptionHandler(object sender, UnhandledExceptionEventArgs e)
@@ -19,20 +20,14 @@ namespace pmm91_vector
             if (e.ExceptionObject is Exception)
             {
                 var ex = e.ExceptionObject as Exception;
-                MessageBox.Show(string.Format("Exception: {0}", ex.Message), "Unhandled Exception :(",
+                MessageBox.Show(string.Format("Исключение: {0}", ex.Message), "Необработанное исключение",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show("Unknown exception (maybe in unmanaged code).", "Unhandled Exception :(",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Неизвестное исключение (возможно, в неуправляемом коде).",
+                    "Необработанное исключение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void ProgramWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            Misc.WindowManager.Instance.Parent = this.MainCanvas;
-            Misc.WindowManager.Instance.NewWindow();
         }
     }
 }

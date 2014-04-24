@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace pmm91_vector.Streamers
 {
@@ -8,6 +9,20 @@ namespace pmm91_vector.Streamers
     public abstract class BaseStream : Stream
     {
         protected Stream _stream = null;
+        protected string _fileName = "";
+
+        /// <summary>
+        /// Освобождает неуправляемые ресурсы, используемые объектом System.IO.Stream,
+        /// а при необходимости освобождает также управляемые ресурсы.
+        /// </summary>
+        /// <param name="disposing">Значение true позволяет освободить управляемые и неуправляемые ресурсы;
+        /// значение false позволяет освободить только неуправляемые ресурсы.</param>
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (this._stream != null)
+                this._stream.Dispose();
+        }
 
         /// <summary>
         /// Чтение коллекции фигур из потока
@@ -24,67 +39,98 @@ namespace pmm91_vector.Streamers
 
         #region Реализация абстрактных методов класса Stream
 
-        ~BaseStream()
-        {
-            if (this._stream != null)
-                this._stream.Close();
-        }
-
         public override bool CanRead
         {
-            get { return this._stream.CanRead; }
+            get
+            {
+                if (this._stream != null)
+                    return this._stream.CanRead;
+                else
+                    return false;
+            }
         }
 
         public override bool CanSeek
         {
-            get { return this._stream.CanSeek; }
+            get
+            {
+                if (this._stream != null)
+                    return this._stream.CanSeek;
+                else
+                    return false;
+            }
         }
 
         public override bool CanWrite
         {
-            get { return this._stream.CanWrite; }
+            get
+            {
+                if (this._stream != null)
+                    return this._stream.CanWrite;
+                else
+                    return false;
+            }
         }
 
         public override void Flush()
         {
-            this._stream.Flush();
+            if (this._stream != null)
+                this._stream.Flush();
         }
 
         public override long Length
         {
-            get { return this._stream.Length; }
+            get
+            {
+                if (this._stream != null)
+                    return this._stream.Length;
+                else
+                    return -1;
+            }
         }
 
         public override long Position
         {
             get
             {
-                return this._stream.Position;
+                if (this._stream != null)
+                    return this._stream.Position;
+                else
+                    return -1;
             }
             set
             {
-                this._stream.Position = value;
+                if (this._stream != null)
+                    this._stream.Position = value;
             }
         }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return this._stream.Read(buffer, offset, count);
+            if (this._stream != null)
+                return this._stream.Read(buffer, offset, count);
+            else
+                return -1;
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            return this._stream.Seek(offset, origin);
+            if (this._stream != null)
+                return this._stream.Seek(offset, origin);
+            else
+                return -1;
         }
 
         public override void SetLength(long value)
         {
-            this._stream.SetLength(value);
+            if (this._stream != null)
+                this._stream.SetLength(value);
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            this._stream.Write(buffer, offset, count);
+            if (this._stream != null)
+                this._stream.Write(buffer, offset, count);
         }
 
         #endregion

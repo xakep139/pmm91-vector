@@ -9,12 +9,13 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Ломаная линия
     /// </summary>
-    [Serializable()]
+    [Serializable]
     class Polyline : BaseFigure
     {
-        public Polyline()
-        {
-        }
+        /// <summary>
+        /// Конструктор без параметров (по умолчанию)
+        /// </summary>
+        public Polyline() { }
 
         /// <summary>
         /// Конструктор ломаной
@@ -69,7 +70,6 @@ namespace pmm91_vector.Implementation.Figures
             foreach (Point pt in this.Points)
                 //TODO: учесть локальную ось X
                 polyline.Points.Add(new Point(pt.X + this.Center.X, pt.Y + this.Center.Y));
-            polyline.Fill = this.FillBrush;
             polyline.Stroke = new SolidColorBrush(this.BoundaryColor);
             where.DrawingSurface.Children.Add(polyline);
         }
