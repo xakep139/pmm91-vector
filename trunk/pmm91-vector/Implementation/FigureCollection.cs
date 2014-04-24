@@ -26,6 +26,9 @@ namespace pmm91_vector.Implementation
             set;
         }
 
+        /// <summary>
+        /// Список активных фигур
+        /// </summary>
         public IList<IFigure> ActiveFigures
         {
             get

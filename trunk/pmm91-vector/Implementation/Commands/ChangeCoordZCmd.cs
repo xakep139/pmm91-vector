@@ -9,8 +9,8 @@ namespace pmm91_vector.Implementation.Commands
     {
         public bool CanExecute(object parameter)
         {
-            //TODO: сделать команду активной, только если выбрана некоторая фигура
-            return true;
+            return (WindowManager.Instance.ActiveWindow != null &&
+                    WindowManager.Instance.ActiveWindow.Figures.ActiveFigures.Count > 0);
         }
 
         public event EventHandler CanExecuteChanged
