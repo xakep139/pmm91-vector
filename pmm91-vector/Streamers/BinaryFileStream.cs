@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Microsoft.Win32.SafeHandles;
 
 namespace pmm91_vector.Streamers
 {
@@ -11,11 +10,6 @@ namespace pmm91_vector.Streamers
         {
             this._fileName = fileName;
             this._stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-        }
-
-        public BinaryFileStream(SafeFileHandle fileHandle)
-        {;
-            this._stream = new FileStream(fileHandle, FileAccess.ReadWrite);
         }
 
         public override Interfaces.IFigureCollection ReadColection(Type collectionType)

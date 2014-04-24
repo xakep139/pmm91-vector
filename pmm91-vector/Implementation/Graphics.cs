@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Controls;
 
 using pmm91_vector.Misc;
 using pmm91_vector.Interfaces;
