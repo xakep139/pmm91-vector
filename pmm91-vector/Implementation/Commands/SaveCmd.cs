@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 using pmm91_vector.Misc;
@@ -33,12 +34,19 @@ namespace pmm91_vector.Implementation.Commands
             //и вызываем метод FigureCollection.Save(BaseStream stream)
             //и записываем path в свойство FigureCollection.FileName
             string path = WindowManager.Instance.ActiveWindow.Figures.FileName;
-            BaseStream stream = null;
-            if (path.EndsWith(".bin"))
-                stream = new BinaryFileStream(path);
-            else
-                stream = new XmlFileStream(path);
-            WindowManager.Instance.ActiveWindow.Figures.Save(stream);
+            try
+            {
+                if (path.EndsWith(".bin"))
+                    using (var stream = new BinaryFileStream(path))
+                        WindowManager.Instance.ActiveWindow.Figures.Save(stream);
+                else
+                    using (var stream = new XmlFileStream(path))
+                        WindowManager.Instance.ActiveWindow.Figures.Save(stream);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка сохранения", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

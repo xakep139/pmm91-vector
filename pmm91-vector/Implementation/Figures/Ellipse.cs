@@ -10,13 +10,18 @@ namespace pmm91_vector.Implementation.Figures
     /// <summary>
     /// Эллипс
     /// </summary>
-    [Serializable()]
+    [Serializable]
     class Ellipse : BaseFigure
     {
         private Point leftTop;
         private Point rightBottom;
 
         #region Конструкторы
+        
+        /// <summary>
+        /// Конструктор без параметров (по умолчанию)
+        /// </summary>
+        public Ellipse() { }
 
         /// <summary>
         /// Конструктор эллипса по двум точкам,

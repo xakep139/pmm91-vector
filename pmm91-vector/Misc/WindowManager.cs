@@ -24,6 +24,19 @@ namespace pmm91_vector.Misc
         }
 
         /// <summary>
+        /// Сущность объекта-одиночки "менеджер окон"
+        /// </summary>
+        public static WindowManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new WindowManager();
+                return _instance;
+            }
+        }
+
+        /// <summary>
         /// Родительский элемент для окон
         /// </summary>
         public Panel Parent
@@ -45,20 +58,7 @@ namespace pmm91_vector.Misc
         }
 
         /// <summary>
-        /// Сущность объекта-одиночки "менеджер окон"
-        /// </summary>
-        public static WindowManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new WindowManager();
-                return _instance;
-            }
-        }
-
-        /// <summary>
-        /// Создание нового окна. Оно будет активным
+        /// Создание нового окна; оно будет активным
         /// </summary>
         /// <returns>Возвращает созданное окно</returns>
         public GraphicWindow NewWindow()
@@ -86,14 +86,14 @@ namespace pmm91_vector.Misc
             if (windowID >= 0 && this._windows.Count > windowID)
             {
                 this._windows[windowID].Graph.Free_mem();
-                if (this._activeWindow == windowID)
+                if (this.ActiveIndex == windowID && this._windows.Count > 1)
+                    this.PrevWindow();
+                else
                 {
                     if (this.Parent != null)
                         this.Parent.Children.Remove(this.ActiveWindow);
                     this._activeWindow--;
                 }
-                if (this._activeWindow >= 0 && this.Parent != null)
-                    this.Parent.Children.Add(this.ActiveWindow);
                 this._windows.RemoveAt(windowID);
                 return true;
             }
@@ -124,10 +124,55 @@ namespace pmm91_vector.Misc
         {
             get
             {
-                if (this._activeWindow >= 0)
-                    return this._windows[this._activeWindow];
+                if (this.ActiveIndex >= 0)
+                    return this._windows[this.ActiveIndex];
                 else
                     return null;
+            }
+        }
+
+        /// <summary>
+        /// Получение индекса активного окна (-1, если нет такового)
+        /// </summary>
+        public int ActiveIndex
+        {
+            get
+            {
+                return this._activeWindow;
+            }
+        }
+
+        /// <summary>
+        /// Переключение на следующее окно (циклически)
+        /// </summary>
+        public void NextWindow()
+        {
+            if (this.ActiveIndex >= 0 && this._windows.Count > 1)
+            {
+                if (this.Parent != null)
+                    this.Parent.Children.Remove(this.ActiveWindow);
+                this._activeWindow++;
+                if (this.ActiveIndex >= this._windows.Count)
+                    this._activeWindow = 0;
+                if (this.Parent != null)
+                    this.Parent.Children.Add(this.ActiveWindow);
+            }
+        }
+
+        /// <summary>
+        /// Переключение на предыдущее окно (циклически)
+        /// </summary>
+        public void PrevWindow()
+        {
+            if (this.ActiveIndex >= 0 && this._windows.Count > 1)
+            {
+                if (this.Parent != null)
+                    this.Parent.Children.Remove(this.ActiveWindow);
+                this._activeWindow--;
+                if (this.ActiveIndex < 0)
+                    this._activeWindow = this._windows.Count - 1;
+                if (this.Parent != null)
+                    this.Parent.Children.Add(this.ActiveWindow);
             }
         }
     }

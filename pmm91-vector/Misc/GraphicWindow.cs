@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 
 using pmm91_vector.Implementation;
+using System.Windows.Media;
 
 namespace pmm91_vector.Misc
 {
@@ -21,6 +22,7 @@ namespace pmm91_vector.Misc
             this._stack = new CommandStack();
 
             this._graphics.Init(this);
+            this.Background = Brushes.WhiteSmoke;
             this.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
         }

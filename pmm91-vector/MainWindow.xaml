@@ -3,19 +3,22 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:com="clr-namespace:pmm91_vector.Implementation.Commands"
-        Title="Векторный графический редактор" Height="480" Width="640" MinWidth="640" MinHeight="480" Loaded="ProgramWindow_Loaded">
+        Title="Векторный графический редактор" Height="480" Width="640" MinWidth="640" MinHeight="480">
     <Window.Resources>
-        <com:ExitCmd x:Key="ExitCommand"/>
+        <com:ExitCmd x:Key="Exit"/>
         <com:UndoCmd x:Key="UndoCommand"/>
         <com:RedoCmd x:Key="RedoCommand"/>
-        <com:SaveAsCmd x:Key="SaveAsCommand"/>
-        <com:SaveCmd x:Key="SaveCommand"/>
-        <com:OpenCmd x:Key="OpenCommand"/>
+        <com:SaveAsCmd x:Key="SaveAs"/>
+        <com:SaveCmd x:Key="Save"/>
+        <com:OpenCmd x:Key="Open"/>
         <com:AddFigureCmd x:Key="AddFigure"/>
         <com:DeleteFigureCmd x:Key="DeleteFigure"/>
         <com:ChangeOutColorCmd x:Key="ChangeOutColor"/>
         <com:ChangeInColorCmd x:Key="ChangeInColor"/>
         <com:ChangeCoordZCmd x:Key="ChangeCoordZ"/>
+        <com:ChangeWindowCmd x:Key="ChangeWindow"/>
+        <com:CloseWindowCmd x:Key="CloseWindow"/>
+        <com:NewWindowCmd x:Key="NewWindow"/>
         <Style x:Key="VerticalSeparatorStyle" 
                 TargetType="{x:Type Separator}"
                 BasedOn="{StaticResource {x:Type Separator}}">
@@ -35,23 +38,28 @@
         </Grid.RowDefinitions>
         <Menu x:Name="MainMenu" Grid.Row="0" VerticalAlignment="Top">
             <MenuItem x:Name="miFile" Header="Файл">
-                <MenuItem x:Name="miOpen" Header="Открыть" Command="{StaticResource OpenCommand}">
+                <MenuItem x:Name="miNewFile" Header="Новый" Command="{StaticResource NewWindow}">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/DocumentNew.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="miOpen" Header="Открыть" Command="{StaticResource Open}">
                     <MenuItem.Icon>
                         <Image Source="Icons/Open.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem x:Name="miSave" Header="Сохранить" Command="{StaticResource SaveCommand}">
+                <MenuItem x:Name="miSave" Header="Сохранить" Command="{StaticResource Save}">
                     <MenuItem.Icon>
                         <Image Source="Icons/Save.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem x:Name="miSaveAs" Header="Сохранить как" Command="{StaticResource SaveAsCommand}">
+                <MenuItem x:Name="miSaveAs" Header="Сохранить как" Command="{StaticResource SaveAs}">
                     <MenuItem.Icon>
                         <Image Source="Icons/Save_As.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem x:Name="miExit" Header="Выход" Command="{StaticResource ExitCommand}">
+                <MenuItem x:Name="miExit" Header="Выход" Command="{StaticResource Exit}">
                     <MenuItem.Icon>
                         <Image Source="Icons/Close.png" />
                     </MenuItem.Icon>
@@ -66,6 +74,32 @@
                 <MenuItem x:Name="miRedo" Header="Вернуть" Command="{StaticResource RedoCommand}">
                     <MenuItem.Icon>
                         <Image Source="Icons/Redo.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="miWindow" Header="Окно">
+                <MenuItem x:Name="miNextWindow" Header="Следующее окно"
+                          Command="{StaticResource ChangeWindow}" CommandParameter="Next">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Next.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="miPrevWindow" Header="Предыдущее окно"
+                          Command="{StaticResource ChangeWindow}" CommandParameter="Prev">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Previous.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="miCloseWindow" Header="Закрыть окно"
+                          Command="{StaticResource CloseWindow}" CommandParameter="Cur">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/WindowDelete.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="miCloseWindows" Header="Закрыть все окна"
+                          Command="{StaticResource CloseWindow}" CommandParameter="All">
+                    <MenuItem.Icon>
+                        <Image Source="Icons/Windows.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -107,7 +141,7 @@
             </Button>
             <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
         </Menu>
-        <DockPanel x:Name="MainCanvas" Grid.Row="2" Background="#FFE2E2E2">
+        <DockPanel x:Name="MainCanvas" Grid.Row="2" Background="DarkGray">
         </DockPanel>
     </Grid>
 </Window>

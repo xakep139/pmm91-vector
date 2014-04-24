@@ -37,5 +37,10 @@ namespace pmm91_vector.Interfaces
         /// Имя файла, который соответствует теущей коллекции фигур
         /// </summary>
         string FileName { get; set; }
+
+        /// <summary>
+        /// Список активных фигур
+        /// </summary>
+        IList<IFigure> ActiveFigures { get; set; }
     }
 }

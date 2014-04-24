@@ -5,23 +5,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
+using pmm91_vector.Misc;
+
 namespace pmm91_vector.Implementation.Figures
 {
-    [Serializable]
-    public class BrushSerializator
-    {
-        public bool IsSolidBrush { get; set; }
-        byte r, g, b, a;
-
-        public BrushSerializator(Brush brush)
-        {
-
-        }
-        public Brush CreateBrush()
-        {
-            return new SolidColorBrush(Colors.Aqua);
-        }
-    }
     /// <summary>
     /// Базовый класс для всех фигур
     /// </summary>
@@ -29,13 +16,13 @@ namespace pmm91_vector.Implementation.Figures
     public abstract class BaseFigure : Interfaces.IFigure
     {
         private int z;
-        [NonSerialized]
-        private Brush fillBrush;
-        [NonSerialized]
-        private Color boundaryColor;
         private IList<Point> points = new List<Point>();
+        private FillBrushSerializator _fillBrushSerializer = new FillBrushSerializator(Brushes.White, Colors.Black);
 
-        public BaseFigure()        {  }
+        /// <summary>
+        /// Конструктор без параметров (по умолчанию)
+        /// </summary>
+        public BaseFigure() { }
 
         public BaseFigure(IEnumerable<Point> points)
         {
@@ -45,19 +32,20 @@ namespace pmm91_vector.Implementation.Figures
 
         public Color BoundaryColor
         {
-            get { return this.boundaryColor; }
-            set { this.boundaryColor = value; }
+            get { return this._fillBrushSerializer.OutColor; }
+            set { this._fillBrushSerializer.OutColor = value; }
         }
-        BrushSerializator FillBrushSerializer
+
+        public FillBrushSerializator FillBrushSerializer
         {
-        get{return new BrushSerializator(FillBrush);}
-        set{FillBrush=value.CreateBrush();}
+            get { return this._fillBrushSerializer; }
+            set { this._fillBrushSerializer = value; }
         }
 
         public Brush FillBrush
         {
-            get { return this.fillBrush; }
-            set { this.fillBrush = value; }
+            get { return this._fillBrushSerializer.FillBrush; }
+            set { this._fillBrushSerializer.FillBrush = value; }
         }
 
         public int Z

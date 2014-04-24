@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,9 +60,13 @@
     <Compile Include="Implementation\Commands\ChangeCoordZCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeInColorCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeOutColorCmd.cs" />
+    <Compile Include="Implementation\Commands\ChangeWindowCmd.cs" />
+    <Compile Include="Implementation\Commands\CloseWindowCmd.cs" />
     <Compile Include="Implementation\Commands\DeleteFigureCmd.cs" />
     <Compile Include="Implementation\Commands\SaveCmd.cs" />
+    <Compile Include="Implementation\Commands\NewWindowCmd.cs" />
     <Compile Include="Implementation\Graphics.cs" />
+    <Compile Include="Misc\FillBrushSerializator.cs" />
     <Compile Include="Misc\GraphicWindow.cs" />
     <Compile Include="Misc\WindowManager.cs" />
     <Compile Include="Streamers\BinaryFileStream.cs" />
@@ -142,6 +147,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Program.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\DocumentNew.png" />
+    <Resource Include="Icons\WindowDelete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Next.png" />
+    <Resource Include="Icons\Previous.png" />
+    <Resource Include="Icons\Windows.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

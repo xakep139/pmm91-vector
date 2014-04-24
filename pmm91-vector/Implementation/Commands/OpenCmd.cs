@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using Microsoft.Win32;
+using System.Windows;
 using System.Windows.Input;
 
 using pmm91_vector.Misc;
@@ -37,19 +37,27 @@ namespace pmm91_vector.Implementation.Commands
             if (result.HasValue && result.Value == true)
             {
                 string path = openFileDialog.FileName;
+                var newWindow = WindowManager.Instance.NewWindow();
                 //В зависимости от типа файла создаём Streamer'а (наследника BaseStream)
                 //и вызываем метод FigureCollection.Load(BaseStream stream)
                 //и записываем path в свойство FigureCollection.FileName
-                BaseStream stream = null;
-                if (openFileDialog.FilterIndex == 1)
-                    stream = new BinaryFileStream(path);
-                else
-                    stream = new XmlFileStream(path);
-                var newWindow = WindowManager.Instance.NewWindow();
-                newWindow.Figures.Load(stream);
-                newWindow.Figures.FileName = path;
-                //Вызываем отрисовку:
-                newWindow.Graph.Paint(newWindow.Figures);
+                try
+                {
+                    if (openFileDialog.FilterIndex == 1)
+                        using (var stream = new BinaryFileStream(path))
+                            newWindow.Figures.Load(stream);
+                    else
+                        using (var stream = new XmlFileStream(path))
+                            newWindow.Figures.Load(stream);
+                    newWindow.Figures.FileName = path;
+                    //Вызываем отрисовку:
+                    newWindow.Graph.Paint(newWindow.Figures);
+                }
+                catch (Exception e)
+                {
+                    WindowManager.Instance.DeleteWindow(WindowManager.Instance.ActiveIndex);
+                    MessageBox.Show(e.Message, "Ошибка открытия", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
