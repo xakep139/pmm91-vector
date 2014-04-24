@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 using pmm91_vector.Implementation;
-using System.Windows.Media;
 
 namespace pmm91_vector.Misc
 {

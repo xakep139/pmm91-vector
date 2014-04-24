@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using pmm91_vector.Interfaces;
 
 namespace pmm91_vector.Implementation

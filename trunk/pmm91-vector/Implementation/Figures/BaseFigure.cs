@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 using pmm91_vector.Misc;
@@ -130,7 +129,7 @@ namespace pmm91_vector.Implementation.Figures
         /// <param name="points">Коллекция точек (в глобальной системе координат)</param>
         protected void SetPoints(IEnumerable<Point> points)
         {
-            InitCenter(points);//Вычисляем центр
+            InitCenter(points); //Вычисляем центр
 
             #region Переводим точки points из глобальных координат в локальные
 

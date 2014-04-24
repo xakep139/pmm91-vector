@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -133,12 +134,12 @@ namespace pmm91_vector.Implementation
 
         public IEnumerator<IFigure> GetEnumerator()
         {
-            return _figures.GetEnumerator();
+            return this._figures.GetEnumerator();
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this._figures.GetEnumerator();
         }
     }
 }
