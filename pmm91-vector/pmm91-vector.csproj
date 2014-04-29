@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="Implementation\Commands\ChangeCoordZCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeInColorCmd.cs" />
+    <Compile Include="Implementation\Commands\ChangeModeCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeOutColorCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeWindowCmd.cs" />
     <Compile Include="Implementation\Commands\CloseWindowCmd.cs" />
@@ -156,6 +157,9 @@
     <Resource Include="Icons\Next.png" />
     <Resource Include="Icons\Previous.png" />
     <Resource Include="Icons\Windows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Сursor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
