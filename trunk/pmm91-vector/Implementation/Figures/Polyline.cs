@@ -47,7 +47,26 @@ namespace pmm91_vector.Implementation.Figures
 
         public override bool Selection(Point a, Point b)
         {
-            throw new NotImplementedException();
+            var points = Local2Global();
+            //Для каждого отрезка ломаной проверям, пресекается ли он со сторонами прямоуголника выделения.
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                var p1 = points[i];
+                var p2 = points[i + 1];
+
+                if (LinesIntersection(p1, p2, a, new Point(b.X, a.Y)) ||
+                    LinesIntersection(p1, p2, new Point(b.X, a.Y), b) ||
+                    LinesIntersection(p1, p2, b, new Point(a.X, b.Y)) ||
+                    LinesIntersection(p1, p2, new Point(a.X, b.Y), a))
+                    return true;
+            }
+            //Если ломанная не пересекается с прямоугольником выделения, то, возможно, она лежит внутри него.
+            //Проверим вложенность для одной точки.
+            var p = points[0];
+            if (p.X > a.X && p.X < b.X && p.Y > a.Y && p.Y < b.Y)
+                return true;
+
+            return false;
         }
 
         public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
