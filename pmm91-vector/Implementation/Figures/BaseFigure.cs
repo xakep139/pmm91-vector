@@ -146,6 +146,30 @@ namespace pmm91_vector.Implementation.Figures
             #endregion
         }
 
+        /// <summary>
+        /// Определяет пересекаются ли два отрезка, заданные точками Р1Р2 и Р3Р4
+        /// </summary>
+        protected bool LinesIntersection(Point p1, Point p2, Point p3, Point p4)
+        {
+            var vect1 = p2 - p1;
+            var vect2 = p2 - p3;
+            var z1 = vect1.X * vect2.Y - vect1.Y * vect2.X;//z-компонента векторного произведения vect1 и vect2
+            vect2 = p2 - p4;
+            var z2 = vect1.X * vect2.Y - vect1.Y * vect2.X;
+            //Если z1*z2<0, значит точки р3 и р4 лежат по разные стороны отрезка р1р2
+            if (z1 * z2 > 0)
+                return false;
+
+            vect1 = p4 - p3;
+            vect2 = p4 - p1;
+            var z3 = vect1.X * vect2.Y - vect1.Y * vect2.X;
+            vect2 = p4 - p2;
+            var z4 = vect1.X * vect2.Y - vect1.Y * vect2.X;
+            //Если z3*z4<0, значит точки р1 и р2 лежат по разные стороны отрезка р3р4
+
+            return z1 * z2 < 0 && z3 * z4 < 0;
+        }
+
         public System.Xml.Schema.XmlSchema GetSchema()
         {
             throw new NotImplementedException();
