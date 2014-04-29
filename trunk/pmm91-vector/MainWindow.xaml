@@ -19,6 +19,7 @@
         <com:ChangeWindowCmd x:Key="ChangeWindow"/>
         <com:CloseWindowCmd x:Key="CloseWindow"/>
         <com:NewWindowCmd x:Key="NewWindow"/>
+        <com:ChangeModeCmd x:Key="ChangeMode"/>
         <Style x:Key="VerticalSeparatorStyle" 
                 TargetType="{x:Type Separator}"
                 BasedOn="{StaticResource {x:Type Separator}}">
@@ -106,16 +107,20 @@
         </Menu>
         <Menu x:Name="ButtonMenu" Grid.Row="1" VerticalAlignment="Top">
             <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
+            <Button x:Name="btnCursor" ToolTip="Курсор"
+                    Command="{StaticResource ChangeMode}" CommandParameter="None">
+                <ContentControl Content="Курсор"/>
+            </Button>
             <Button x:Name="btnAddPolyline" ToolTip="Добавить ломаную"
-                    Command="{StaticResource AddFigure}" CommandParameter="Polyline">
+                    Command="{StaticResource ChangeMode}" CommandParameter="Polyline">
                 <ContentControl Content="{StaticResource PolylineIcon}"/>
             </Button>
             <Button x:Name="btnAddPolygon" ToolTip="Добавить многоугольник"
-                    Command="{StaticResource AddFigure}" CommandParameter="Polygon">
+                    Command="{StaticResource ChangeMode}" CommandParameter="Polygon">
                 <ContentControl Content="{StaticResource PolygonIcon}"/>
             </Button>
             <Button x:Name="btnAddEllipse" ToolTip="Добавить эллипс"
-                    Command="{StaticResource AddFigure}" CommandParameter="Ellipse">
+                    Command="{StaticResource ChangeMode}" CommandParameter="Ellipse">
                 <ContentControl Content="{StaticResource EllipseIcon}"/>
             </Button>
             <Separator Style="{DynamicResource VerticalSeparatorStyle}" />

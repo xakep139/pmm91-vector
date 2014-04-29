@@ -6,6 +6,14 @@ using pmm91_vector.Implementation;
 
 namespace pmm91_vector.Misc
 {
+    public enum ToolMode
+    {
+        None,
+        Polyline,
+        Polygon,
+        Ellipse
+    }
+
     /// <summary>
     /// Окно для отрисовки фигур
     /// </summary>
@@ -14,6 +22,8 @@ namespace pmm91_vector.Misc
         CommandStack _stack = null;
         Graphics _graphics = null;
         FigureCollection _figures = null;
+        ToolMode _mode = ToolMode.None;
+
 
         public GraphicWindow()
         {
@@ -26,6 +36,7 @@ namespace pmm91_vector.Misc
             this.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
         }
+
 
         public FigureCollection Figures
         {
@@ -40,6 +51,12 @@ namespace pmm91_vector.Misc
         public CommandStack Stack
         {
             get { return this._stack; }
+        }
+
+        public ToolMode Mode
+        {
+            get { return this._mode; }
+            set { this._mode = value; }
         }
     }
 }
