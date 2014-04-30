@@ -20,6 +20,7 @@
         <com:CloseWindowCmd x:Key="CloseWindow"/>
         <com:NewWindowCmd x:Key="NewWindow"/>
         <com:ChangeModeCmd x:Key="ChangeMode"/>
+        <com:ShowAboutCmd x:Key="ShowAbout"/>
         <Style x:Key="VerticalSeparatorStyle" 
                 TargetType="{x:Type Separator}"
                 BasedOn="{StaticResource {x:Type Separator}}">
@@ -104,12 +105,16 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem x:Name="miRef" Header="Справка">
+                <MenuItem x:Name="miAbout" Header="О программе"
+                          Command="{StaticResource ShowAbout}"/>
+            </MenuItem>
         </Menu>
         <Menu x:Name="ButtonMenu" Grid.Row="1" VerticalAlignment="Top">
             <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
             <Button x:Name="btnCursor" ToolTip="Курсор"
                     Command="{StaticResource ChangeMode}" CommandParameter="None">
-                <ContentControl Content="Курсор"/>
+                <Image Source="Icons/Cursor.png" Height="24" />
             </Button>
             <Button x:Name="btnAddPolyline" ToolTip="Добавить ломаную"
                     Command="{StaticResource ChangeMode}" CommandParameter="Polyline">

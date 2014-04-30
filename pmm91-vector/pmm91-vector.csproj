@@ -66,6 +66,7 @@
     <Compile Include="Implementation\Commands\DeleteFigureCmd.cs" />
     <Compile Include="Implementation\Commands\SaveCmd.cs" />
     <Compile Include="Implementation\Commands\NewWindowCmd.cs" />
+    <Compile Include="Implementation\Commands\ShowAboutCmd.cs" />
     <Compile Include="Implementation\Graphics.cs" />
     <Compile Include="Misc\FillBrushSerializator.cs" />
     <Compile Include="Misc\GraphicWindow.cs" />
@@ -159,7 +160,7 @@
     <Resource Include="Icons\Windows.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\Сursor.png" />
+    <Resource Include="Icons\Cursor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

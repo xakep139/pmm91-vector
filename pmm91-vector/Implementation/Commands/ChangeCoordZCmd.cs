@@ -5,7 +5,7 @@ using pmm91_vector.Misc;
 
 namespace pmm91_vector.Implementation.Commands
 {
-    class ChangeCoordZCmd : Interfaces.ICommand
+    public class ChangeCoordZCmd : Interfaces.ICommand
     {
         public bool CanExecute(object parameter)
         {
@@ -27,6 +27,8 @@ namespace pmm91_vector.Implementation.Commands
 
         public void Execute(object parameter)
         {
+            if (parameter == null || (parameter as string) == null)
+                throw new Exception("Некорректный параметр команды смены Z-координаты");
             WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
             string direction = (parameter as string).ToLower();
             switch (direction)
