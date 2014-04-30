@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 using pmm91_vector.Implementation;
+using System.Windows;
+using System.Collections;
 
 namespace pmm91_vector.Misc
 {
@@ -35,8 +37,36 @@ namespace pmm91_vector.Misc
             this.Background = Brushes.WhiteSmoke;
             this.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            this.MouseDown += newWindow_MouseDown;
         }
+        static void newWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            //Если мы добавляем фигуры
+            Point[] points = new Point[2];
+            var ActiveWindow = sender as GraphicWindow;
+            points[0] = e.GetPosition(sender as GraphicWindow);
+            
 
+            if (ActiveWindow.Mode != ToolMode.None)
+            {
+                var cmd = new pmm91_vector.Implementation.Commands.AddFigureCmd();
+                ArrayList ar = new ArrayList();
+                points[1] = new Point(points[0].X + 100, points[0].Y + 100);
+                ar.Add(points);
+                cmd.Execute(ar);
+            }
+            //Если мы выделяем
+            else
+            {
+                points[1] = new Point(points[0].X + 10, points[0].Y + 10);
+                var Figures =ActiveWindow.Figures.Selection(points[0], points[1]);
+                foreach (pmm91_vector.Interfaces.IFigure figure in Figures)
+                {
+                    figure.BoundaryColor = Colors.Red;
+                    figure.Draw(ActiveWindow.Graph);
+                }
+            }
+        }
 
         public FigureCollection Figures
         {
