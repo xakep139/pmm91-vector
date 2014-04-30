@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Collections;
+
 using pmm91_vector.Misc;
 
 namespace pmm91_vector.Implementation.Commands
@@ -29,17 +30,15 @@ namespace pmm91_vector.Implementation.Commands
 
         public void Execute(object parameter)
         {
+            Point[] figCoords = parameter as Point[];
+            if (parameter == null || figCoords == null)
+                throw new Exception("Некорректный параметр команды добавления фигуры");
             WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
             Figures.BaseFigure newFigure = null;
-            ArrayList ar = parameter as ArrayList;
-            Point[] points = ar[0] as Point[];
-            //TODO: выставить необходимые координаты
-            Point[] figCoords = points;
-
-
-            // string figureType = (parameter as string).ToLower();
             switch (WindowManager.Instance.ActiveWindow.Mode)
             {
+                case ToolMode.None:
+                    break;
                 case ToolMode.Ellipse:
                     newFigure = new Figures.Ellipse(figCoords);
                     break;
@@ -50,7 +49,7 @@ namespace pmm91_vector.Implementation.Commands
                     newFigure = new Figures.Polyline(figCoords);
                     break;
                 default:
-                    break;
+                    throw new NotImplementedException();
             }
             try
             {
