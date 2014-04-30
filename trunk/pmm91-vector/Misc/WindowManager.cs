@@ -78,38 +78,9 @@ namespace pmm91_vector.Misc
             }
             this._activeWindow = this._windows.IndexOf(newWindow);
 
-            newWindow.MouseDown += newWindow_MouseDown;
 
 
             return newWindow;
-        }
-
-        void newWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            //Если мы добавляем фигуры
-            Point[] points = new Point[2];
-            points[0] = e.GetPosition(sender as GraphicWindow);
-            
-
-            if (this.ActiveWindow.Mode != ToolMode.None)
-            {
-                var cmd = new AddFigureCmd();
-                ArrayList ar = new ArrayList();
-                points[1] = new Point(points[0].X + 100, points[0].Y + 100);
-                ar.Add(points);
-                cmd.Execute(ar);
-            }
-            //Если мы выделяем
-            else
-            {
-                points[1] = new Point(points[0].X + 10, points[0].Y + 10);
-                var Figures =ActiveWindow.Figures.Selection(points[0], points[1]);
-                foreach (pmm91_vector.Interfaces.IFigure figure in Figures)
-                {
-                    figure.BoundaryColor = Colors.Red;
-                    figure.Draw(Instance.ActiveWindow.Graph);
-                }
-            }
         }
 
         /// <summary>
