@@ -10,7 +10,7 @@ namespace pmm91_vector.Implementation.Figures
     /// Ломаная линия
     /// </summary>
     [Serializable]
-    class Polyline : BaseFigure
+    public class Polyline : BaseFigure
     {
         /// <summary>
         /// Конструктор без параметров (по умолчанию)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Xml.Serialization;
 
 using pmm91_vector.Interfaces;
 
@@ -16,9 +17,9 @@ namespace pmm91_vector.Implementation
     public class FigureCollection : IFigureCollection
     {
         [NonSerialized]
-        private IList<IFigure> _activeFigures = new List<IFigure>();
+        private IList<Figures.BaseFigure> _activeFigures = new List<Figures.BaseFigure>();
 
-        private IList<IFigure> _figures = new List<IFigure>();
+        private IList<Figures.BaseFigure> _figures = new List<Figures.BaseFigure>();
 
         public string FileName
         {
@@ -29,22 +30,22 @@ namespace pmm91_vector.Implementation
         /// <summary>
         /// Список активных фигур
         /// </summary>
-        public IList<IFigure> ActiveFigures
+        public IList<Figures.BaseFigure> ActiveFigures
         {
             get
             {
-                return new List<IFigure>(this._activeFigures);
+                return new List<Figures.BaseFigure>(this._activeFigures);
             }
             set
             {
                 foreach (var fig in value)
                     if (!this._figures.Contains(fig))
                         throw new Exception("Заданная фигура не содержится в коллекции");
-                this.ActiveFigures = new List<IFigure>(value);
+                this.ActiveFigures = new List<Figures.BaseFigure>(value);
             }
         }
 
-        public IList<IFigure> Selection(Point a, Point b)
+        public IList<Figures.BaseFigure> Selection(Point a, Point b)
         {
             return _figures.Where(x => x.Selection(a, b)).ToList();
         }
@@ -55,7 +56,7 @@ namespace pmm91_vector.Implementation
             {
                 var newFigureCollection = (FigureCollection)stream.ReadColection(this.GetType());
                 this.FileName = newFigureCollection.FileName;
-                this._figures = new List<IFigure>(newFigureCollection._figures);
+                this._figures = new List<Figures.BaseFigure>(newFigureCollection._figures);
                 return true;
             }
             else
@@ -73,12 +74,12 @@ namespace pmm91_vector.Implementation
                 return false;
         }
 
-        public int IndexOf(IFigure item)
+        public int IndexOf(Figures.BaseFigure item)
         {
             return _figures.IndexOf(item);
         }
 
-        public void Insert(int index, IFigure item)
+        public void Insert(int index, Figures.BaseFigure item)
         {
             _figures.Insert(index, item);
         }
@@ -88,7 +89,7 @@ namespace pmm91_vector.Implementation
             _figures.RemoveAt(index);
         }
 
-        public IFigure this[int index]
+        public Figures.BaseFigure this[int index]
         {
             get
             {
@@ -100,7 +101,7 @@ namespace pmm91_vector.Implementation
             }
         }
 
-        public void Add(IFigure item)
+        public void Add(Figures.BaseFigure item)
         {
             _figures.Add(item);
         }
@@ -110,12 +111,12 @@ namespace pmm91_vector.Implementation
             _figures.Clear();
         }
 
-        public bool Contains(IFigure item)
+        public bool Contains(Figures.BaseFigure item)
         {
             return _figures.Contains(item);
         }
 
-        public void CopyTo(IFigure[] array, int arrayIndex)
+        public void CopyTo(Figures.BaseFigure[] array, int arrayIndex)
         {
             _figures.CopyTo(array, arrayIndex);
         }
@@ -130,12 +131,12 @@ namespace pmm91_vector.Implementation
             get { return _figures.IsReadOnly; }
         }
 
-        public bool Remove(IFigure item)
+        public bool Remove(Figures.BaseFigure item)
         {
             return _figures.Remove(item);
         }
 
-        public IEnumerator<IFigure> GetEnumerator()
+        public IEnumerator<Figures.BaseFigure> GetEnumerator()
         {
             return this._figures.GetEnumerator();
         }

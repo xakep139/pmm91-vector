@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Xml.Serialization;
 
 using pmm91_vector.Misc;
 
@@ -12,6 +13,7 @@ namespace pmm91_vector.Implementation.Figures
     /// Базовый класс для всех фигур
     /// </summary>
     [Serializable]
+    [XmlInclude(typeof(Ellipse)), XmlInclude(typeof(Polygon)), XmlInclude(typeof(Polyline))]
     public abstract class BaseFigure : Interfaces.IFigure
     {
         private int z;
@@ -41,6 +43,7 @@ namespace pmm91_vector.Implementation.Figures
             set { this._fillBrushSerializer = value; }
         }
 
+        
         public Brush FillBrush
         {
             get { return this._fillBrushSerializer.FillBrush; }
@@ -53,9 +56,16 @@ namespace pmm91_vector.Implementation.Figures
             set { this.z = value; }
         }
 
+         [XmlIgnore]
         public IList<Point> Points
         {
             get { return this.points; }
+            protected set { this.points = value; }
+        }
+
+        public List<Point> PointsSerialize
+        {
+            get { return this.points as List<Point>; }
             protected set { this.points = value; }
         }
 
@@ -170,7 +180,7 @@ namespace pmm91_vector.Implementation.Figures
             return z1 * z2 < 0 && z3 * z4 < 0;
         }
 
-        public System.Xml.Schema.XmlSchema GetSchema()
+        /*public System.Xml.Schema.XmlSchema GetSchema()
         {
             throw new NotImplementedException();
         }
@@ -183,6 +193,6 @@ namespace pmm91_vector.Implementation.Figures
         public void WriteXml(System.Xml.XmlWriter writer)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

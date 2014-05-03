@@ -64,8 +64,10 @@
     <Compile Include="Implementation\Commands\ChangeWindowCmd.cs" />
     <Compile Include="Implementation\Commands\CloseWindowCmd.cs" />
     <Compile Include="Implementation\Commands\DeleteFigureCmd.cs" />
+    <Compile Include="Implementation\Commands\MoveFigureCmd.cs" />
     <Compile Include="Implementation\Commands\SaveCmd.cs" />
     <Compile Include="Implementation\Commands\NewWindowCmd.cs" />
+    <Compile Include="Implementation\Commands\ScaleFigureCmd.cs" />
     <Compile Include="Implementation\Commands\ShowAboutCmd.cs" />
     <Compile Include="Implementation\Graphics.cs" />
     <Compile Include="Misc\FillBrushSerializator.cs" />
