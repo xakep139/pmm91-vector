@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Drawing.Drawing2D;
+using System.Xml.Serialization;
 
 namespace pmm91_vector.Misc
 {
@@ -23,6 +24,8 @@ namespace pmm91_vector.Misc
                 this.isSolidBrush = value;
             }
         }
+
+        public FillBrushSerializator() { }
 
         public FillBrushSerializator(Brush brush, Color color)
         {

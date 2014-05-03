@@ -11,7 +11,7 @@ namespace pmm91_vector.Implementation.Figures
     /// Эллипс
     /// </summary>
     [Serializable]
-    class Ellipse : BaseFigure
+    public class Ellipse : BaseFigure
     {
         private Point leftTop;
         private Point rightBottom;
