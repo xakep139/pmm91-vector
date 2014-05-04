@@ -39,7 +39,6 @@ namespace pmm91_vector.Implementation.Figures
 
         #region IGeometryFigure
 
-
         public override void Transform(Interfaces.IFigureTransform transformer)
         {
             throw new NotImplementedException();
