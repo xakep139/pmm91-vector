@@ -31,7 +31,7 @@ namespace pmm91_vector.Implementation.Commands
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Бинарные файлы (*.bin)|*.bin|XML файлы (*.xml)|*.xml";
-            openFileDialog.FilterIndex = 1;
+            openFileDialog.FilterIndex = 2;
 
             var result = openFileDialog.ShowDialog();
             if (result.HasValue && result.Value == true)

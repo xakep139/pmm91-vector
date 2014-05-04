@@ -13,6 +13,8 @@
         <com:OpenCmd x:Key="Open"/>
         <com:AddFigureCmd x:Key="AddFigure"/>
         <com:DeleteFigureCmd x:Key="DeleteFigure"/>
+        <com:MoveFigureCmd x:Key="MoveFigure"/>
+        <com:ScaleFigureCmd x:Key="ScaleFigure"/>
         <com:ChangeOutColorCmd x:Key="ChangeOutColor"/>
         <com:ChangeInColorCmd x:Key="ChangeInColor"/>
         <com:ChangeCoordZCmd x:Key="ChangeCoordZ"/>
@@ -111,7 +113,7 @@
             </MenuItem>
         </Menu>
         <Menu x:Name="ButtonMenu" Grid.Row="1" VerticalAlignment="Top">
-            <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
+            <Separator Style="{StaticResource VerticalSeparatorStyle}" />
             <Button x:Name="btnCursor" ToolTip="Курсор"
                     Command="{StaticResource ChangeMode}" CommandParameter="None">
                 <Image Source="Icons/Cursor.png" Height="24" />
@@ -128,7 +130,7 @@
                     Command="{StaticResource ChangeMode}" CommandParameter="Ellipse">
                 <ContentControl Content="{StaticResource EllipseIcon}"/>
             </Button>
-            <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
+            <Separator Style="{StaticResource VerticalSeparatorStyle}" />
             <Button x:Name="btnOutColor" ToolTip="Цвет границы фигуры"
                     Command="{StaticResource ChangeOutColor}">
                 <ContentControl Content="{StaticResource PenIcon}"/>
@@ -136,6 +138,14 @@
             <Button x:Name="btnInColor" ToolTip="Цвет заливки фигуры"
                     Command="{StaticResource ChangeInColor}">
                 <ContentControl Content="{StaticResource FillingIcon}"/>
+            </Button>
+            <Button x:Name="btnMoveFigure" ToolTip="Переместить фигуру"
+                    Command="{StaticResource MoveFigure}">
+                <ContentControl Content="{StaticResource MoveIcon}"/>
+            </Button>
+            <Button x:Name="btnScaleFigure" ToolTip="Растянуть (сжать) фигуру"
+                    Command="{StaticResource ScaleFigure}">
+                <ContentControl Content="{StaticResource ScaleIcon}"/>
             </Button>
             <Button x:Name="btnIncreaseZ" ToolTip="Переместить вперёд"
                     Command="{StaticResource ChangeCoordZ}" CommandParameter="Up">
@@ -149,7 +159,7 @@
                     Command="{StaticResource DeleteFigure}">
                 <ContentControl Content="{StaticResource GarbageIcon}"/>
             </Button>
-            <Separator Style="{DynamicResource VerticalSeparatorStyle}" />
+            <Separator Style="{StaticResource VerticalSeparatorStyle}" />
         </Menu>
         <DockPanel x:Name="MainCanvas" Grid.Row="2" Background="DarkGray">
         </DockPanel>

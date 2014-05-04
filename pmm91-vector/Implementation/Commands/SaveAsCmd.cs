@@ -31,7 +31,7 @@ namespace pmm91_vector.Implementation.Commands
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Бинарный файл (*.bin)|*.bin|XML-файл (*.xml)|*.xml";
-            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.FilterIndex = 2;
 
             var result = saveFileDialog.ShowDialog();
             if (result.HasValue && result.Value == true)
@@ -52,7 +52,8 @@ namespace pmm91_vector.Implementation.Commands
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message, "Ошибка сохранения", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(e.Message + ":" + Environment.NewLine + e.InnerException,
+                        "Ошибка сохранения", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

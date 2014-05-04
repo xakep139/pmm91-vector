@@ -47,10 +47,6 @@ namespace pmm91_vector.Implementation.Figures
         {
             if (points == null || points.Count() < 2)
                 throw new Exception("Некорректная коллекция точек");
-            this.leftTop = new Point(Math.Min(this.Points[0].X, this.Points[1].X),
-                                     Math.Min(this.Points[0].Y, this.Points[1].Y));
-            this.rightBottom = new Point(Math.Max(this.Points[0].X, this.Points[1].X),
-                                     Math.Max(this.Points[0].Y, this.Points[1].Y));
         }
 
         #endregion
@@ -83,6 +79,10 @@ namespace pmm91_vector.Implementation.Figures
 
         public override void Draw(Interfaces.IGraphics where)
         {
+            this.leftTop = new Point(Math.Min(this.Points[0].X, this.Points[1].X),
+                                     Math.Min(this.Points[0].Y, this.Points[1].Y));
+            this.rightBottom = new Point(Math.Max(this.Points[0].X, this.Points[1].X),
+                                     Math.Max(this.Points[0].Y, this.Points[1].Y));
             //TODO: учесть локальную ось X
             var ellipse = new System.Windows.Shapes.Ellipse 
                 { Width = Math.Abs(rightBottom.X - leftTop.X), Height = Math.Abs(rightBottom.Y - leftTop.Y),

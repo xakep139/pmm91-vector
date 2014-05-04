@@ -45,7 +45,8 @@ namespace pmm91_vector.Implementation.Commands
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Ошибка сохранения", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(e.Message + ":" + Environment.NewLine + e.InnerException,
+                    "Ошибка сохранения", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

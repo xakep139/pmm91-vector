@@ -17,6 +17,7 @@ namespace pmm91_vector.Implementation.Figures
     public abstract class BaseFigure : Interfaces.IFigure
     {
         private int z;
+        private Point _axisX = new Point(1, 0);
         private IList<Point> points = new List<Point>();
         private FillBrushSerializator _fillBrushSerializer = new FillBrushSerializator(Brushes.White, Colors.Black);
 
@@ -43,7 +44,6 @@ namespace pmm91_vector.Implementation.Figures
             set { this._fillBrushSerializer = value; }
         }
 
-        
         public Brush FillBrush
         {
             get { return this._fillBrushSerializer.FillBrush; }
@@ -56,7 +56,7 @@ namespace pmm91_vector.Implementation.Figures
             set { this.z = value; }
         }
 
-         [XmlIgnore]
+        [XmlIgnore]
         public IList<Point> Points
         {
             get { return this.points; }
@@ -71,20 +71,15 @@ namespace pmm91_vector.Implementation.Figures
 
         public Point Center { get; set; }
 
-        private Point _axisX = new Point(1,0);
         public Point AxisX 
         {
             get { return _axisX; }
             set
             {
-                var norma = Math.Sqrt(value.X * value.X + value.Y * value.Y);
-                _axisX = new Point(value.X / norma, value.Y / norma);
+                var norm = Math.Sqrt(value.X * value.X + value.Y * value.Y);
+                _axisX = new Point(value.X / norm, value.Y / norm);
             }
         }
-
-        abstract public void Transform(Interfaces.IFigureTransform transformer);
-
-        abstract public bool Selection(Point a, Point b);
 
         public void SetPoint(int index, Point p)
         {
@@ -92,6 +87,10 @@ namespace pmm91_vector.Implementation.Figures
             globalPoints[index] = p;
             SetPoints(globalPoints);
         }
+
+        abstract public void Transform(Interfaces.IFigureTransform transformer);
+
+        abstract public bool Selection(Point a, Point b);
 
         abstract public Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure);
 
@@ -179,20 +178,5 @@ namespace pmm91_vector.Implementation.Figures
 
             return z1 * z2 < 0 && z3 * z4 < 0;
         }
-
-        /*public System.Xml.Schema.XmlSchema GetSchema()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ReadXml(System.Xml.XmlReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WriteXml(System.Xml.XmlWriter writer)
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }
