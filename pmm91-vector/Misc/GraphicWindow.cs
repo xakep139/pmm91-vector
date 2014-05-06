@@ -29,6 +29,7 @@ namespace pmm91_vector.Misc
         Graphics _graphics = null;
         FigureCollection _figures = null;
         ToolMode _mode = ToolMode.None;
+        Point[] _selectionrect = new Point[2];
 
         public GraphicWindow()
         {
@@ -41,6 +42,44 @@ namespace pmm91_vector.Misc
             this.HorizontalAlignment = HorizontalAlignment.Stretch;
             this.VerticalAlignment = VerticalAlignment.Stretch;
             this.MouseDown += GraphicWindow_MouseDown;
+            this.MouseUp += GraphicWindow_MouseUp;
+        }
+
+        static void GraphicWindow_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var ActiveWindow = sender as GraphicWindow;
+            if (ActiveWindow.Mode != ToolMode.None)
+            {
+               
+            }
+            else    //Если мы выделяем:
+            {
+                Point[] points = ActiveWindow.SelectionRect;
+                points[1] = e.GetPosition(ActiveWindow);
+                var Figures = ActiveWindow.Figures.Selection(points[0], points[1]);
+                if (Figures.Count > 0)
+                {                    
+                    foreach (Interfaces.IFigure figure in Figures)
+                    {
+                        Color tmp = figure.BoundaryColor;
+                        figure.BoundaryColor = Colors.Red;
+                        figure.Draw(ActiveWindow.Graph);
+                        figure.BoundaryColor = tmp;
+                    }
+                    ActiveWindow.Figures.UpdateActiveFigures(Figures);
+                }
+                else
+                {
+                    foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
+                    {
+                        figure.Draw(ActiveWindow.Graph);
+                    }
+                    ActiveWindow.Figures.ActiveFigures = Figures;
+                }
+                //TODO: установить ActiveWindow.Figures.ActiveFigures
+                //и если в выделении ничего нет, то выделенные ранее фигуры сделать того же цвета, что они были
+                
+            }
         }
 
         static void GraphicWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -58,19 +97,10 @@ namespace pmm91_vector.Misc
             }
             else    //Если мы выделяем:
             {
-                points[1] = new Point(points[0].X + 5, points[0].Y + 5);
-                var Figures = ActiveWindow.Figures.Selection(points[0], points[1]);
-                //TODO: установить ActiveWindow.Figures.ActiveFigures
-                //и если в выделении ничего нет, то выделенные ранее фигуры сделать того же цвета, что они были
-                foreach (Interfaces.IFigure figure in Figures)
-                {
-                    Color tmp = figure.BoundaryColor;
-                    figure.BoundaryColor = Colors.Red;
-                    figure.Draw(ActiveWindow.Graph);
-                    figure.BoundaryColor = tmp;
-                }
+                ActiveWindow.SelectionRect = points;
             }
         }
+
 
         public FigureCollection Figures
         {
@@ -91,6 +121,12 @@ namespace pmm91_vector.Misc
         {
             get { return this._mode; }
             set { this._mode = value; }
+        }
+
+        public Point[] SelectionRect
+        {
+            get { return this._selectionrect; }
+            set { this._selectionrect = value; }
         }
     }
 }
