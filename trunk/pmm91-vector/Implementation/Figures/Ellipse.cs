@@ -60,7 +60,7 @@ namespace pmm91_vector.Implementation.Figures
 
         public override bool Selection(Point a, Point b)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
