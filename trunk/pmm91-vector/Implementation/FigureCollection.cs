@@ -41,8 +41,13 @@ namespace pmm91_vector.Implementation
                 foreach (var fig in value)
                     if (!this._figures.Contains(fig))
                         throw new Exception("Заданная фигура не содержится в коллекции");
-                this.ActiveFigures = new List<Figures.BaseFigure>(value);
+                this._activeFigures = new List<Figures.BaseFigure>(value);
             }
+        }
+
+        public void UpdateActiveFigures(IList<Figures.BaseFigure> Figures)
+        {
+            this.ActiveFigures = Figures;
         }
 
         public IList<Figures.BaseFigure> Selection(Point a, Point b)
