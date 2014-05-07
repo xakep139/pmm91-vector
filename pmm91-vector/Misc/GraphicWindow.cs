@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 using pmm91_vector.Implementation;
 
@@ -30,7 +31,7 @@ namespace pmm91_vector.Misc
         FigureCollection _figures = null;
         ToolMode _mode = ToolMode.None;
         Point[] _selectionrect = new Point[2];
-        System.Windows.Shapes.Polygon _rectangle = new System.Windows.Shapes.Polygon();
+        Polygon _rectangle = new Polygon();
 
         public GraphicWindow()
         {
@@ -61,8 +62,7 @@ namespace pmm91_vector.Misc
                 ActiveWindow._rectangle.Points[3] = p3;
                 ActiveWindow._rectangle.UpdateLayout();
             }
-            catch
-            { }
+            catch{ }
         }
         public static void GraphicWindow_MouseMove_Ellipse(object sender, MouseEventArgs e)
         {
@@ -81,30 +81,27 @@ namespace pmm91_vector.Misc
         {
             var ActiveWindow = sender as GraphicWindow;
            
-            Point[] points = ActiveWindow.SelectionRect;
-            points[1] = e.GetPosition(ActiveWindow);
-            var Figures = ActiveWindow.Figures.Selection(points[0], points[1]);
-            if (Figures.Count > 0)
-            {                    
-                foreach (Interfaces.IFigure figure in Figures)
+            Point[] selPoints = ActiveWindow.SelectionRect;
+            selPoints[1] = e.GetPosition(ActiveWindow);
+            var oldSelection = ActiveWindow.Figures.ActiveFigures;
+            var newSelection = ActiveWindow.Figures.Selection(selPoints[0], selPoints[1]);
+            if (newSelection.Count > 0)  //В выделении хотя бы одна фигура
+            {
+                foreach (var figure in newSelection)
                 {
-                    Color tmp = figure.BoundaryColor;
+                    Color oldColor = figure.BoundaryColor;
                     figure.BoundaryColor = Colors.Red;
                     figure.Draw(ActiveWindow.Graph);
-                    figure.BoundaryColor = tmp;
+                    figure.BoundaryColor = oldColor;
                 }
-                ActiveWindow.Figures.UpdateActiveFigures(Figures);
+                foreach (var figure in oldSelection)
+                    if (!newSelection.Contains(figure))
+                        figure.Draw(ActiveWindow.Graph);
             }
-            else
-            {
-                foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
-                {
+            else    //В выделении нет фигур
+                foreach (var figure in ActiveWindow.Figures.ActiveFigures)
                     figure.Draw(ActiveWindow.Graph);
-                }
-                ActiveWindow.Figures.ActiveFigures = Figures;
-            }
-            //TODO: установить ActiveWindow.Figures.ActiveFigures
-            //и если в выделении ничего нет, то выделенные ранее фигуры сделать того же цвета, что они были
+            ActiveWindow.Figures.ActiveFigures = newSelection;
 
             ActiveWindow.Children.Remove(ActiveWindow._rectangle);
         }
@@ -129,7 +126,7 @@ namespace pmm91_vector.Misc
             points[0] = e.GetPosition(ActiveWindow);
             ActiveWindow.SelectionRect = points;
 
-            //отрисовка прямоугольника выделения, не забыть исправить
+            //TODO: отрисовка прямоугольника выделения, не забыть исправить
             ActiveWindow._rectangle = new System.Windows.Shapes.Polygon();
             ActiveWindow._rectangle.Points.Add(points[0]);
             ActiveWindow._rectangle.Points.Add(points[0]);
@@ -155,9 +152,7 @@ namespace pmm91_vector.Misc
             cmd.Execute(points);
 
             foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
-            {
                 figure.Draw(ActiveWindow.Graph);
-            }
             ActiveWindow.Figures.ActiveFigures.Clear();
     
         }
@@ -173,9 +168,7 @@ namespace pmm91_vector.Misc
             points[1] = new Point(points[0].X + 100, points[0].Y + 100);
             cmd.Execute(points);
             foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
-            {
                 figure.Draw(ActiveWindow.Graph);
-            }
             ActiveWindow.Figures.ActiveFigures.Clear();
         }
 
@@ -190,9 +183,7 @@ namespace pmm91_vector.Misc
             points[1] = new Point(points[0].X + 100, points[0].Y + 100);
             cmd.Execute(points);
             foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
-            {
                 figure.Draw(ActiveWindow.Graph);
-            }
             ActiveWindow.Figures.ActiveFigures.Clear();
         }
 
