@@ -45,11 +45,6 @@ namespace pmm91_vector.Implementation
             }
         }
 
-        public void UpdateActiveFigures(IList<Figures.BaseFigure> Figures)
-        {
-            this.ActiveFigures = Figures;
-        }
-
         public IList<Figures.BaseFigure> Selection(Point a, Point b)
         {
             return _figures.Where(x => x.Selection(a, b)).ToList();
