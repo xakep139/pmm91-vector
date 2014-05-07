@@ -110,6 +110,8 @@ namespace pmm91_vector.Implementation.Figures
 
         public override void Draw(Interfaces.IGraphics where)
         {
+            if (this._shapeFigure != null)
+                where.DrawingSurface.Children.Remove(this._shapeFigure);
             var polygon = new System.Windows.Shapes.Polygon();
             foreach (Point pt in this.Points)
                 //TODO: учесть локальную ось X
@@ -117,6 +119,7 @@ namespace pmm91_vector.Implementation.Figures
             polygon.Fill = this.FillBrush;
             polygon.Stroke = new SolidColorBrush(this.BoundaryColor);
             where.DrawingSurface.Children.Add(polygon);
+            this._shapeFigure = polygon;
         }
 
         #endregion

@@ -84,12 +84,15 @@ namespace pmm91_vector.Implementation.Figures
 
         public override void Draw(Interfaces.IGraphics where)
         {
+            if (this._shapeFigure != null)
+                where.DrawingSurface.Children.Remove(this._shapeFigure);
             var polyline = new System.Windows.Shapes.Polyline();
             foreach (Point pt in this.Points)
                 //TODO: учесть локальную ось X
                 polyline.Points.Add(new Point(pt.X + this.Center.X, pt.Y + this.Center.Y));
             polyline.Stroke = new SolidColorBrush(this.BoundaryColor);
             where.DrawingSurface.Children.Add(polyline);
+            this._shapeFigure = polyline;
         }
 
         #endregion

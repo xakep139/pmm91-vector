@@ -74,11 +74,13 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         #endregion
-
+        
         #region IGraphicFigure
 
         public override void Draw(Interfaces.IGraphics where)
         {
+            if (this._shapeFigure != null)
+                where.DrawingSurface.Children.Remove(this._shapeFigure);
             this.leftTop = new Point(Math.Min(this.Points[0].X, this.Points[1].X),
                                      Math.Min(this.Points[0].Y, this.Points[1].Y));
             this.rightBottom = new Point(Math.Max(this.Points[0].X, this.Points[1].X),
@@ -89,6 +91,7 @@ namespace pmm91_vector.Implementation.Figures
                   Margin = new Thickness(this.Center.X + this.leftTop.X, this.Center.Y + this.leftTop.Y, 0, 0),
                   Fill = this.FillBrush, Stroke = new SolidColorBrush(this.BoundaryColor)};
             where.DrawingSurface.Children.Add(ellipse);
+            this._shapeFigure = ellipse;
         }
 
         #endregion

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 using pmm91_vector.Misc;
+using pmm91_vector.Implementation.Figures;
 
 namespace pmm91_vector.Implementation.Commands
 {
@@ -27,7 +29,10 @@ namespace pmm91_vector.Implementation.Commands
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            foreach (var figure in WindowManager.Instance.ActiveWindow.Figures.ActiveFigures)
+                WindowManager.Instance.ActiveWindow.Figures.Remove(figure);
+            WindowManager.Instance.ActiveWindow.Figures.ActiveFigures = new List<BaseFigure>();
+            WindowManager.Instance.ActiveWindow.Graph.Paint(WindowManager.Instance.ActiveWindow.Figures);
         }
     }
 }
