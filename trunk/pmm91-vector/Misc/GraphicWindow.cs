@@ -54,7 +54,7 @@ namespace pmm91_vector.Misc
         {
             var ActiveWindow = sender as GraphicWindow;
 
-            if (ActiveWindow._rectangle != null)
+            if (ActiveWindow._rectangle != null && ActiveWindow._rectangle.Points.Count != 0)
             {
                 Point p = e.GetPosition(ActiveWindow);
                 Point p1 = new Point(p.X, ActiveWindow._rectangle.Points[0].Y);

@@ -73,11 +73,12 @@ namespace pmm91_vector.Implementation.Figures
         {
             var points = Local2Global();
             int n = points.Count;
+            Point p1, p2;
             //Для каждого отрезка многоугольника проверям, пресекается ли он со сторонами прямоугольника выделения:
             for (int i = 0; i < n; i++)
             {
-                var p1 = points[i];
-                var p2 = points[(i + 1) % n];
+                p1 = points[i];
+                p2 = points[(i + 1) % n];
 
                 if (LinesIntersection(p1, p2, a, new Point(b.X, a.Y)) ||
                     LinesIntersection(p1, p2, new Point(b.X, a.Y), b) ||
@@ -87,11 +88,50 @@ namespace pmm91_vector.Implementation.Figures
             }
             //Если многоугольник не пересекается с прямоугольником выделения, то, возможно, он лежит внутри него.
             //Проверим вложенность для одной точки:
-            var p = points[0];
-            if (p.X > a.X && p.X < b.X && p.Y > a.Y && p.Y < b.Y)
+            var point = points[0];
+            if (point.X > a.X && point.X < b.X && point.Y > a.Y && point.Y < b.Y)
                 return true;
 
-            return false;
+            //Возможно, прмоугольник выделения лежит внутри многоугольника.
+            //Проверим вложенность для одной точки:
+            //из точки пустим луч в случайном направлении и посчитаем, сколько сторон многоугольника пересекает этот луч. 
+            //Если нечетное - точка внутри многоугольника.
+            p1 = a;
+            p2 = new Point();
+            Random rand = new Random();
+            var stop = false;
+            while (!stop)
+            {
+                p2 = new Point(int.MaxValue - rand.NextDouble(), int.MaxValue - rand.NextDouble());
+
+                var repeat = false;
+                //Проверяем, не является ли ситуация вырожденной: луч пересекает вершину многоугольника
+                //Если да, то генерируем новое направление.
+                var A = p1.Y - p2.Y;
+                var B = p2.X - p1.X;
+                var C = p1.X * p2.Y - p2.X * p1.Y;
+                foreach (var p in points)
+                {
+                    if (A * p.X + B * p.Y + C == 0)
+                    {
+                        repeat = true;
+                        break;
+                    }
+                }
+                if (repeat)
+                    continue;
+                stop = true;
+            }
+            var count = 0;
+            for (int i = 0; i < n; i++)
+            {
+                var pp1 = points[i];
+                var pp2 = points[(i + 1) % n];
+
+                if (LinesIntersection(p1, p2, pp1, pp2))
+                    count++;
+            }
+            return (count % 2) != 0;
         }
 
         public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
