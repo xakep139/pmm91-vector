@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,7 +69,7 @@ namespace pmm91_vector.Implementation.Figures
             var points = Local2Global();
             int n = points.Count;
             Point p1, p2;
-            //Для каждого отрезка многоугольника проверям, пресекается ли он со сторонами прямоугольника выделения:
+            //Для каждого отрезка многоугольника проверям пересекается ли он со сторонами прямоугольника выделения:
             for (int i = 0; i < n; i++)
             {
                 p1 = points[i];
@@ -87,7 +87,7 @@ namespace pmm91_vector.Implementation.Figures
             if (point.X > a.X && point.X < b.X && point.Y > a.Y && point.Y < b.Y)
                 return true;
 
-            //Возможно, прмоугольник выделения лежит внутри многоугольника.
+            //Возможно, прямоугольник выделения лежит внутри многоугольника.
             //Проверим вложенность для одной точки:
             //из точки пустим луч в случайном направлении и посчитаем, сколько сторон многоугольника пересекает этот луч. 
             //Если нечетное - точка внутри многоугольника.
