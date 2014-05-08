@@ -28,6 +28,7 @@ namespace pmm91_vector.Implementation.Commands
         public void Execute(object parameter)
         {
             throw new NotImplementedException();
+            WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
         }
     }
 }

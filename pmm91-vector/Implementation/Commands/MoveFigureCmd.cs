@@ -5,7 +5,7 @@ using pmm91_vector.Misc;
 
 namespace pmm91_vector.Implementation.Commands
 {
-    class MoveFigureCmd:Interfaces.ICommand
+    class MoveFigureCmd : Interfaces.ICommand
     {
         public bool CanExecute(object parameter)
         {
@@ -28,6 +28,7 @@ namespace pmm91_vector.Implementation.Commands
         public void Execute(object parameter)
         {
             throw new NotImplementedException();
+            WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
         }
     }
 }

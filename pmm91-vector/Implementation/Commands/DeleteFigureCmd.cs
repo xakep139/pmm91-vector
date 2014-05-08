@@ -29,10 +29,12 @@ namespace pmm91_vector.Implementation.Commands
 
         public void Execute(object parameter)
         {
-            foreach (var figure in WindowManager.Instance.ActiveWindow.Figures.ActiveFigures)
-                WindowManager.Instance.ActiveWindow.Figures.Remove(figure);
-            WindowManager.Instance.ActiveWindow.Figures.ActiveFigures = new List<BaseFigure>();
-            WindowManager.Instance.ActiveWindow.Graph.Paint(WindowManager.Instance.ActiveWindow.Figures);
+            var window = WindowManager.Instance.ActiveWindow;
+            window.Stack.DoCommand(this);
+            foreach (var figure in window.Figures.ActiveFigures)
+                window.Figures.Remove(figure);
+            window.Figures.ActiveFigures.Clear();
+            window.Graph.Paint(window.Figures);
         }
     }
 }

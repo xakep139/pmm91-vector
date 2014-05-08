@@ -3,6 +3,7 @@
 using pmm91_vector.Misc;
 using pmm91_vector.Interfaces;
 using pmm91_vector.Implementation.Figures;
+using System.Windows.Media;
 
 namespace pmm91_vector.Implementation
 {
@@ -27,7 +28,14 @@ namespace pmm91_vector.Implementation
         {
             drawingWindow.Children.Clear();
             foreach (BaseFigure figure in displayScene)
+            //TODO: учесть Z-координату
+            {
+                Color oldColor = figure.BoundaryColor;
+                if (displayScene.ActiveFigures.Contains(figure))
+                    figure.BoundaryColor = Colors.Red;
                 figure.Draw(this);
+                figure.BoundaryColor = oldColor;
+            }
         }
 
         public void Free_mem()

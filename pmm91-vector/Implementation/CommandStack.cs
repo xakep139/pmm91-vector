@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using pmm91_vector.Interfaces;
+using pmm91_vector.Misc;
+using pmm91_vector.Implementation.Figures;
 
 namespace pmm91_vector.Implementation
 {
@@ -15,34 +17,44 @@ namespace pmm91_vector.Implementation
         /// Стек выполненных команд
         /// </summary>
         private Stack<ICommand> _stackUndo = new Stack<ICommand>();
+
+        /// <summary>
+        /// Стек состояний сцены выполненных команд
+        /// </summary>
+        private Stack<FigureCollection> _stackFigUndo = new Stack<FigureCollection>();
         
         /// <summary>
         /// Стек отменённых команд
         /// </summary>
         private Stack<ICommand> _stackRedo = new Stack<ICommand>();
 
+        /// <summary>
+        /// Стек состояний сцены отменённых команд
+        /// </summary>
+        private Stack<FigureCollection> _stackFigRedo = new Stack<FigureCollection>();
+
         public void DoCommand(ICommand command)
         {
             this._stackRedo.Clear();        //Стек отменённых команд очищаем
+            this._stackFigRedo.Clear();
             this._stackUndo.Push(command);  //Добавляем выполняемую команду в основной стек
+            this._stackFigUndo.Push(new FigureCollection(WindowManager.Instance.ActiveWindow.Figures));
         }
 
         public void UndoCommand()
         {
-            ////
-            ////    Подумать насчёт того, как сделать так, чтобы отменить изменения, сделанные командой
-            ////
-            throw new NotImplementedException();
             this._stackRedo.Push(this._stackUndo.Pop());
+            this._stackFigRedo.Push(WindowManager.Instance.ActiveWindow.Figures);
+            WindowManager.Instance.ActiveWindow.Figures = this._stackFigUndo.Pop();
+            WindowManager.Instance.ActiveWindow.Graph.Paint(WindowManager.Instance.ActiveWindow.Figures);
         }
 
         public void RedoCommand()
         {
-            ////
-            ////    Подумать насчёт того, где хранить параметры команды (сейчас задал как null)
-            ////
             this._stackUndo.Push(this._stackRedo.Pop());
-            this._stackUndo.Peek().Execute(null);
+            this._stackFigUndo.Push(WindowManager.Instance.ActiveWindow.Figures);
+            WindowManager.Instance.ActiveWindow.Figures = this._stackFigRedo.Pop();
+            WindowManager.Instance.ActiveWindow.Graph.Paint(WindowManager.Instance.ActiveWindow.Figures);
         }
 
         public bool CanUndo()
