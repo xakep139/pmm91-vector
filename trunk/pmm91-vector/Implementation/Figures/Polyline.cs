@@ -39,11 +39,6 @@ namespace pmm91_vector.Implementation.Figures
 
         #region IGeometryFigure
 
-        public override void Transform(Interfaces.IFigureTransform transformer)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Selection(Point a, Point b)
         {
             var points = Local2Global();

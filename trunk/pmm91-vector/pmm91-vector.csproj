@@ -69,6 +69,7 @@
     <Compile Include="Implementation\Commands\NewWindowCmd.cs" />
     <Compile Include="Implementation\Commands\ScaleFigureCmd.cs" />
     <Compile Include="Implementation\Commands\ShowAboutCmd.cs" />
+    <Compile Include="Implementation\FigureTransform.cs" />
     <Compile Include="Implementation\Graphics.cs" />
     <Compile Include="Misc\FillBrushSerializator.cs" />
     <Compile Include="Misc\GraphicWindow.cs" />

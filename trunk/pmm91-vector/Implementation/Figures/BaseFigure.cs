@@ -92,7 +92,15 @@ namespace pmm91_vector.Implementation.Figures
             SetPoints(globalPoints);
         }
 
-        abstract public void Transform(Interfaces.IFigureTransform transformer);
+        public void Transform(Interfaces.IFigureTransform transformer)
+        {
+            //TODO сжатие/расширение фигуры
+            List<Point> newPoints = new List<Point>();
+            foreach (var p in Points)
+                newPoints.Add(transformer.TransformMatrix.Transform(p));
+
+            Points = newPoints;
+        }
 
         abstract public bool Selection(Point a, Point b);
 
