@@ -33,12 +33,11 @@ namespace pmm91_vector.Implementation.Commands
             Point[] figCoords = parameter as Point[];
             if (parameter == null || figCoords == null)
                 throw new Exception("Некорректный параметр команды добавления фигуры");
-            WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
+            var window = WindowManager.Instance.ActiveWindow;
+            window.Stack.DoCommand(this);
             Figures.BaseFigure newFigure = null;
-            switch (WindowManager.Instance.ActiveWindow.Mode)
+            switch (window.Mode)
             {
-                case ToolMode.None:
-                    break;
                 case ToolMode.Ellipse:
                     newFigure = new Figures.Ellipse(figCoords);
                     break;
@@ -54,10 +53,14 @@ namespace pmm91_vector.Implementation.Commands
             try
             {
                 newFigure.BoundaryColor = Colors.Black;
-                WindowManager.Instance.ActiveWindow.Figures.Add(newFigure);
-                newFigure.Draw(WindowManager.Instance.ActiveWindow.Graph);
+                window.Figures.ActiveFigures.Clear();
+                window.Figures.Add(newFigure);
+                window.Graph.Paint(window.Figures);
             }
-            catch { }
+            catch
+            {
+                MessageBox.Show("Ошибка при добавлении фигуры", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

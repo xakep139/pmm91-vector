@@ -140,11 +140,11 @@
                 <ContentControl Content="{StaticResource FillingIcon}"/>
             </Button>
             <Button x:Name="btnMoveFigure" ToolTip="Переместить фигуру"
-                    Command="{StaticResource MoveFigure}">
+                    Command="{StaticResource ChangeMode}" CommandParameter="Move">
                 <ContentControl Content="{StaticResource MoveIcon}"/>
             </Button>
             <Button x:Name="btnScaleFigure" ToolTip="Растянуть (сжать) фигуру"
-                    Command="{StaticResource ScaleFigure}">
+                    Command="{StaticResource ChangeMode}" CommandParameter="Scale">
                 <ContentControl Content="{StaticResource ScaleIcon}"/>
             </Button>
             <Button x:Name="btnIncreaseZ" ToolTip="Переместить вперёд"

@@ -15,10 +15,12 @@ namespace pmm91_vector.Misc
     /// </summary>
     public enum ToolMode
     {
-        None,
+        Select,
         Polyline,
         Polygon,
-        Ellipse
+        Ellipse,
+        Move,
+        Scale
     }
 
     /// <summary>
@@ -29,7 +31,7 @@ namespace pmm91_vector.Misc
         CommandStack _stack = null;
         Graphics _graphics = null;
         FigureCollection _figures = null;
-        ToolMode _mode = ToolMode.None;
+        ToolMode _mode = ToolMode.Select;
         Point[] _selectionrect = new Point[2];
         Polygon _rectangle = new Polygon();
 
@@ -43,17 +45,17 @@ namespace pmm91_vector.Misc
             this.Background = Brushes.WhiteSmoke;
             this.HorizontalAlignment = HorizontalAlignment.Stretch;
             this.VerticalAlignment = VerticalAlignment.Stretch;
-            this.MouseDown += GraphicWindow_MouseDown_None;
-            this.MouseUp += GraphicWindow_MouseUp_None;
-            this.MouseMove += GraphicWindow_MouseMove_None; ;
+            this.MouseDown += GraphicWindow_MouseDown_Select;
+            this.MouseUp += GraphicWindow_MouseUp_Select;
+            this.MouseMove += GraphicWindow_MouseMove_Select;
         }
 
-        public static void GraphicWindow_MouseMove_None(object sender, MouseEventArgs e)
+        private void GraphicWindow_MouseMove_Select(object sender, MouseEventArgs e)
         {
-            try
+            var ActiveWindow = sender as GraphicWindow;
+
+            if (ActiveWindow._rectangle != null)
             {
-                var ActiveWindow = sender as GraphicWindow;
-                
                 Point p = e.GetPosition(ActiveWindow);
                 Point p1 = new Point(p.X, ActiveWindow._rectangle.Points[0].Y);
                 ActiveWindow._rectangle.Points[1] = p1;
@@ -62,64 +64,21 @@ namespace pmm91_vector.Misc
                 ActiveWindow._rectangle.Points[3] = p3;
                 ActiveWindow._rectangle.UpdateLayout();
             }
-            catch{ }
-        }
-        public static void GraphicWindow_MouseMove_Ellipse(object sender, MouseEventArgs e)
-        {
-
-        }
-        public static void GraphicWindow_MouseMove_Polygon(object sender, MouseEventArgs e)
-        {
-
-        }
-        public static void GraphicWindow_MouseMove_Polyline(object sender, MouseEventArgs e)
-        {
-
         }
 
-        public static void GraphicWindow_MouseUp_None(object sender, MouseButtonEventArgs e)
+        private void GraphicWindow_MouseUp_Select(object sender, MouseButtonEventArgs e)
         {
             var ActiveWindow = sender as GraphicWindow;
-           
-            Point[] selPoints = ActiveWindow.SelectionRect;
-            selPoints[1] = e.GetPosition(ActiveWindow);
-            var oldSelection = ActiveWindow.Figures.ActiveFigures;
-            var newSelection = ActiveWindow.Figures.Selection(selPoints[0], selPoints[1]);
-            if (newSelection.Count > 0)  //В выделении хотя бы одна фигура
-            {
-                foreach (var figure in newSelection)
-                {
-                    Color oldColor = figure.BoundaryColor;
-                    figure.BoundaryColor = Colors.Red;
-                    figure.Draw(ActiveWindow.Graph);
-                    figure.BoundaryColor = oldColor;
-                }
-                foreach (var figure in oldSelection)
-                    if (!newSelection.Contains(figure))
-                        figure.Draw(ActiveWindow.Graph);
-            }
-            else    //В выделении нет фигур
-                foreach (var figure in ActiveWindow.Figures.ActiveFigures)
-                    figure.Draw(ActiveWindow.Graph);
-            ActiveWindow.Figures.ActiveFigures = newSelection;
 
             ActiveWindow.Children.Remove(ActiveWindow._rectangle);
+            ActiveWindow._rectangle = null;
+            Point[] selPoints = ActiveWindow.SelectionRect;
+            selPoints[1] = e.GetPosition(ActiveWindow);
+            ActiveWindow.Figures.ActiveFigures = ActiveWindow.Figures.Selection(selPoints[0], selPoints[1]);
+            ActiveWindow.Graph.Paint(ActiveWindow.Figures);
         }
 
-        public static void GraphicWindow_MouseUp_Ellipse(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-        public static void GraphicWindow_MouseUp_Polyline(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-        public static void GraphicWindow_MouseUp_Polygon(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        public static void GraphicWindow_MouseDown_None(object sender, MouseButtonEventArgs e)
+        private void GraphicWindow_MouseDown_Select(object sender, MouseButtonEventArgs e)
         {
             var ActiveWindow = sender as GraphicWindow;
             Point[] points = new Point[2];
@@ -140,57 +99,11 @@ namespace pmm91_vector.Misc
             ActiveWindow.Children.Add(ActiveWindow._rectangle); 
         }
 
-        public static void GraphicWindow_MouseDown_Ellipse(object sender, MouseButtonEventArgs e)
-        {
-            var ActiveWindow = sender as GraphicWindow;
-            Point[] points = new Point[2];
-            points[0] = e.GetPosition(ActiveWindow);
-
-            //Если мы добавляем фигуры:
-            var cmd = new Implementation.Commands.AddFigureCmd();
-            points[1] = new Point(points[0].X + 100, points[0].Y + 100);
-            cmd.Execute(points);
-
-            foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
-                figure.Draw(ActiveWindow.Graph);
-            ActiveWindow.Figures.ActiveFigures.Clear();
-    
-        }
-
-        public static void GraphicWindow_MouseDown_Polygon(object sender, MouseButtonEventArgs e)
-        {
-            var ActiveWindow = sender as GraphicWindow;
-            Point[] points = new Point[2];
-            points[0] = e.GetPosition(ActiveWindow);
-
-            //Если мы добавляем фигуры:
-            var cmd = new Implementation.Commands.AddFigureCmd();
-            points[1] = new Point(points[0].X + 100, points[0].Y + 100);
-            cmd.Execute(points);
-            foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
-                figure.Draw(ActiveWindow.Graph);
-            ActiveWindow.Figures.ActiveFigures.Clear();
-        }
-
-        public static void GraphicWindow_MouseDown_Polyline(object sender, MouseButtonEventArgs e)
-        {
-            var ActiveWindow = sender as GraphicWindow;
-            Point[] points = new Point[2];
-            points[0] = e.GetPosition(ActiveWindow);
-
-            //Если мы добавляем фигуры:
-            var cmd = new Implementation.Commands.AddFigureCmd();
-            points[1] = new Point(points[0].X + 100, points[0].Y + 100);
-            cmd.Execute(points);
-            foreach (Interfaces.IFigure figure in ActiveWindow.Figures.ActiveFigures)
-                figure.Draw(ActiveWindow.Graph);
-            ActiveWindow.Figures.ActiveFigures.Clear();
-        }
-
 
         public FigureCollection Figures
         {
             get { return this._figures; }
+            set { this._figures = value; }
         }
 
         public Graphics Graph
@@ -206,7 +119,44 @@ namespace pmm91_vector.Misc
         public ToolMode Mode
         {
             get { return this._mode; }
-            set { this._mode = value; }
+            set
+            {
+                this.MouseDown -= this.GraphicWindow_MouseDown_Select;
+                this.MouseMove -= this.GraphicWindow_MouseMove_Select;
+                this.MouseUp -= this.GraphicWindow_MouseUp_Select;
+                this.MouseUp -= this.GraphicWindow_MouseUp_AddFigure;
+
+                switch (value)
+                {
+                    case ToolMode.Select:
+                        this.MouseDown += this.GraphicWindow_MouseDown_Select;
+                        this.MouseMove += this.GraphicWindow_MouseMove_Select;
+                        this.MouseUp += this.GraphicWindow_MouseUp_Select;
+                        break;
+                    case ToolMode.Polyline:
+                    case ToolMode.Polygon:
+                    case ToolMode.Ellipse:
+                        this.MouseUp += GraphicWindow_MouseUp_AddFigure;
+                        break;
+                    case ToolMode.Move:
+                        throw new NotImplementedException();
+                    case ToolMode.Scale:
+                        throw new NotImplementedException();
+                }
+                this._mode = value;
+            }
+        }
+
+        void GraphicWindow_MouseUp_AddFigure(object sender, MouseButtonEventArgs e)
+        {
+            var ActiveWindow = sender as GraphicWindow;
+            Point[] points = new Point[2];
+            points[0] = e.GetPosition(ActiveWindow);
+
+            //Если мы добавляем фигуры:
+            var cmd = new Implementation.Commands.AddFigureCmd();
+            points[1] = new Point(points[0].X + 100, points[0].Y + 100);
+            cmd.Execute(points);
         }
 
         public Point[] SelectionRect

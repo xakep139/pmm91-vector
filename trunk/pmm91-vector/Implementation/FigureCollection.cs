@@ -21,6 +21,16 @@ namespace pmm91_vector.Implementation
 
         private IList<Figures.BaseFigure> _figures = new List<Figures.BaseFigure>();
 
+        public FigureCollection(FigureCollection copy = null)
+        {
+            if (copy != null)
+            {
+                this.FileName = copy.FileName;
+                this._activeFigures = new List<Figures.BaseFigure>(copy._activeFigures);
+                this._figures = new List<Figures.BaseFigure>(copy._figures);
+            }
+        }
+
         public string FileName
         {
             get;
@@ -34,14 +44,14 @@ namespace pmm91_vector.Implementation
         {
             get
             {
-                return new List<Figures.BaseFigure>(this._activeFigures);
+                return this._activeFigures;
             }
             set
             {
                 foreach (var fig in value)
                     if (!this._figures.Contains(fig))
                         throw new Exception("Заданная фигура не содержится в коллекции");
-                this._activeFigures = new List<Figures.BaseFigure>(value);
+                this._activeFigures = value;
             }
         }
 
