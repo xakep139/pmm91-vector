@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using System.Collections.Generic;
 
 using pmm91_vector.Misc;
-using pmm91_vector.Implementation.Figures;
 
 namespace pmm91_vector.Implementation.Commands
 {

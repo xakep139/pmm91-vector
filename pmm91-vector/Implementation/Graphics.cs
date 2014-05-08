@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Windows.Media;
 
 using pmm91_vector.Misc;
 using pmm91_vector.Interfaces;
 using pmm91_vector.Implementation.Figures;
-using System.Windows.Media;
 
 namespace pmm91_vector.Implementation
 {
