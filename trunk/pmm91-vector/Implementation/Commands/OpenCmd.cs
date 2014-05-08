@@ -56,7 +56,8 @@ namespace pmm91_vector.Implementation.Commands
                 catch (Exception e)
                 {
                     WindowManager.Instance.DeleteWindow(WindowManager.Instance.ActiveIndex);
-                    MessageBox.Show(e.Message, "Ошибка открытия", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(e.Message + ":" + Environment.NewLine + e.InnerException,
+                        "Ошибка открытия", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

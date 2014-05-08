@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Xml.Serialization;
 
 using pmm91_vector.Interfaces;
 
@@ -21,7 +19,9 @@ namespace pmm91_vector.Implementation
 
         private IList<Figures.BaseFigure> _figures = new List<Figures.BaseFigure>();
 
-        public FigureCollection(FigureCollection copy = null)
+        public FigureCollection() { }
+
+        public FigureCollection(FigureCollection copy)
         {
             if (copy != null)
             {

@@ -1,10 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
 
 using pmm91_vector.Interfaces;
 using pmm91_vector.Misc;
-using pmm91_vector.Implementation.Figures;
 
 namespace pmm91_vector.Implementation
 {

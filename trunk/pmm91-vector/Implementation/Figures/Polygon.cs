@@ -1,7 +1,6 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace pmm91_vector.Implementation.Figures
@@ -51,6 +50,8 @@ namespace pmm91_vector.Implementation.Figures
 
         #endregion
 
+        #region IGeometryFigure
+
        /// <summary>
        /// Добавление точки
        /// </summary>
@@ -62,9 +63,7 @@ namespace pmm91_vector.Implementation.Figures
             SetPoints(globalPoints);
         }
 
-        #region IGeometryFigure
-
-        public override  bool Selection(Point a, Point b)
+        public override bool Selection(Point a, Point b)
         {
             var points = Local2Global();
             int n = points.Count;
@@ -89,7 +88,7 @@ namespace pmm91_vector.Implementation.Figures
 
             //Возможно, прямоугольник выделения лежит внутри многоугольника.
             //Проверим вложенность для одной точки:
-            //из точки пустим луч в случайном направлении и посчитаем, сколько сторон многоугольника пересекает этот луч. 
+            //Из точки пустим луч в случайном направлении и посчитаем, сколько сторон многоугольника пересекает этот луч. 
             //Если нечетное - точка внутри многоугольника.
             p1 = a;
             p2 = new Point();

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using pmm91_vector.Implementation.Commands;
-using System.Collections;
-using System.Windows;
-using System.Windows.Media;
 
 namespace pmm91_vector.Misc
 {

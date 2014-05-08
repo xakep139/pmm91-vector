@@ -1,7 +1,4 @@
-﻿using System.Windows.Controls;
-﻿using System.Windows.Media;
-
-namespace pmm91_vector.Interfaces
+﻿namespace pmm91_vector.Interfaces
 {
     /// <summary>
     /// Интерфейс графической части

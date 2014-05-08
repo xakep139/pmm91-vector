@@ -94,7 +94,7 @@ namespace pmm91_vector.Implementation.Figures
 
         public void Transform(Interfaces.IFigureTransform transformer)
         {
-            //TODO сжатие/расширение фигуры
+            //TODO: сжатие/расширение фигуры
             List<Point> newPoints = new List<Point>();
             foreach (var p in Points)
                 newPoints.Add(transformer.TransformMatrix.Transform(p));
@@ -134,8 +134,8 @@ namespace pmm91_vector.Implementation.Figures
         protected List<Point> Local2Global()
         {
             List<Point> globalPoints = new List<Point>();
-            double cosPhi = AxisX.X; //Косинус угла поворота (угол между локальной осью Х и глобальной)
-            double sinPhi = -AxisX.Y; //Синус ула поворота
+            double cosPhi = AxisX.X;    //Косинус угла поворота (угол между локальной осью Х и глобальной)
+            double sinPhi = -AxisX.Y;   //Синус ула поворота
             Matrix transformMatrix = new Matrix(cosPhi, sinPhi, -sinPhi, cosPhi, Center.X, Center.Y);   //Матрицы трансформации
 
             foreach (var p in Points)
