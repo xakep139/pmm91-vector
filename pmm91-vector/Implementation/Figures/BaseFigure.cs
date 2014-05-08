@@ -137,16 +137,11 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         /// <summary>
-        /// Устанавливает точки фигуры
+        /// Переводим точки points из глобальных координат в локальные
         /// </summary>
-        /// <param name="points">Коллекция точек (в глобальной системе координат)</param>
-        protected void SetPoints(IEnumerable<Point> points)
+        protected List<Point> Global2Local(IEnumerable<Point> points)
         {
-            InitCenter(points); //Вычисляем центр
-
-            #region Переводим точки points из глобальных координат в локальные
-
-            Points = new List<Point>();
+            var pointsLocal = new List<Point>();
 
             double cosPhi = AxisX.X; //Косинус угла поворота (угол между локальной осью Х и глобальной)
             double sinPhi = -AxisX.Y; //Синус ула поворота
@@ -154,9 +149,19 @@ namespace pmm91_vector.Implementation.Figures
             transformMatrix.Invert();
 
             foreach (var p in points)
-                Points.Add(transformMatrix.Transform(p));
+                pointsLocal.Add(transformMatrix.Transform(p));
 
-            #endregion
+            return pointsLocal;
+        }
+
+        /// <summary>
+        /// Устанавливает точки фигуры
+        /// </summary>
+        /// <param name="points">Коллекция точек (в глобальной системе координат)</param>
+        protected void SetPoints(IEnumerable<Point> points)
+        {
+            InitCenter(points); //Вычисляем центр
+            Points = Global2Local(points);
         }
 
         /// <summary>
@@ -180,7 +185,7 @@ namespace pmm91_vector.Implementation.Figures
             var z4 = vect1.X * vect2.Y - vect1.Y * vect2.X;
             //Если z3*z4<0, значит точки р1 и р2 лежат по разные стороны отрезка р3р4
 
-            return z1 * z2 < 0 && z3 * z4 < 0;
+            return z1 * z2 <= 0 && z3 * z4 <= 0;
         }
     }
 }
