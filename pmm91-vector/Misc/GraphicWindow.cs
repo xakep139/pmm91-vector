@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 
 using pmm91_vector.Implementation;
+using System.Collections;
 
 namespace pmm91_vector.Misc
 {
@@ -33,6 +34,7 @@ namespace pmm91_vector.Misc
         ToolMode _mode = ToolMode.Select;
         Point[] _selectionrect = new Point[2];
         Polygon _rectangle = new Polygon();
+        bool IsMoving = false;
 
         public GraphicWindow()
         {
@@ -65,6 +67,22 @@ namespace pmm91_vector.Misc
             }
         }
 
+        private void GraphicWindow_MouseMove_Move(object sender, MouseEventArgs e)
+        {
+            var ActiveWindow = sender as GraphicWindow;
+            if (IsMoving)
+            {
+                ArrayList parameteres = new ArrayList();
+                Point[] p = new Point[1];
+                p[0] = e.GetPosition(ActiveWindow);
+                string IsTrueCommand = "";
+                parameteres.Add(p);
+                parameteres.Add(IsTrueCommand);
+                var moveCmd = new pmm91_vector.Implementation.Commands.MoveFigureCmd();
+                moveCmd.Execute(parameteres);
+            }
+        }
+
         private void GraphicWindow_MouseUp_Select(object sender, MouseButtonEventArgs e)
         {
             var ActiveWindow = sender as GraphicWindow;
@@ -75,6 +93,23 @@ namespace pmm91_vector.Misc
             selPoints[1] = e.GetPosition(ActiveWindow);
             ActiveWindow.Figures.ActiveFigures = ActiveWindow.Figures.Selection(selPoints[0], selPoints[1]);
             ActiveWindow.Graph.Paint(ActiveWindow.Figures);
+        }
+
+        private void GraphicWindow_MouseUp_Move(object sender, MouseButtonEventArgs e)
+        {
+            var ActiveWindow = sender as GraphicWindow;
+            if (IsMoving)
+            {
+                ArrayList parameteres = new ArrayList();
+                Point[] p = new Point[1];
+                p[0] = e.GetPosition(ActiveWindow);
+                string IsTrueCommand = "1";
+                parameteres.Add(p);
+                parameteres.Add(IsTrueCommand);
+                var moveCmd = new pmm91_vector.Implementation.Commands.MoveFigureCmd();
+                moveCmd.Execute(parameteres);
+                IsMoving = false;
+            }
         }
 
         private void GraphicWindow_MouseDown_Select(object sender, MouseButtonEventArgs e)
@@ -97,6 +132,20 @@ namespace pmm91_vector.Misc
             ActiveWindow._rectangle.StrokeDashArray = dc;
             ActiveWindow.Children.Add(ActiveWindow._rectangle); 
         }
+
+        private void GraphicWindow_MouseDown_Move(object sender, MouseButtonEventArgs e)
+        {
+            var ActiveWindow = sender as GraphicWindow;
+            if (ActiveWindow.Figures.Selection(e.GetPosition(ActiveWindow), e.GetPosition(ActiveWindow)).Count > 0)
+            {
+                IsMoving = true;
+            }
+            else
+            {
+                IsMoving = false;
+            }
+        }
+
 
 
         public FigureCollection Figures
@@ -121,8 +170,11 @@ namespace pmm91_vector.Misc
             set
             {
                 this.MouseDown -= this.GraphicWindow_MouseDown_Select;
+                this.MouseDown -= this.GraphicWindow_MouseDown_Move;
                 this.MouseMove -= this.GraphicWindow_MouseMove_Select;
+                this.MouseMove -= this.GraphicWindow_MouseMove_Move;
                 this.MouseUp -= this.GraphicWindow_MouseUp_Select;
+                this.MouseUp -= this.GraphicWindow_MouseUp_Move;
                 this.MouseUp -= this.GraphicWindow_MouseUp_AddFigure;
 
                 switch (value)
@@ -138,7 +190,10 @@ namespace pmm91_vector.Misc
                         this.MouseUp += GraphicWindow_MouseUp_AddFigure;
                         break;
                     case ToolMode.Move:
-                        throw new NotImplementedException();
+                        this.MouseDown += this.GraphicWindow_MouseDown_Move;
+                        this.MouseMove += this.GraphicWindow_MouseMove_Move;
+                        this.MouseUp += this.GraphicWindow_MouseUp_Move;
+                        break;
                     case ToolMode.Scale:
                         throw new NotImplementedException();
                 }
