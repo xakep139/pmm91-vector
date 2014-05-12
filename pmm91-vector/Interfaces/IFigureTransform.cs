@@ -3,11 +3,19 @@ using System.Windows.Media;
 
 namespace pmm91_vector.Interfaces
 {
+    public enum eTypeTransformation
+    {
+        Move,
+        Rotate,
+        Transform
+    }
+
     /// <summary>
     /// Интерфейс матричного преобразования фигуры
     /// </summary>
     public interface IFigureTransform
     {
+        eTypeTransformation TypeTransformation { set; get; }
         Matrix TransformMatrix { set; get; }
         /*  
         /// <summary>
@@ -24,7 +32,7 @@ namespace pmm91_vector.Interfaces
         void Move(Point vector);
 
         /// <summary>
-        /// Поворот фигуры вокруг её ценра тяжести на угол angle
+        /// Поворот фигуры вокруг её ценра тяжести на угол angle (в радианах)
         /// </summary>
         void Rotate(double angle);
 

@@ -60,6 +60,14 @@ namespace pmm91_vector.Implementation
             return _figures.Where(x => x.Selection(a, b)).ToList();
         }
 
+        public void Transform(Interfaces.IFigureTransform transformer)
+        {
+            foreach (var figure in _activeFigures)
+            {
+                figure.Transform(transformer);
+            }
+        }
+
         public bool Load(Streamers.BaseStream stream)
         {
             if (stream.CanRead)

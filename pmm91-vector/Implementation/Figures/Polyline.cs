@@ -81,9 +81,11 @@ namespace pmm91_vector.Implementation.Figures
             if (this._shapeFigure != null)
                 where.DrawingSurface.Children.Remove(this._shapeFigure);
             var polyline = new System.Windows.Shapes.Polyline();
-            foreach (Point pt in this.Points)
-                //TODO: учесть локальную ось X
-                polyline.Points.Add(new Point(pt.X + this.Center.X, pt.Y + this.Center.Y));
+
+            var globalPoints = Local2Global();
+            foreach (Point pt in globalPoints)
+                polyline.Points.Add(new Point(pt.X, pt.Y));
+
             polyline.Stroke = new SolidColorBrush(this.BoundaryColor);
             where.DrawingSurface.Children.Add(polyline);
             this._shapeFigure = polyline;

@@ -147,9 +147,11 @@ namespace pmm91_vector.Implementation.Figures
             if (this._shapeFigure != null)
                 where.DrawingSurface.Children.Remove(this._shapeFigure);
             var polygon = new System.Windows.Shapes.Polygon();
-            foreach (Point pt in this.Points)
-                //TODO: учесть локальную ось X
-                polygon.Points.Add(new Point(pt.X + this.Center.X, pt.Y + this.Center.Y));
+
+            var globalPoints = Local2Global();
+            foreach (Point pt in globalPoints)
+                polygon.Points.Add(new Point(pt.X, pt.Y));
+
             polygon.Fill = this.FillBrush;
             polygon.Stroke = new SolidColorBrush(this.BoundaryColor);
             where.DrawingSurface.Children.Add(polygon);
