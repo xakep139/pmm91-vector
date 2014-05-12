@@ -106,7 +106,7 @@ namespace pmm91_vector.Implementation.Figures
                 var C = p1.X * p2.Y - p2.X * p1.Y;
                 foreach (var p in points)
                 {
-                    if (A * p.X + B * p.Y + C == 0)
+                    if (Math.Abs(A * p.X + B * p.Y + C) < 1e-8)
                     {
                         repeat = true;
                         break;
