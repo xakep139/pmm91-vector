@@ -95,11 +95,17 @@ namespace pmm91_vector.Implementation.Figures
         public void Transform(Interfaces.IFigureTransform transformer)
         {
             //TODO: сжатие/расширение фигуры
-            List<Point> newPoints = new List<Point>();
-            foreach (var p in Points)
-                newPoints.Add(transformer.TransformMatrix.Transform(p));
-
-            Points = newPoints;
+            switch (transformer.TypeTransformation)
+            {
+                case Interfaces.eTypeTransformation.Move:
+                    Center = transformer.TransformMatrix.Transform(Center);
+                    break;
+                case Interfaces.eTypeTransformation.Rotate:
+                    AxisX = transformer.TransformMatrix.Transform(AxisX);
+                    break;
+                case Interfaces.eTypeTransformation.Transform:
+                    break;
+            }
         }
 
         abstract public bool Selection(Point a, Point b);

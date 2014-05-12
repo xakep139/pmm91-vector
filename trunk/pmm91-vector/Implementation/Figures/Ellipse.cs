@@ -75,14 +75,16 @@ namespace pmm91_vector.Implementation.Figures
         {
             if (this._shapeFigure != null)
                 where.DrawingSurface.Children.Remove(this._shapeFigure);
-            this.leftTop = new Point(Math.Min(this.Points[0].X, this.Points[1].X),
-                                     Math.Min(this.Points[0].Y, this.Points[1].Y));
-            this.rightBottom = new Point(Math.Max(this.Points[0].X, this.Points[1].X),
-                                     Math.Max(this.Points[0].Y, this.Points[1].Y));
-            //TODO: учесть локальную ось X
+
+            var globalPoints = Local2Global();
+            this.leftTop = new Point(Math.Min(globalPoints[0].X, globalPoints[1].X),
+                                     Math.Min(globalPoints[0].Y, globalPoints[1].Y));
+            this.rightBottom = new Point(Math.Max(globalPoints[0].X, globalPoints[1].X),
+                                     Math.Max(globalPoints[0].Y, globalPoints[1].Y));
+
             var ellipse = new System.Windows.Shapes.Ellipse 
                 { Width = Math.Abs(rightBottom.X - leftTop.X), Height = Math.Abs(rightBottom.Y - leftTop.Y),
-                  Margin = new Thickness(this.Center.X + this.leftTop.X, this.Center.Y + this.leftTop.Y, 0, 0),
+                  Margin = new Thickness(this.leftTop.X, this.leftTop.Y, 0, 0),
                   Fill = this.FillBrush, Stroke = new SolidColorBrush(this.BoundaryColor)};
             where.DrawingSurface.Children.Add(ellipse);
             this._shapeFigure = ellipse;

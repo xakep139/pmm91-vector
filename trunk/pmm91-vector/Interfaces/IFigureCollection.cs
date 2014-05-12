@@ -16,6 +16,11 @@ namespace pmm91_vector.Interfaces
         /// <param name="b">Превая нижняя точка выделения</param>
         /// <returns>Возвращает коллекцию фигур</returns>
         IList<Implementation.Figures.BaseFigure> Selection(Point a, Point b);
+
+        /// <summary>
+        /// Трансформация всех активных фигур
+        /// </summary>
+        void Transform(Interfaces.IFigureTransform transformer);
         
         // Объединение - ?
         
