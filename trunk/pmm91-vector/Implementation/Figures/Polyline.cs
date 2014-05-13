@@ -11,6 +11,8 @@ namespace pmm91_vector.Implementation.Figures
     [Serializable]
     public class Polyline : BaseFigure
     {
+        #region Конструкторы
+
         /// <summary>
         /// Конструктор без параметров (по умолчанию)
         /// </summary>
@@ -25,10 +27,12 @@ namespace pmm91_vector.Implementation.Figures
         {
         }
 
+        #endregion
+
         /// <summary>
         /// Добавление точки
         /// </summary>
-        /// <param name="point">Координаты точки в глобальной системе координат</param>
+        /// <param name="point">Точка в глобальной системе координат</param>
         public void AddPoint(Point point)
         {
             var globalPoints = Local2Global();
@@ -95,6 +99,8 @@ namespace pmm91_vector.Implementation.Figures
 
         #endregion
 
+        #region ICloneable
+
         public override object Clone()
         {
             var res = new Polyline(this.Local2Global());
@@ -105,5 +111,7 @@ namespace pmm91_vector.Implementation.Figures
             res.Center = this.Center;
             return res;
         }
+
+        #endregion
     }
 }

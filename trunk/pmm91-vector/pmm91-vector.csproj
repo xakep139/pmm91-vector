@@ -62,9 +62,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Implementation\Commands\ChangeCoordZCmd.cs" />
-    <Compile Include="Implementation\Commands\ChangeInColorCmd.cs" />
+    <Compile Include="Implementation\Commands\ChangeColorCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeModeCmd.cs" />
-    <Compile Include="Implementation\Commands\ChangeOutColorCmd.cs" />
     <Compile Include="Implementation\Commands\ChangeWindowCmd.cs" />
     <Compile Include="Implementation\Commands\CloseWindowCmd.cs" />
     <Compile Include="Implementation\Commands\DeleteFigureCmd.cs" />
@@ -168,9 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Cursor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Misc\WPFColorPickerLib.dll" />

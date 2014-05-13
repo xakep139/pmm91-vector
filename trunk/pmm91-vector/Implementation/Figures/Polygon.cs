@@ -162,6 +162,8 @@ namespace pmm91_vector.Implementation.Figures
 
         #endregion
 
+        #region ICloneable
+
         public override object Clone()
         {
             var res = new Polygon(this.Local2Global());
@@ -172,5 +174,7 @@ namespace pmm91_vector.Implementation.Figures
             res.Center = this.Center;
             return res;
         }
+
+        #endregion
     }
 }

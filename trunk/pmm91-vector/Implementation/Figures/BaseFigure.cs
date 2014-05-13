@@ -36,6 +36,8 @@ namespace pmm91_vector.Implementation.Figures
             SetPoints(points);
         }
 
+        #region Свойства (property)
+
         public Color BoundaryColor
         {
             get { return this._fillBrushSerializer.OutColor; }
@@ -85,6 +87,24 @@ namespace pmm91_vector.Implementation.Figures
             }
         }
 
+        #endregion
+
+        #region Абстрактные методы
+
+        abstract public bool Selection(Point a, Point b);
+
+        abstract public Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure);
+
+        abstract public Interfaces.IGeometryFigure Union(Interfaces.IGeometryFigure figure);
+
+        abstract public void Draw(Interfaces.IGraphics where);
+
+        abstract public object Clone();
+
+        #endregion
+
+        #region Реализованные методы
+
         public void SetPoint(int index, Point p)
         {
             var globalPoints = Local2Global();
@@ -107,16 +127,6 @@ namespace pmm91_vector.Implementation.Figures
                     break;
             }
         }
-
-        abstract public bool Selection(Point a, Point b);
-
-        abstract public Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure);
-
-        abstract public Interfaces.IGeometryFigure Union(Interfaces.IGeometryFigure figure);
-
-        abstract public void Draw(Interfaces.IGraphics where);
-
-        abstract public object Clone();
 
          /// <summary>
         /// Пересчитывет центр фигуры, состоящей из указанных точек
@@ -204,16 +214,6 @@ namespace pmm91_vector.Implementation.Figures
             return z1 * z2 <= 0 && z3 * z4 <= 0;
         }
 
-        protected bool PointsIntersectionEllipse(double line, double x1, double x2, double a, double b, double left, double right)
-        {
-            double temp_intersec = a - a * (line - x2) * (line - x2) / b;
-            temp_intersec = Math.Sqrt(temp_intersec);
-            var intersec1 = x1 + temp_intersec;
-            var intersec2 = x1 - temp_intersec;
-            if (left >= right) { var tempor = right; right = left; left = tempor; }
-            if (left <= intersec1 && intersec1 <= right) return true;
-            if (left <= intersec2 && intersec2 <= right) return true;
-            return false;
-        }
+        #endregion
     }
 }
