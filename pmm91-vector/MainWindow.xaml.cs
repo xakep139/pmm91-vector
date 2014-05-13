@@ -12,6 +12,7 @@ namespace pmm91_vector
         {
             InitializeComponent();
             Misc.WindowManager.Instance.Parent = this.MainCanvas;
+            Misc.WindowManager.Instance.MainWindow = this;
             AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
         }
 
