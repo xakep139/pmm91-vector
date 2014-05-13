@@ -15,6 +15,22 @@ namespace pmm91_vector.Implementation.Figures
         private Point leftTop;
         private Point rightBottom;
 
+        protected bool PointsIntersectionEllipse(double line, double x1, double x2, double a, double b, double left, double right)
+        {
+            double temp_intersec = a - a * (line - x2) * (line - x2) / b;
+            temp_intersec = Math.Sqrt(temp_intersec);
+            var intersec1 = x1 + temp_intersec;
+            var intersec2 = x1 - temp_intersec;
+            if (left >= right)
+            {
+                var tempor = right;
+                right = left;
+                left = tempor;
+            }
+            return ((left <= intersec1) && (intersec1 <= right)) ||
+                   ((left <= intersec2) && (intersec2 <= right));
+        }
+
         #region Конструкторы
         
         /// <summary>
@@ -155,6 +171,8 @@ namespace pmm91_vector.Implementation.Figures
 
         #endregion
 
+        #region ICloneable
+
         public override object Clone()
         {
             var res = new Ellipse(this.Local2Global());
@@ -165,5 +183,7 @@ namespace pmm91_vector.Implementation.Figures
             res.Center = this.Center;
             return res;
         }
+
+        #endregion
     }
 }

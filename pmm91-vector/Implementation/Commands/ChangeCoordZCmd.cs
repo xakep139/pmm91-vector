@@ -42,7 +42,7 @@ namespace pmm91_vector.Implementation.Commands
                     int minZ = window.Figures.Count;
                     foreach (Figures.BaseFigure figure in window.Figures.ActiveFigures)
                     {
-                        if (figure.Z < window.Figures.Count-1)
+                        if (figure.Z < window.Figures.Count - 1)
                         {
                             if (figure.Z < minZ)
                                 minZ = figure.Z;

@@ -15,8 +15,7 @@
         <com:DeleteFigureCmd x:Key="DeleteFigure"/>
         <com:MoveFigureCmd x:Key="MoveFigure"/>
         <com:ScaleFigureCmd x:Key="ScaleFigure"/>
-        <com:ChangeOutColorCmd x:Key="ChangeOutColor"/>
-        <com:ChangeInColorCmd x:Key="ChangeInColor"/>
+        <com:ChangeColorCmd x:Key="ChangeColor"/>
         <com:ChangeCoordZCmd x:Key="ChangeCoordZ"/>
         <com:ChangeWindowCmd x:Key="ChangeWindow"/>
         <com:CloseWindowCmd x:Key="CloseWindow"/>
@@ -132,11 +131,11 @@
             </Button>
             <Separator Style="{StaticResource VerticalSeparatorStyle}" />
             <Button x:Name="btnOutColor" ToolTip="Цвет границы фигуры"
-                    Command="{StaticResource ChangeOutColor}">
+                    Command="{StaticResource ChangeColor}" CommandParameter="out">
                 <ContentControl Content="{StaticResource PenIcon}"/>
             </Button>
             <Button x:Name="btnInColor" ToolTip="Цвет заливки фигуры"
-                    Command="{StaticResource ChangeInColor}">
+                    Command="{StaticResource ChangeColor}" CommandParameter="in">
                 <ContentControl Content="{StaticResource FillingIcon}"/>
             </Button>
             <Button x:Name="btnMoveFigure" ToolTip="Переместить фигуру"
