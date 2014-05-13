@@ -74,8 +74,15 @@ namespace pmm91_vector.Implementation.Figures
             var center_ellipse = new Point();
             center_ellipse.X = (points[0].X + points[1].X) / 2.0;
             center_ellipse.Y = (points[0].Y + points[1].Y) / 2.0;
-            if (center_ellipse.X > a.X && center_ellipse.X < b.X && center_ellipse.Y > a.Y && center_ellipse.Y < b.Y)
-                return true; //Если центр эллипса находится внутри прямоугольника выделения
+            //Если центр эллипса находится внутри прямоугольника выделения
+            if (a.X <= b.X && a.Y <= b.Y && center_ellipse.X > a.X && center_ellipse.X < b.X && center_ellipse.Y > a.Y && center_ellipse.Y < b.Y)
+                return true;
+            if (a.X < b.X && a.Y > b.Y && center_ellipse.X > a.X && center_ellipse.X < b.X && center_ellipse.Y < a.Y && center_ellipse.Y > b.Y)
+                return true;
+            if (a.X > b.X && a.Y < b.Y && center_ellipse.X < a.X && center_ellipse.X > b.X && center_ellipse.Y > a.Y && center_ellipse.Y < b.Y)
+                return true;
+            if (a.X > b.X && a.Y > b.Y && center_ellipse.X < a.X && center_ellipse.X > b.X && center_ellipse.Y < a.Y && center_ellipse.Y > b.Y)
+                return true;
             var a_ellipse = Math.Abs(points[0].X - center_ellipse.X);
             a_ellipse = a_ellipse * a_ellipse;
             var b_ellipse = Math.Abs(points[0].Y - center_ellipse.Y);
