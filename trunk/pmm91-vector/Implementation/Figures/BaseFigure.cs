@@ -15,7 +15,7 @@ namespace pmm91_vector.Implementation.Figures
     /// </summary>
     [Serializable]
     [XmlInclude(typeof(Ellipse)), XmlInclude(typeof(Polygon)), XmlInclude(typeof(Polyline))]
-    public abstract class BaseFigure : Interfaces.IFigure
+    public abstract class BaseFigure : Interfaces.IFigure, ICloneable
     {
         private int z;
         private Point _axisX = new Point(1, 0);
@@ -115,6 +115,8 @@ namespace pmm91_vector.Implementation.Figures
         abstract public Interfaces.IGeometryFigure Union(Interfaces.IGeometryFigure figure);
 
         abstract public void Draw(Interfaces.IGraphics where);
+
+        abstract public object Clone();
 
          /// <summary>
         /// Пересчитывет центр фигуры, состоящей из указанных точек

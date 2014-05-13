@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace pmm91_vector.Streamers
 {
-    public class XmlFileStream : BaseStream
+    public sealed class XmlFileStream : BaseStream
     {
         public XmlFileStream(string fileName)
         {

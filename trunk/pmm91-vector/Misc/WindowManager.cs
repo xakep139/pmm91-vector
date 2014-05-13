@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace pmm91_vector.Misc
@@ -34,6 +35,15 @@ namespace pmm91_vector.Misc
                     _instance = new WindowManager();
                 return _instance;
             }
+        }
+
+        /// <summary>
+        /// Основное окно приложения
+        /// </summary>
+        public Window MainWindow
+        {
+            get;
+            set;
         }
 
         /// <summary>

@@ -25,9 +25,10 @@ namespace pmm91_vector.Implementation
         {
             if (copy != null)
             {
-                this.FileName = copy.FileName;
-                this._activeFigures = new List<Figures.BaseFigure>(copy._activeFigures);
-                this._figures = new List<Figures.BaseFigure>(copy._figures);
+                this.FileName = (copy.FileName != null) ? (string) copy.FileName.Clone() : null;
+                this._figures = new List<Figures.BaseFigure>(copy._figures.Count);
+                foreach (var fig in copy._figures)
+                    this._figures.Add((Figures.BaseFigure)fig.Clone());
             }
         }
 
@@ -63,9 +64,7 @@ namespace pmm91_vector.Implementation
         public void Transform(Interfaces.IFigureTransform transformer)
         {
             foreach (var figure in _activeFigures)
-            {
                 figure.Transform(transformer);
-            }
         }
 
         public bool Load(Streamers.BaseStream stream)

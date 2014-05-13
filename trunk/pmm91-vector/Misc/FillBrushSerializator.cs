@@ -27,7 +27,7 @@ namespace pmm91_vector.Misc
         {
             get
             {
-                return new SolidColorBrush(Color.FromArgb(Br, Bg, Bb, Ba));
+                return new SolidColorBrush(Color.FromArgb(Ba, Br, Bg, Bb));
             }
             set
             {

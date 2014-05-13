@@ -4,8 +4,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace pmm91_vector.Streamers
 {
-    public class BinaryFileStream : BaseStream
+    public sealed class BinaryFileStream : BaseStream
     {
+        private BinaryFormatter formatter = new BinaryFormatter();
+
         public BinaryFileStream(string fileName)
         {
             this._fileName = fileName;
@@ -14,14 +16,12 @@ namespace pmm91_vector.Streamers
 
         public override Interfaces.IFigureCollection ReadColection(Type collectionType)
         {
-            BinaryFormatter deserializer = new BinaryFormatter();
-            return (Interfaces.IFigureCollection)deserializer.Deserialize(this._stream);
+            return (Interfaces.IFigureCollection)formatter.Deserialize(this._stream);
         }
 
         public override void WriteColection(Interfaces.IFigureCollection Collection)
         {
-            BinaryFormatter serializer = new BinaryFormatter();
-            serializer.Serialize(this._stream, Collection);
+            formatter.Serialize(this._stream, Collection);
         }
     }
 }

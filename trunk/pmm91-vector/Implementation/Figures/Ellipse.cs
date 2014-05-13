@@ -154,5 +154,16 @@ namespace pmm91_vector.Implementation.Figures
         }
 
         #endregion
+
+        public override object Clone()
+        {
+            var res = new Ellipse(this.Local2Global());
+            res.BoundaryColor = this.BoundaryColor;
+            res.FillBrush = this.FillBrush;
+            res.Z = this.Z;
+            res.AxisX = this.AxisX;
+            res.Center = this.Center;
+            return res;
+        }
     }
 }
