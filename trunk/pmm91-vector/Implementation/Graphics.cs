@@ -26,9 +26,8 @@ namespace pmm91_vector.Implementation
 
         public void Paint(IFigureCollection displayScene)
         {
-            drawingWindow.Children.Clear();
+            drawingWindow.Children.Capacity = displayScene.Count;
             foreach (BaseFigure figure in displayScene)
-            //TODO: учесть Z-координату
             {
                 Color oldColor = figure.BoundaryColor;
                 if (displayScene.ActiveFigures.Contains(figure))

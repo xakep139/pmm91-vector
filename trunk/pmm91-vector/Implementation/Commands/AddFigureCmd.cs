@@ -51,6 +51,7 @@ namespace pmm91_vector.Implementation.Commands
             try
             {
                 newFigure.BoundaryColor = Colors.Black;
+                newFigure.Z = window.Figures.Count;
                 window.Figures.ActiveFigures.Clear();
                 window.Figures.Add(newFigure);
                 window.Graph.Paint(window.Figures);

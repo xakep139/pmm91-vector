@@ -89,7 +89,7 @@ namespace pmm91_vector.Implementation.Figures
                 polyline.Points.Add(new Point(pt.X, pt.Y));
 
             polyline.Stroke = new SolidColorBrush(this.BoundaryColor);
-            where.DrawingSurface.Children.Add(polyline);
+            where.DrawingSurface.Children.Insert(Z, polyline);
             this._shapeFigure = polyline;
         }
 

@@ -156,7 +156,7 @@ namespace pmm91_vector.Implementation.Figures
 
             polygon.Fill = this.FillBrush;
             polygon.Stroke = new SolidColorBrush(this.BoundaryColor);
-            where.DrawingSurface.Children.Add(polygon);
+            where.DrawingSurface.Children.Insert(Z, polygon);
             this._shapeFigure = polygon;
         }
 
