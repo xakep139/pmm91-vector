@@ -31,6 +31,7 @@ namespace pmm91_vector.Implementation.Figures
         public Ellipse(Point p1, Point p2)
             : this(new List<Point> { p1, p2 })
         {
+            CalcBounds();
         }
 
         /// <summary>
@@ -46,15 +47,34 @@ namespace pmm91_vector.Implementation.Figures
         {
             if (points == null || points.Count() < 2)
                 throw new Exception("Некорректная коллекция точек");
+            CalcBounds();
         }
 
         #endregion
 
         #region IGeometryFigure
 
+        /// <summary>
+        /// Вычисление границ эллипса
+        /// </summary>
+        private void CalcBounds()
+        {
+            var globalPoints = Local2Global();
+            this.leftTop = new Point(Math.Min(globalPoints[0].X, globalPoints[1].X),
+                                     Math.Min(globalPoints[0].Y, globalPoints[1].Y));
+            this.rightBottom = new Point(Math.Max(globalPoints[0].X, globalPoints[1].X),
+                                     Math.Max(globalPoints[0].Y, globalPoints[1].Y));
+        }
+
         public override bool Selection(Point a, Point b)
         {
-            return false;
+            var leftTopSel = new Point(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y));
+            var rightBottomSel = new Point(Math.Max(a.X, b.X), Math.Max(a.Y, b.Y));
+            CalcBounds();
+            return ((leftTopSel.X <= this.leftTop.X) && 
+                    (rightBottomSel.X >= this.rightBottom.X) && 
+                    (leftTopSel.Y <= this.leftTop.Y) && 
+                    (rightBottomSel.Y >= this.rightBottom.Y));
         }
 
         public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
@@ -75,15 +95,11 @@ namespace pmm91_vector.Implementation.Figures
         {
             if (this._shapeFigure != null)
                 where.DrawingSurface.Children.Remove(this._shapeFigure);
-
-            var globalPoints = Local2Global();
-            this.leftTop = new Point(Math.Min(globalPoints[0].X, globalPoints[1].X),
-                                     Math.Min(globalPoints[0].Y, globalPoints[1].Y));
-            this.rightBottom = new Point(Math.Max(globalPoints[0].X, globalPoints[1].X),
-                                     Math.Max(globalPoints[0].Y, globalPoints[1].Y));
-
-            var ellipse = new System.Windows.Shapes.Ellipse 
-                { Width = Math.Abs(rightBottom.X - leftTop.X), Height = Math.Abs(rightBottom.Y - leftTop.Y),
+            CalcBounds();
+            var ellipse = new System.Windows.Shapes.Ellipse
+            {
+                Width = Math.Abs(this.rightBottom.X - this.leftTop.X),
+                Height = Math.Abs(this.rightBottom.Y - this.leftTop.Y),
                   Margin = new Thickness(this.leftTop.X, this.leftTop.Y, 0, 0),
                   Fill = this.FillBrush, Stroke = new SolidColorBrush(this.BoundaryColor)};
             where.DrawingSurface.Children.Add(ellipse);
