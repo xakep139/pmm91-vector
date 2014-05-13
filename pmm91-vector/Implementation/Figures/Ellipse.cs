@@ -146,9 +146,10 @@ namespace pmm91_vector.Implementation.Figures
             {
                 Width = Math.Abs(this.rightBottom.X - this.leftTop.X),
                 Height = Math.Abs(this.rightBottom.Y - this.leftTop.Y),
-                  Margin = new Thickness(this.leftTop.X, this.leftTop.Y, 0, 0),
-                  Fill = this.FillBrush, Stroke = new SolidColorBrush(this.BoundaryColor)};
-            where.DrawingSurface.Children.Add(ellipse);
+                Margin = new Thickness(this.leftTop.X, this.leftTop.Y, 0, 0),
+                Fill = this.FillBrush, Stroke = new SolidColorBrush(this.BoundaryColor)
+            };
+            where.DrawingSurface.Children.Insert(Z, ellipse);
             this._shapeFigure = ellipse;
         }
 

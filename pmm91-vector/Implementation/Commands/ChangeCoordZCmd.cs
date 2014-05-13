@@ -30,13 +30,59 @@ namespace pmm91_vector.Implementation.Commands
             if (parameter == null || (parameter as string) == null)
                 throw new Exception("Некорректный параметр команды смены Z-координаты");
             WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
+
+            var window = WindowManager.Instance.ActiveWindow;
+
             string direction = (parameter as string).ToLower();
             switch (direction)
             {
-                //TODO: написать реальное изменение Z-координаты
+                //TODO: как должно происходить изменение Z-координаты при нескольких выделенных фигурах
+                //Для 1 выделенной фигуры изменяется правильно
                 case "up":
+                    int minZ = window.Figures.Count;
+                    foreach (Figures.BaseFigure figure in window.Figures.ActiveFigures)
+                    {
+                        if (figure.Z < window.Figures.Count-1)
+                        {
+                            if (figure.Z < minZ)
+                                minZ = figure.Z;
+
+                            int id = window.Figures.IndexOf(figure);
+                            window.Figures[id].Z++;
+                        }
+                    }
+                    foreach (Figures.BaseFigure figure in window.Figures)
+                    {
+                        if (figure.Z == minZ+1 && !window.Figures.ActiveFigures.Contains(figure))
+                        {
+                            figure.Z--;
+                            break;
+                        }
+                    }
+                    window.Graph.Paint(window.Figures);
                     break;
                 case "down":
+                    int maxZ = 0;
+                    foreach (Figures.BaseFigure figure in window.Figures.ActiveFigures)
+                    {
+                        if (figure.Z > 0)
+                        {
+                            if (figure.Z > maxZ)
+                                maxZ = figure.Z;
+
+                            int id = window.Figures.IndexOf(figure);
+                            window.Figures[id].Z--;
+                        }
+                    }
+                    foreach (Figures.BaseFigure figure in window.Figures)
+                    {
+                        if (figure.Z == maxZ-1 && !window.Figures.ActiveFigures.Contains(figure))
+                        {
+                            figure.Z++;
+                            break;
+                        }
+                    }
+                    window.Graph.Paint(window.Figures);
                     break;
                 default:
                     throw new NotImplementedException();
