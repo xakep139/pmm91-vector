@@ -41,22 +41,24 @@ namespace pmm91_vector.Implementation.Figures
         public override bool Selection(Point a, Point b)
         {
             var points = Local2Global();
+            var leftTop = new Point(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y));
+            var rightBottom = new Point(Math.Max(a.X, b.X), Math.Max(a.Y, b.Y));
             //Для каждого отрезка ломаной проверям, пресекается ли он со сторонами прямоуголника выделения.
             for (int i = 0; i < points.Count - 1; i++)
             {
                 var p1 = points[i];
                 var p2 = points[i + 1];
 
-                if (LinesIntersection(p1, p2, a, new Point(b.X, a.Y)) ||
-                    LinesIntersection(p1, p2, new Point(b.X, a.Y), b) ||
-                    LinesIntersection(p1, p2, b, new Point(a.X, b.Y)) ||
-                    LinesIntersection(p1, p2, new Point(a.X, b.Y), a))
+                if (LinesIntersection(p1, p2, leftTop, new Point(rightBottom.X, leftTop.Y)) ||
+                    LinesIntersection(p1, p2, new Point(rightBottom.X, leftTop.Y), rightBottom) ||
+                    LinesIntersection(p1, p2, rightBottom, new Point(leftTop.X, rightBottom.Y)) ||
+                    LinesIntersection(p1, p2, new Point(leftTop.X, rightBottom.Y), leftTop))
                     return true;
             }
             //Если ломанная не пересекается с прямоугольником выделения, то, возможно, она лежит внутри него.
             //Проверим вложенность для одной точки.
             var p = points[0];
-            if (p.X > a.X && p.X < b.X && p.Y > a.Y && p.Y < b.Y)
+            if (p.X > leftTop.X && p.X < rightBottom.X && p.Y > leftTop.Y && p.Y < rightBottom.Y)
                 return true;
 
             return false;

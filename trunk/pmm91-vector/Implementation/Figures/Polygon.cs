@@ -66,6 +66,8 @@ namespace pmm91_vector.Implementation.Figures
         public override bool Selection(Point a, Point b)
         {
             var points = Local2Global();
+            var leftTop = new Point(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y));
+            var rightBottom = new Point(Math.Max(a.X, b.X), Math.Max(a.Y, b.Y));
             int n = points.Count;
             Point p1, p2;
             //Для каждого отрезка многоугольника проверям пересекается ли он со сторонами прямоугольника выделения:
@@ -74,23 +76,23 @@ namespace pmm91_vector.Implementation.Figures
                 p1 = points[i];
                 p2 = points[(i + 1) % n];
 
-                if (LinesIntersection(p1, p2, a, new Point(b.X, a.Y)) ||
-                    LinesIntersection(p1, p2, new Point(b.X, a.Y), b) ||
-                    LinesIntersection(p1, p2, b, new Point(a.X, b.Y)) ||
-                    LinesIntersection(p1, p2, new Point(a.X, b.Y), a))
+                if (LinesIntersection(p1, p2, leftTop, new Point(rightBottom.X, leftTop.Y)) ||
+                    LinesIntersection(p1, p2, new Point(rightBottom.X, leftTop.Y), rightBottom) ||
+                    LinesIntersection(p1, p2, rightBottom, new Point(leftTop.X, rightBottom.Y)) ||
+                    LinesIntersection(p1, p2, new Point(leftTop.X, rightBottom.Y), leftTop))
                     return true;
             }
             //Если многоугольник не пересекается с прямоугольником выделения, то, возможно, он лежит внутри него.
             //Проверим вложенность для одной точки:
             var point = points[0];
-            if (point.X > a.X && point.X < b.X && point.Y > a.Y && point.Y < b.Y)
+            if (point.X > leftTop.X && point.X < rightBottom.X && point.Y > leftTop.Y && point.Y < rightBottom.Y)
                 return true;
 
             //Возможно, прямоугольник выделения лежит внутри многоугольника.
             //Проверим вложенность для одной точки:
             //Из точки пустим луч в случайном направлении и посчитаем, сколько сторон многоугольника пересекает этот луч. 
             //Если нечетное - точка внутри многоугольника.
-            p1 = a;
+            p1 = leftTop;
             p2 = new Point();
             Random rand = new Random();
             var stop = false;
