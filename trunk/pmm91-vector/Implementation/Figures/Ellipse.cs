@@ -68,13 +68,52 @@ namespace pmm91_vector.Implementation.Figures
 
         public override bool Selection(Point a, Point b)
         {
-            var leftTopSel = new Point(Math.Min(a.X, b.X), Math.Min(a.Y, b.Y));
-            var rightBottomSel = new Point(Math.Max(a.X, b.X), Math.Max(a.Y, b.Y));
-            CalcBounds();
-            return ((leftTopSel.X <= this.leftTop.X) && 
-                    (rightBottomSel.X >= this.rightBottom.X) && 
-                    (leftTopSel.Y <= this.leftTop.Y) && 
-                    (rightBottomSel.Y >= this.rightBottom.Y));
+            var points = Local2Global();
+            int n = points.Count;
+            //Вычисление значений квадратов полуосей a,b и центра эллипса
+            var center_ellipse = new Point();
+            center_ellipse.X = (points[0].X + points[1].X) / 2.0;
+            center_ellipse.Y = (points[0].Y + points[1].Y) / 2.0;
+            if (center_ellipse.X > a.X && center_ellipse.X < b.X && center_ellipse.Y > a.Y && center_ellipse.Y < b.Y)
+                return true; //Если центр эллипса находится внутри прямоугольника выделения
+            var a_ellipse = Math.Abs(points[0].X - center_ellipse.X);
+            a_ellipse = a_ellipse * a_ellipse;
+            var b_ellipse = Math.Abs(points[0].Y - center_ellipse.Y);
+            b_ellipse = b_ellipse * b_ellipse;
+
+            //Проверка на пересечение сторон прямоугольника выделения и эллипса
+            if (PointsIntersectionEllipse(a.X, center_ellipse.Y, center_ellipse.X, a_ellipse, b_ellipse, a.Y, b.Y)) return true;
+            if (PointsIntersectionEllipse(b.X, center_ellipse.Y, center_ellipse.X, a_ellipse, b_ellipse, a.Y, b.Y)) return true;
+            if (PointsIntersectionEllipse(a.Y, center_ellipse.X, center_ellipse.Y, a_ellipse, b_ellipse, a.X, b.X)) return true;
+            if (PointsIntersectionEllipse(b.Y, center_ellipse.X, center_ellipse.Y, a_ellipse, b_ellipse, a.X, b.X)) return true;
+
+            //Надо ли выделять эллипс, если прямоугольник выделения находится внутри эллипса (не в центре)?
+            /*
+            if (a_ellipse >= b_ellipse)
+            {
+                var e = Math.Sqrt((1.0 - (b_ellipse) / (a_ellipse)));
+                var c = a_ellipse * e;
+                var FX1 = center_ellipse.X - c;
+                var FX2 = center_ellipse.X + c;
+                var FY = center_ellipse.Y;
+                var D = a_ellipse * (3.0 - e);
+                var P = Math.Sqrt(((FX1 - a.X) * (FX1 - a.X) + (FY - a.Y) * (FY - a.Y))) + Math.Sqrt(((FX2 - a.X) * (FX2 - a.X) + (FY - a.Y) * (FY - a.Y)));
+                if (P <= D) return true;
+            }
+            else
+            {
+                var e = Math.Sqrt((1.0 - (a_ellipse) / (b_ellipse)));
+                var c = b_ellipse * e;
+                var FY1 = center_ellipse.Y - c;
+                var FY2 = center_ellipse.Y + c;
+                var FX = center_ellipse.X;
+                var D = b_ellipse * (3.0 - e);
+                var P = Math.Sqrt(((FY1 - a.Y) * (FY1 - a.Y) + (FX - a.X) * (FX - a.X))) + Math.Sqrt(((FY2 - a.Y) * (FY2 - a.Y) + (FX - a.X) * (FX - a.X)));
+                if (P <= D) return true;
+            }*/
+            var in_ellips = ((a.X - center_ellipse.X) * (a.X - center_ellipse.X)) / a_ellipse + ((a.Y - center_ellipse.Y) * (a.Y - center_ellipse.Y)) / b_ellipse;
+            if (in_ellips <= 1.0) return true;
+            return false;
         }
 
         public override Interfaces.IGeometryFigure Intersection(Interfaces.IGeometryFigure figure)
