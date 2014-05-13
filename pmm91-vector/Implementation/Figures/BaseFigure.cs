@@ -201,5 +201,17 @@ namespace pmm91_vector.Implementation.Figures
 
             return z1 * z2 <= 0 && z3 * z4 <= 0;
         }
+
+        protected bool PointsIntersectionEllipse(double line, double x1, double x2, double a, double b, double left, double right)
+        {
+            double temp_intersec = a - a * (line - x2) * (line - x2) / b;
+            temp_intersec = Math.Sqrt(temp_intersec);
+            var intersec1 = x1 + temp_intersec;
+            var intersec2 = x1 - temp_intersec;
+            if (left >= right) { var tempor = right; right = left; left = tempor; }
+            if (left <= intersec1 && intersec1 <= right) return true;
+            if (left <= intersec2 && intersec2 <= right) return true;
+            return false;
+        }
     }
 }
