@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Windows.Media;
 
 using pmm91_vector.Misc;
@@ -26,7 +26,7 @@ namespace pmm91_vector.Implementation
 
         public void Paint(IFigureCollection displayScene)
         {
-            drawingWindow.Children.Capacity = displayScene.Count;
+            drawingWindow.Children.Clear();
             foreach (BaseFigure figure in displayScene)
             {
                 Color oldColor = figure.BoundaryColor;
