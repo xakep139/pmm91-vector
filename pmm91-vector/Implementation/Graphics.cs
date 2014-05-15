@@ -1,4 +1,5 @@
- using System;
+using System;
+using System.Linq;
 using System.Windows.Media;
 
 using pmm91_vector.Misc;
@@ -27,8 +28,9 @@ namespace pmm91_vector.Implementation
         public void Paint(IFigureCollection displayScene)
         {
             drawingWindow.Children.Clear();
-            foreach (BaseFigure figure in displayScene)
+            for (int curZ = 0; curZ < displayScene.Count; curZ++)
             {
+                var figure = displayScene.Single(x => (x.Z == curZ));
                 Color oldColor = figure.BoundaryColor;
                 if (displayScene.ActiveFigures.Contains(figure))
                     figure.BoundaryColor = Colors.Red;
