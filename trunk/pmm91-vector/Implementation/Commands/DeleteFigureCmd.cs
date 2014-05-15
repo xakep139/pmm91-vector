@@ -29,8 +29,15 @@ namespace pmm91_vector.Implementation.Commands
         {
             var window = WindowManager.Instance.ActiveWindow;
             window.Stack.DoCommand(this);
-            foreach (var figure in window.Figures.ActiveFigures)
-                window.Figures.Remove(figure);
+            int count = window.Figures.ActiveFigures.Count; //Число удаляемых фигур
+            foreach (var delFig in window.Figures.ActiveFigures)
+            {
+                window.Figures.Remove(delFig);
+                //Пересчёт Z-координаты:
+                foreach (var restFig in window.Figures)
+                    if (restFig.Z > delFig.Z)
+                        restFig.Z--;
+            }
             window.Figures.ActiveFigures.Clear();
             window.Graph.Paint(window.Figures);
         }

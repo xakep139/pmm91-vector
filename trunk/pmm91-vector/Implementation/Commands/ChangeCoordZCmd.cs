@@ -40,7 +40,7 @@ namespace pmm91_vector.Implementation.Commands
                 //Для 1 выделенной фигуры изменяется правильно
                 case "up":
                     int minZ = window.Figures.Count;
-                    foreach (Figures.BaseFigure figure in window.Figures.ActiveFigures)
+                    foreach (var figure in window.Figures.ActiveFigures)
                     {
                         if (figure.Z < window.Figures.Count - 1)
                         {
@@ -51,15 +51,14 @@ namespace pmm91_vector.Implementation.Commands
                             window.Figures[id].Z++;
                         }
                     }
-                    foreach (Figures.BaseFigure figure in window.Figures)
+                    foreach (var figure in window.Figures)
                     {
-                        if (figure.Z == minZ+1 && !window.Figures.ActiveFigures.Contains(figure))
+                        if ((figure.Z == minZ + 1) && !window.Figures.ActiveFigures.Contains(figure))
                         {
                             figure.Z--;
                             break;
                         }
                     }
-                    window.Graph.Paint(window.Figures);
                     break;
                 case "down":
                     int maxZ = 0;
@@ -76,17 +75,17 @@ namespace pmm91_vector.Implementation.Commands
                     }
                     foreach (Figures.BaseFigure figure in window.Figures)
                     {
-                        if (figure.Z == maxZ-1 && !window.Figures.ActiveFigures.Contains(figure))
+                        if ((figure.Z == maxZ - 1) && !window.Figures.ActiveFigures.Contains(figure))
                         {
                             figure.Z++;
                             break;
                         }
                     }
-                    window.Graph.Paint(window.Figures);
                     break;
                 default:
                     throw new NotImplementedException();
             }
+            window.Graph.Paint(window.Figures);
         }
     }
 }
