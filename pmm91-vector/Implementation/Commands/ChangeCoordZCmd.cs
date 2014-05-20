@@ -33,6 +33,9 @@ namespace pmm91_vector.Implementation.Commands
 
             var window = WindowManager.Instance.ActiveWindow;
 
+            if (window.Figures.ActiveFigures.Count != 1)
+                return;
+
             string direction = (parameter as string).ToLower();
             switch (direction)
             {

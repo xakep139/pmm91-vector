@@ -31,11 +31,17 @@ namespace pmm91_vector.Implementation.Commands
             //TODO Исправить на что-нибудь нормальное, как будет реализован Move
             var parameters = parameter as ArrayList;
             System.Windows.Point[] p = parameters[0] as System.Windows.Point[];
-            string IsTrueCommand = parameters[1] as string;
-            if (IsTrueCommand != "")
-                WindowManager.Instance.ActiveWindow.Stack.DoCommand(this);
+            
+            var window = WindowManager.Instance.ActiveWindow;
+            window.Stack.DoCommand(this);
+            
             FigureTransform ft = new FigureTransform();
             ft.Move(p[0]);
+            foreach (Figures.BaseFigure figure in window.Figures.ActiveFigures)
+            {
+                figure.Transform(ft);
+            }
+            window.Graph.Paint(window.Figures);
         }
     }
 }
