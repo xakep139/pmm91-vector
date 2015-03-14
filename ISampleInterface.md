@@ -1,0 +1,38 @@
+# Интерфейс #
+
+```
+interface ISampleInterface
+{
+   /// <summary>Описание функции</summary>
+   /// <param name="a">описание параметра а</param>
+   /// <param name="b">описание параметра b</param>
+   /// <returns>описание возвращаемого результата</returns>
+    string SampleMethod(int a, int b);
+}
+```
+
+# Классы, их описание и назначение #
+```
+    /// <summary>
+    ///  Класс ImplementationClass
+    ///  нужен для...
+    /// </summary>
+class ImplementationClass : ISampleInterface
+{
+    // Явная реализация члена интерфейса
+
+    string ISampleInterface.SampleMethod(int a, int b)  
+   {
+        // тело метода
+   }
+
+    static void Main()
+   {
+       // Создание объекта интерфейса ISampleInterface
+       ISampleInterface obj = new ImplementationClass();
+
+       // Пример вызова функции
+       var str=obj.SampleMethod(1,2);
+    }
+}
+```

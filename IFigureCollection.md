@@ -1,0 +1,17 @@
+# Интерфейс(ы) #
+
+```
+public interface IFigureCollection:ICollection
+{
+   // Figure - класс, реализующий интерфейс IFigure
+   bool AddFigure(Figure elem);
+   bool DeleteFigure(Figure elem);
+   int SearchFigure(Figure elem);
+   List<Figure> Selection(Point a, Point b);
+   // Объединение - ?
+}
+```
+
+Требования от GUI:
+  * _static load(string fileName)_;
+  * _save(string fileName)_.
